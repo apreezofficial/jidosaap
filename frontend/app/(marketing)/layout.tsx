@@ -9,7 +9,7 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-[#f4f4f7] selection:bg-blue-600 selection:text-white antialiased">
-      {/* Top Main Navigation (Matching Screenshot Style) */}
+      {/* Top Main Navigation */}
       <header className="w-full max-w-[1380px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
         {/* Brand Logo with 4-dot Grid */}
         <Link href="/" className="flex items-center gap-2.5 group">
@@ -26,13 +26,13 @@ export default function MarketingLayout({
 
         {/* Center Nav Links */}
         <nav className="hidden md:flex items-center gap-8 text-xs lg:text-sm font-medium text-zinc-600">
+          <Link href="/solutions" className="hover:text-zinc-950 transition-colors">
+            Solutions
+          </Link>
           <Link href="/features" className="hover:text-zinc-950 transition-colors">
             Features
           </Link>
-          <Link href="/#use-cases" className="hover:text-zinc-950 transition-colors">
-            Use Cases
-          </Link>
-          <Link href="/#subdomains" className="hover:text-zinc-950 transition-colors">
+          <Link href="/solutions/subdomains" className="hover:text-zinc-950 transition-colors">
             Subdomains
           </Link>
           <Link href="/pricing" className="hover:text-zinc-950 transition-colors">
@@ -78,12 +78,24 @@ export default function MarketingLayout({
             </div>
 
             <div className="flex flex-wrap gap-6 text-xs text-zinc-600 font-medium">
-              <Link href="/#use-cases" className="hover:text-zinc-950 transition-colors">penna.dev Bridge</Link>
-              <Link href="/#use-cases" className="hover:text-zinc-950 transition-colors">7 AM Designer Drops</Link>
-              <Link href="/#use-cases" className="hover:text-zinc-950 transition-colors">Group Spam Guardian</Link>
-              <Link href="/#use-cases" className="hover:text-zinc-950 transition-colors">24/7 Auto-Responder</Link>
-              <Link href="/request-integration" className="hover:text-zinc-950 transition-colors">Claim Subdomain</Link>
-              <Link href="/pricing" className="hover:text-zinc-950 transition-colors">Pricing</Link>
+              <Link href="/solutions/newsletter-bridge" className="hover:text-zinc-950 transition-colors">
+                1-Tap Status Bridge
+              </Link>
+              <Link href="/solutions/scheduled-drops" className="hover:text-zinc-950 transition-colors">
+                7 AM Scheduled Drops
+              </Link>
+              <Link href="/solutions/group-shield" className="hover:text-zinc-950 transition-colors">
+                Group Spam Shield
+              </Link>
+              <Link href="/solutions/auto-responder" className="hover:text-zinc-950 transition-colors">
+                24/7 Auto-Responder
+              </Link>
+              <Link href="/solutions/subdomains" className="hover:text-zinc-950 transition-colors">
+                Claim Subdomain
+              </Link>
+              <Link href="/pricing" className="hover:text-zinc-950 transition-colors">
+                Pricing
+              </Link>
             </div>
           </div>
 

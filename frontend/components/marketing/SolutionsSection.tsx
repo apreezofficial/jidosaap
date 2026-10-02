@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Zap, Clock, ShieldAlert, Check } from "lucide-react";
+import Link from "next/link";
+import { Zap, Clock, ShieldAlert, Check, ArrowRight, Bot } from "lucide-react";
 
 export function SolutionsSection() {
   return (
@@ -15,34 +16,83 @@ export function SolutionsSection() {
         </h2>
       </div>
 
-      {/* 3 Value Pillars with Connecting Dots */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left relative pt-4">
-        <div className="space-y-3">
-          <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-            <Zap className="h-4 w-4" />
+      {/* Value Pillars with Direct Links to Dedicated Pages */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto text-left relative pt-4">
+        {/* Solution 1 */}
+        <Link
+          href="/solutions/newsletter-bridge"
+          className="group p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-zinc-300 hover:shadow-xs transition-all flex flex-col justify-between"
+        >
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <Zap className="h-4 w-4" />
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong className="text-zinc-900 block group-hover:text-[#2563eb] transition-colors">1-Tap Status Bridge</strong>
+              Post penna.dev &amp; newsletter articles straight to WhatsApp Status with zero manual reformatting.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
-            <strong>1-Tap Bridge (Precious):</strong> Ensure your audience is always reading your latest penna.dev issues with single-tap status sharing.
-          </p>
-        </div>
+          <span className="text-[11px] font-semibold text-[#2563eb] flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+            View solution <ArrowRight className="h-3 w-3" />
+          </span>
+        </Link>
 
-        <div className="space-y-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0284c7] flex items-center justify-center">
-            <Clock className="h-4 w-4" />
+        {/* Solution 2 */}
+        <Link
+          href="/solutions/scheduled-drops"
+          className="group p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-zinc-300 hover:shadow-xs transition-all flex flex-col justify-between"
+        >
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+              <Clock className="h-4 w-4" />
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong className="text-zinc-900 block group-hover:text-[#2563eb] transition-colors">7:00 AM Daily Drops</strong>
+              Queue graphics once a week and let JidoSapp broadcast your portfolio every morning on schedule.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
-            <strong>7:00 AM Drops (Shola):</strong> Prioritize and broadcast your design work automatically every morning so you win high-ticket retainers.
-          </p>
-        </div>
+          <span className="text-[11px] font-semibold text-[#2563eb] flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+            View solution <ArrowRight className="h-3 w-3" />
+          </span>
+        </Link>
 
-        <div className="space-y-3">
-          <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-            <ShieldAlert className="h-4 w-4" />
+        {/* Solution 3 */}
+        <Link
+          href="/solutions/group-shield"
+          className="group p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-zinc-300 hover:shadow-xs transition-all flex flex-col justify-between"
+        >
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <ShieldAlert className="h-4 w-4" />
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong className="text-zinc-900 block group-hover:text-[#2563eb] transition-colors">Group Spam Shield</strong>
+              Delete phishing links in milliseconds, issue warning strikes, and auto-kick malicious bots 24/7.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
-            <strong>Group Shield (Michael):</strong> Keep community chats clean and protected 24/7 without constant manual moderator check-ins.
-          </p>
-        </div>
+          <span className="text-[11px] font-semibold text-[#2563eb] flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+            View solution <ArrowRight className="h-3 w-3" />
+          </span>
+        </Link>
+
+        {/* Solution 4 */}
+        <Link
+          href="/solutions/auto-responder"
+          className="group p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-zinc-300 hover:shadow-xs transition-all flex flex-col justify-between"
+        >
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#2563eb] flex items-center justify-center">
+              <Bot className="h-4 w-4" />
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong className="text-zinc-900 block group-hover:text-[#2563eb] transition-colors">24/7 Auto-Responder</strong>
+              Deliver instant rate cards, answer customer questions, and book Calendly calls without human delay.
+            </p>
+          </div>
+          <span className="text-[11px] font-semibold text-[#2563eb] flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+            View solution <ArrowRight className="h-3 w-3" />
+          </span>
+        </Link>
       </div>
 
       {/* Big Radiant Dashboard Frame with Floating Badges */}
