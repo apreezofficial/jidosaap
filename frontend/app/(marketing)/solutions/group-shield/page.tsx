@@ -50,7 +50,7 @@ export default function GroupShieldPage() {
       <div className="text-center space-y-4 max-w-3xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs font-semibold text-emerald-700">
           <ShieldAlert className="h-3.5 w-3.5" />
-          <span>Automated Group Moderation &amp; Anti-Spam</span>
+          <span>Group Buddy: Automated Moderation &amp; Anti-Spam</span>
         </div>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
           Protect your WhatsApp Groups 24/7. Zero manual policing.
@@ -59,9 +59,9 @@ export default function GroupShieldPage() {
           Running developer groups, masterminds, or customer communities shouldn't mean staying awake 24/7 to delete phishing links. JidoSapp deletes spam in milliseconds, issues warning strikes, and kicks malicious bots automatically.
         </p>
         <div className="pt-2 flex justify-center gap-3">
-          <Link href="/request-integration">
+          <Link href="/request-integration?use_case=group_buddy">
             <button className="h-11 px-6 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-md transition-all">
-              Protect Your Community
+              Request Demo
             </button>
           </Link>
           <Link href="/pricing">

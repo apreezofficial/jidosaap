@@ -37,8 +37,8 @@ export default function SolutionsHubPage() {
       metric: "+85% Retainer Inquiries",
     },
     {
-      title: "Community Anti-Spam Shield",
-      tag: "For Group Admins & DAOs",
+      title: "Group Buddy: Anti-Spam Shield",
+      tag: "For Communities & Groups",
       href: "/solutions/group-shield",
       icon: ShieldAlert,
       color: "bg-emerald-50 text-emerald-600 border-emerald-200/80",
@@ -138,7 +138,7 @@ export default function SolutionsHubPage() {
         <div>
           <Link href="/request-integration">
             <button className="h-11 px-7 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-md transition-all">
-              Request Integration &amp; Subdomain
+              Request Demo &amp; Subdomain
             </button>
           </Link>
         </div>

@@ -8,7 +8,7 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-[#f4f4f7] selection:bg-blue-600 selection:text-white antialiased">
+    <div className="min-h-screen flex flex-col bg-[#f4f4f7] selection:bg-[#2563eb] selection:text-white antialiased font-sans">
       {/* Top Main Navigation */}
       <header className="w-full max-w-[1380px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
         {/* Brand Logo with 4-dot Grid */}
@@ -46,8 +46,8 @@ export default function MarketingLayout({
             Sign in
           </Link>
           <Link href="/request-integration">
-            <button className="h-9 px-4 rounded-xl border border-zinc-300/80 bg-white hover:bg-zinc-50 text-xs font-semibold text-zinc-800 shadow-xs transition-all">
-              Get demo
+            <button className="h-9 px-4 rounded-xl border border-zinc-300/80 bg-white hover:bg-zinc-50 text-xs font-semibold text-zinc-800 shadow-2xs transition-all">
+              Request Demo
             </button>
           </Link>
         </div>
@@ -78,17 +78,17 @@ export default function MarketingLayout({
             </div>
 
             <div className="flex flex-wrap gap-6 text-xs text-zinc-600 font-medium">
-              <Link href="/solutions/newsletter-bridge" className="hover:text-zinc-950 transition-colors">
-                1-Tap Status Bridge
-              </Link>
-              <Link href="/solutions/scheduled-drops" className="hover:text-zinc-950 transition-colors">
-                7 AM Scheduled Drops
-              </Link>
               <Link href="/solutions/group-shield" className="hover:text-zinc-950 transition-colors">
-                Group Spam Shield
+                Group Buddy
               </Link>
               <Link href="/solutions/auto-responder" className="hover:text-zinc-950 transition-colors">
                 24/7 Auto-Responder
+              </Link>
+              <Link href="/solutions/newsletter-bridge" className="hover:text-zinc-950 transition-colors">
+                Status Bridge
+              </Link>
+              <Link href="/solutions/scheduled-drops" className="hover:text-zinc-950 transition-colors">
+                Scheduled Drops
               </Link>
               <Link href="/solutions/subdomains" className="hover:text-zinc-950 transition-colors">
                 Claim Subdomain
@@ -101,10 +101,10 @@ export default function MarketingLayout({
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
             <div>
-              Built for high-velocity creators, freelance designers, and communities. Powered by Meta WhatsApp Cloud API.
+              Built for high-velocity teams, creators, freelance designers, and communities. Powered by Meta WhatsApp Cloud API.
             </div>
             <div>
-              © {new Date().getFullYear()} JidoSapp (jidosaap.xyz). All rights reserved.
+              &copy; {new Date().getFullYear()} JidoSapp (jidosaap.xyz). All rights reserved.
             </div>
           </div>
         </div>

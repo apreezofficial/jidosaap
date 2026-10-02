@@ -2,14 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Calendar,
   Zap,
   Bot,
   Kanban,
   BarChart3,
-  Sparkles,
   ShieldCheck,
   Send,
   Newspaper,
@@ -18,83 +16,98 @@ import {
   Globe,
   ArrowRight,
   Clock,
+  CheckCircle2,
 } from "lucide-react";
 
 export default function FeaturesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 space-y-24">
+    <div className="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
       {/* Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200">
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>WhatsApp Superpowers Unlocked</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-semibold text-zinc-700 shadow-2xs">
+          <span>Enterprise Platform Capabilities</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
           Your WhatsApp can do more than you think.
         </h1>
-        <p className="text-base text-zinc-600 leading-relaxed">
-          From single-tap newsletter bridges to 7:00 AM portfolio drops and 24/7 group spam sentinels—explore the full spectrum of automations provisioned on your dedicated <code className="font-mono font-bold text-zinc-900">*.jidosaap.xyz</code> subdomain.
+        <p className="text-base sm:text-lg text-zinc-500 leading-relaxed max-w-2xl mx-auto">
+          From 24/7 group spam moderation and zero-latency auto-responders to 7:00 AM portfolio broadcasts—explore the full spectrum of tools provisioned on your dedicated <code className="font-mono font-bold text-zinc-900 bg-zinc-100 px-1.5 py-0.5 rounded">*.jidosaap.xyz</code> subdomain.
         </p>
-        <div className="pt-2 flex justify-center gap-4">
+        <div className="pt-2 flex justify-center gap-3">
           <Link href="/request-integration">
-            <Button className="bg-rose-600 hover:bg-rose-500 text-white font-semibold gap-2">
-              <span>Request Dedicated Integration</span>
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            <button className="h-11 px-7 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-xs transition-all">
+              Request Demo
+            </button>
           </Link>
-          <Link href="/#use-cases">
-            <Button variant="outline">Explore Live Demos</Button>
+          <Link href="/solutions">
+            <button className="h-11 px-6 rounded-xl bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-700 text-xs font-medium shadow-2xs transition-all">
+              Explore Solutions
+            </button>
           </Link>
         </div>
       </div>
 
-      {/* Featured Star Capabilities */}
+      {/* 4 Core Pillars */}
       <div className="space-y-8">
         <div className="text-center space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-rose-600">Star Workflows</span>
-          <h2 className="text-2xl font-bold text-zinc-900">Proven Real-World Implementations</h2>
+          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono">Flagship Engines</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950">Proven Real-World Implementations</h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Precious */}
-          <div className="rounded-2xl border border-indigo-100 bg-gradient-to-b from-indigo-50/50 to-white p-7 space-y-4 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
-              <Newspaper className="h-5 w-5" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Group Buddy */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-4 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/60 flex items-center justify-center">
+              <ShieldCheck className="h-5 w-5" />
             </div>
-            <h3 className="text-lg font-bold text-zinc-900">Precious @ penna.dev: 1-Tap Status Bridge</h3>
-            <p className="text-xs text-zinc-600 leading-relaxed">
-              Connects directly to penna.dev webhooks. When a newsletter post is ready, a single tap pushes the issue summary, preview image, and read link directly to your WhatsApp Status and reader broadcast lists without manual tab switching.
-            </p>
-            <div className="text-[11px] font-mono text-indigo-700 bg-indigo-50 px-2 py-1 rounded w-fit">
-              Isolated at precious.jidosaap.xyz
-            </div>
-          </div>
-
-          {/* Shola */}
-          <div className="rounded-2xl border border-amber-100 bg-gradient-to-b from-amber-50/50 to-white p-7 space-y-4 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-xl bg-amber-600 text-white flex items-center justify-center">
-              <Palette className="h-5 w-5" />
-            </div>
-            <h3 className="text-lg font-bold text-zinc-900">Shola The Designer: Daily 7:00 AM Drop</h3>
-            <p className="text-xs text-zinc-600 leading-relaxed">
-              Queue your visual portfolios in our Content Studio. JidoSapp executes a high-precision 7:00 AM daily cron broadcast to WhatsApp Status and VIP client lists. Build consistent authority that pulls inbound client DMs effortlessly.
-            </p>
-            <div className="text-[11px] font-mono text-amber-700 bg-amber-50 px-2 py-1 rounded w-fit">
-              Isolated at shola.jidosaap.xyz
-            </div>
-          </div>
-
-          {/* Michael */}
-          <div className="rounded-2xl border border-emerald-100 bg-gradient-to-b from-emerald-50/50 to-white p-7 space-y-4 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center">
-              <ShieldAlert className="h-5 w-5" />
-            </div>
-            <h3 className="text-lg font-bold text-zinc-900">Michael's Community: Group Spam Sentinel</h3>
-            <p className="text-xs text-zinc-600 leading-relaxed">
-              Monitors high-traffic community groups around the clock. Automatically detects spam links, scam invites, and unauthorized solicitations. Issues automated strike warnings and kicks offenders out without human moderator intervention.
+            <h3 className="text-lg font-bold text-zinc-900">Group Buddy: Anti-Spam Sentinel</h3>
+            <p className="text-xs text-zinc-500 leading-relaxed">
+              Monitors high-traffic community groups around the clock. Automatically detects scam links, issues strike warnings, and kicks repeat offenders without human moderator delay.
             </p>
             <div className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-1 rounded w-fit">
-              Isolated at michael.jidosaap.xyz
+              Sub-second link deletion
+            </div>
+          </div>
+
+          {/* 24/7 Auto-Responder */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-4 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] border border-blue-200/60 flex items-center justify-center">
+              <Bot className="h-5 w-5" />
+            </div>
+            <h3 className="text-lg font-bold text-zinc-900">24/7 Smart AI Auto-Responder</h3>
+            <p className="text-xs text-zinc-500 leading-relaxed">
+              Never miss high-intent clients at 2:00 AM. Answers FAQs, qualifies prospective clients, delivers service rate cards, and shares live calendar booking links automatically.
+            </p>
+            <div className="text-[11px] font-mono text-blue-700 bg-blue-50 px-2 py-1 rounded w-fit">
+              0s human response latency
+            </div>
+          </div>
+
+          {/* Scheduled Drops */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-4 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="h-10 w-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center justify-center">
+              <Clock className="h-5 w-5" />
+            </div>
+            <h3 className="text-lg font-bold text-zinc-900">7:00 AM Daily Broadcast Engine</h3>
+            <p className="text-xs text-zinc-500 leading-relaxed">
+              Queue your visual portfolios, graphics, or articles once a week. JidoSapp executes sharp daily morning broadcasts to WhatsApp Status and VIP client lists while you sleep.
+            </p>
+            <div className="text-[11px] font-mono text-amber-700 bg-amber-50 px-2 py-1 rounded w-fit">
+              100% on-time cron delivery
+            </div>
+          </div>
+
+          {/* 1-Tap Status Bridge */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-4 shadow-2xs hover:shadow-xs transition-shadow">
+            <div className="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200/60 flex items-center justify-center">
+              <Newspaper className="h-5 w-5" />
+            </div>
+            <h3 className="text-lg font-bold text-zinc-900">1-Tap Article &amp; Status Bridge</h3>
+            <p className="text-xs text-zinc-500 leading-relaxed">
+              Bridge content straight from your CMS, blog, or webhook events. Auto-formats rich media status cards and tracking shortlinks with zero manual copying and pasting.
+            </p>
+            <div className="text-[11px] font-mono text-indigo-700 bg-indigo-50 px-2 py-1 rounded w-fit">
+              Instant mobile distribution
             </div>
           </div>
         </div>
@@ -103,72 +116,72 @@ export default function FeaturesPage() {
       {/* Platform Architecture & Tools */}
       <div className="space-y-8 pt-8 border-t border-zinc-100">
         <div className="text-center space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">Infrastructure</span>
-          <h2 className="text-2xl font-bold text-zinc-900">The Core Engine Under The Hood</h2>
+          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono">Infrastructure</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950">The Core Engine Under The Hood</h2>
         </div>
 
         <section id="features-grid" className="grid md:grid-cols-3 gap-6">
-          {/* Card 1: Content Scheduling */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+          {/* Card 1 */}
+          <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-2xs">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Calendar className="h-5 w-5" />
             </div>
-            <h3 className="font-semibold text-zinc-900">Content Studio &amp; Calendar</h3>
+            <h3 className="font-bold text-zinc-900">Content Studio &amp; Calendar</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
               Compose rich WhatsApp updates, apply approved Meta templates, and schedule recurring broadcasts respecting your workspace timezone.
             </p>
           </div>
 
-          {/* Card 2: AI Agents */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+          {/* Card 2 */}
+          <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-2xs">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Bot className="h-5 w-5" />
             </div>
-            <h3 className="font-semibold text-zinc-900">Autonomous AI Agents</h3>
+            <h3 className="font-bold text-zinc-900">Autonomous AI Agents</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
-              Train AI agents on your business knowledge base with vector embeddings, execute explicit tools, and seamlessly escalate to human teammates.
+              Train AI agents on your business knowledge base, execute explicit tool calling, and seamlessly escalate to human teammates.
             </p>
           </div>
 
-          {/* Card 3: API Automations */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+          {/* Card 3 */}
+          <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-2xs">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Zap className="h-5 w-5" />
             </div>
-            <h3 className="font-semibold text-zinc-900">API Integration &amp; Transformers</h3>
+            <h3 className="font-bold text-zinc-900">API Integration &amp; Transformers</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
               Connect external REST APIs with encrypted secrets. Extract JSON fields and let AI generate dynamic, personalized WhatsApp notifications.
             </p>
           </div>
 
-          {/* Card 4: Visual Workflows */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
-              <Sparkles className="h-5 w-5" />
+          {/* Card 4 */}
+          <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-2xs">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
+              <Globe className="h-5 w-5" />
             </div>
-            <h3 className="font-semibold text-zinc-900">Visual Flow Builder</h3>
+            <h3 className="font-bold text-zinc-900">Dedicated Tenant Subdomains</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
-              Construct multi-branch automation trees with triggers, filters, delays, and WhatsApp actions without writing a single line of code.
+              Run on your own *.jidosaap.xyz domain with isolated database records, private webhooks, and zero shared rate limits.
             </p>
           </div>
 
-          {/* Card 5: CRM Pipeline */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+          {/* Card 5 */}
+          <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-2xs">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Kanban className="h-5 w-5" />
             </div>
-            <h3 className="font-semibold text-zinc-900">Embedded CRM &amp; Leads</h3>
+            <h3 className="font-bold text-zinc-900">Embedded CRM &amp; Pipeline</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
               Automatically capture contacts from incoming messages, qualify leads into a Kanban pipeline, and track conversions.
             </p>
           </div>
 
-          {/* Card 6: Analytics */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+          {/* Card 6 */}
+          <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-2xs">
+            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <BarChart3 className="h-5 w-5" />
             </div>
-            <h3 className="font-semibold text-zinc-900">Unified Analytics &amp; Audit</h3>
+            <h3 className="font-bold text-zinc-900">Unified Analytics &amp; Audit</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
               Monitor messages sent, AI resolution rate, lead velocity, and complete immutable security audit trails.
             </p>
@@ -176,18 +189,18 @@ export default function FeaturesPage() {
         </section>
       </div>
 
-      {/* CTA */}
-      <div className="bg-zinc-950 rounded-2xl p-8 sm:p-12 text-center text-white space-y-6">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+      {/* Bottom CTA */}
+      <div className="bg-zinc-950 rounded-[32px] p-8 sm:p-14 text-center text-white space-y-6 border border-zinc-800">
+        <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
           Ready to setup your dedicated WhatsApp instance?
         </h2>
         <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto">
-          Claim your subdomain on <code className="text-rose-400 font-mono">*.jidosaap.xyz</code> and start automating your WhatsApp today.
+          Claim your subdomain on <code className="text-white font-mono font-bold">*.jidosaap.xyz</code> and start automating your WhatsApp today.
         </p>
         <Link href="/request-integration">
-          <Button size="lg" className="h-11 px-8 bg-rose-600 hover:bg-rose-500 text-white font-semibold">
-            Claim Subdomain &amp; Setup Account
-          </Button>
+          <button className="h-11 px-8 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold text-xs transition-all shadow-md">
+            Request Demo &amp; Subdomain
+          </button>
         </Link>
       </div>
     </div>

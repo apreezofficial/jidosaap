@@ -27,6 +27,7 @@ export default function SubdomainsArchitecturePage() {
       return;
     }
     setStatus("checking");
+    setTimeout(() => {
       const reserved = [
         "admin", "administrator", "api", "app", "apps", "auth", "billing", "bot", "bots",
         "cdn", "dashboard", "dev", "developer", "developers", "docs", "help", "jido",
@@ -49,7 +50,7 @@ export default function SubdomainsArchitecturePage() {
     <div className="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-24">
       {/* Hero Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200/80 text-xs font-semibold text-purple-700">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-xs font-semibold text-[#2563eb]">
           <Globe className="h-3.5 w-3.5" />
           <span>Multi-Tenant Cloud Architecture</span>
         </div>
@@ -57,7 +58,7 @@ export default function SubdomainsArchitecturePage() {
           Your own dedicated subdomain on jidosaap.xyz.
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
-          No shared bot queues. No shared rate limits. Every creator, freelancer, and organization receives an isolated subdomain (e.g. <code>precious.jidosaap.xyz</code>) with private Webhook endpoints and dedicated Meta Cloud API authentication.
+          No shared bot queues. No shared rate limits. Every creator, freelancer, and organization receives an isolated subdomain (e.g. <code>yourbrand.jidosaap.xyz</code>) with private Webhook endpoints and dedicated Meta Cloud API authentication.
         </p>
       </div>
 
@@ -79,7 +80,7 @@ export default function SubdomainsArchitecturePage() {
                 setQuery(e.target.value);
                 setStatus("idle");
               }}
-              placeholder="e.g. precious, shola, studio"
+              placeholder="e.g. acme, brand, studio"
               className="w-full h-12 px-4 pr-32 rounded-xl border border-zinc-200/90 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
             />
             <span className="absolute right-3.5 top-3.5 text-xs text-zinc-400 font-mono pointer-events-none">
@@ -122,7 +123,7 @@ export default function SubdomainsArchitecturePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3">
-            <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Lock className="h-5 w-5" />
             </div>
             <h4 className="text-base font-bold text-zinc-950">Zero Tenant Cross-Talk</h4>
@@ -132,22 +133,22 @@ export default function SubdomainsArchitecturePage() {
           </div>
 
           <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3">
-            <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Server className="h-5 w-5" />
             </div>
             <h4 className="text-base font-bold text-zinc-950">Dedicated Webhook URL</h4>
             <p className="text-xs text-zinc-600 leading-relaxed">
-              Plug <code>https://yourbrand.jidosaap.xyz/api/v1/webhook</code> directly into Stripe, Penna, GitHub, or Shopify.
+              Plug <code>https://yourbrand.jidosaap.xyz/api/v1/webhook</code> directly into Stripe, CRM, GitHub, or Shopify.
             </p>
           </div>
 
           <div className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3">
-            <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
               <Zap className="h-5 w-5" />
             </div>
             <h4 className="text-base font-bold text-zinc-950">Zero Rate-Limit Collisions</h4>
             <p className="text-xs text-zinc-600 leading-relaxed">
-              If another user sends a high-volume broadcast, your auto-responder and status bridge latency remains exactly 0ms.
+              If another user sends a high-volume broadcast, your auto-responder and webhook bridge latency remains exactly 0ms.
             </p>
           </div>
         </div>

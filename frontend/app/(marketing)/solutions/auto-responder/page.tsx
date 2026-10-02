@@ -66,19 +66,19 @@ export default function AutoResponderPage() {
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
           Over 64% of potential clients contact businesses outside standard office hours. JidoSapp's intelligent auto-responder answers instantly, qualifies the prospect, shares your pricing deck, and books calendar calls on autopilot.
         </p>
-        <div className="pt-2 flex justify-center gap-3">
-          <Link href="/request-integration">
-            <button className="h-11 px-6 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-md transition-all">
-              Setup 24/7 Auto-Responder
-            </button>
-          </Link>
-          <Link href="/pricing">
-            <button className="h-11 px-5 rounded-xl bg-white border border-zinc-200/80 hover:bg-zinc-50 text-zinc-700 text-xs font-semibold shadow-xs transition-all">
-              Explore Pro Plan ($39/mo)
-            </button>
-          </Link>
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <Link href="/request-integration?use_case=auto_responder">
+              <button className="h-11 px-6 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-md transition-all">
+                Request Demo
+              </button>
+            </Link>
+            <Link href="/pricing">
+              <button className="h-11 px-5 rounded-xl bg-white border border-zinc-200/80 hover:bg-zinc-50 text-zinc-700 text-xs font-semibold shadow-xs transition-all">
+                Explore Pro Plan ($39/mo)
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
 
       {/* Interactive Chat Simulator */}
       <div className="rounded-[32px] border border-zinc-200/90 bg-white p-6 sm:p-10 shadow-xs max-w-3xl mx-auto space-y-6">

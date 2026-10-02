@@ -22,7 +22,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <div className="h-screen w-full flex flex-col items-center justify-center bg-white">
         <div className="h-8 w-8 rounded-lg bg-zinc-900 flex items-center justify-center text-white font-bold text-sm mb-3 relative overflow-hidden animate-pulse">
           <span className="font-serif">自</span>
-          <span className="absolute bottom-0 right-0 w-2 h-2 bg-rose-500 rounded-full"></span>
+          <span className="absolute bottom-0 right-0 w-2 h-2 bg-[#2563eb] rounded-full"></span>
         </div>
         <p className="text-xs text-zinc-400 font-medium tracking-tight">Initializing JidoSapp...</p>
       </div>
@@ -34,11 +34,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50">
+    <div className="flex h-screen overflow-hidden bg-[#f4f5f7]">
       <Sidebar />
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         <Topbar />
-        <main className="flex-1 overflow-y-auto p-8">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
       <CommandMenu />
     </div>

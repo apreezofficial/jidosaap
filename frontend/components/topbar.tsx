@@ -1,42 +1,23 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Bell, Command, Sparkles, CheckCircle2, AlertCircle, Zap, Users, Bot } from "lucide-react";
+import {
+  Bell,
+  Command,
+  Calendar as CalendarIcon,
+  ChevronDown,
+  CheckCircle2,
+  AlertCircle,
+  Users,
+  Bot,
+  PanelLeftClose,
+  Search,
+} from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { cn, formatRelativeTime } from "@/lib/utils";
-
-const PAGE_TITLES: Record<string, string> = {
-  "/dashboard":           "Dashboard",
-  "/inbox":               "Inbox",
-  "/contacts":            "Contacts",
-  "/crm/leads":           "CRM Pipeline",
-  "/content":             "Content Studio",
-  "/calendar":            "Calendar",
-  "/templates":           "Templates",
-  "/automations":         "Automations",
-  "/integrations/api":    "API Integrations",
-  "/integrations/whatsapp": "WhatsApp",
-  "/agents":              "AI Agents",
-  "/knowledge":           "Knowledge Base",
-  "/analytics":           "Analytics",
-  "/settings/profile":    "Profile",
-  "/settings/workspace":  "Workspace Settings",
-  "/settings/team":       "Team",
-  "/settings/billing":    "Billing",
-  "/settings/security":   "Security",
-};
-
-const NOTIF_ICONS: Record<string, any> = {
-  failed_automation: AlertCircle,
-  new_lead:          Users,
-  ai_handoff:        Bot,
-  failed_whatsapp:   AlertCircle,
-  api_failure:       AlertCircle,
-  usage_limit:       AlertCircle,
-};
 
 export function Topbar() {
   const { currentWorkspace } = useAuth();
@@ -45,13 +26,20 @@ export function Topbar() {
   const [notifications, setNotifications] = useState<any[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
 
-  // Derive current page title
-  const pageTitle = Object.entries(PAGE_TITLES).find(([path]) =>
-    pathname === path || pathname.startsWith(path + "/")
-  )?.[1] ?? "";
+  // Formatted date: "Monday, September 30" style
+  const [formattedDate, setFormattedDate] = useState("");
 
   useEffect(() => {
-    // Fetch recent activity as notifications proxy
+    const now = new Date();
+    const formatted = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    }).format(now);
+    setFormattedDate(formatted);
+  }, []);
+
+  useEffect(() => {
     api.get<any[]>("/analytics/activity", { limit: 5 }).then((res) => {
       if (res.success && res.data) {
         setNotifications(res.data);
@@ -68,48 +56,47 @@ export function Topbar() {
     automation_disabled:    { label: "Automation paused",               color: "text-amber-600" },
     automation_created:     { label: "New automation created",          color: "text-zinc-700" },
     ai_agent_created:       { label: "AI agent deployed",               color: "text-violet-600" },
-    ai_agent_modified:      { label: "AI agent configuration updated",  color: "text-amber-600" },
     contact_created:        { label: "New contact added",               color: "text-zinc-700" },
-    api_connection_created: { label: "API integration connected",       color: "text-blue-600" },
-    member_invited:         { label: "Team member invited",             color: "text-violet-600" },
-    subscription_activated: { label: "Subscription upgraded",           color: "text-emerald-600" },
   };
 
   return (
-    <header className="h-14 border-b border-zinc-200 bg-white px-6 flex items-center justify-between sticky top-0 z-30">
+    <header className="h-14 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-30 select-none">
+      {/* Left: ChronoTask Calendar Date Trigger & Collapse Toggle */}
       <div className="flex items-center gap-3">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-1.5 text-xs text-zinc-500">
-          <span className="font-medium text-zinc-400">{currentWorkspace?.name || "Workspace"}</span>
-          {pageTitle && (
-            <>
-              <span className="text-zinc-300">/</span>
-              <span className="font-semibold text-zinc-800">{pageTitle}</span>
-            </>
-          )}
+        <button
+          title="Toggle Sidebar"
+          className="p-1.5 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 rounded-lg transition-colors"
+        >
+          <PanelLeftClose className="h-4 w-4" />
+        </button>
+
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-zinc-50 border border-zinc-200/70 text-xs font-medium text-zinc-700 cursor-pointer hover:bg-zinc-100/70 transition-colors">
+          <CalendarIcon className="h-3.5 w-3.5 text-zinc-400" />
+          <span>{formattedDate || "Today"}</span>
+          <ChevronDown className="h-3 w-3 text-zinc-400 ml-0.5" />
         </div>
 
-        {/* WhatsApp Connection status */}
+        {/* WhatsApp Connection status pill */}
         <Link
           href="/integrations/whatsapp"
-          className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-semibold border border-emerald-200/80 hover:bg-emerald-100/70 transition-colors"
+          className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-semibold border border-emerald-200/80 hover:bg-emerald-100/70 transition-colors"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Meta Cloud API
+          <span>Meta Cloud API Online</span>
         </Link>
       </div>
 
-      {/* Right side */}
+      {/* Right side: Search + Notifications */}
       <div className="flex items-center gap-2">
         {/* Cmd+K trigger */}
         <button
           onClick={() => {
             document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true }));
           }}
-          className="hidden md:flex items-center gap-2 px-2.5 py-1.5 text-xs text-zinc-400 bg-zinc-50 border border-zinc-200 rounded-lg hover:bg-zinc-100 hover:text-zinc-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-1.5 text-xs text-zinc-400 bg-zinc-50 border border-zinc-200/80 rounded-xl hover:bg-zinc-100 hover:text-zinc-700 transition-colors"
         >
-          <Command className="h-3.5 w-3.5" />
-          <span>Search…</span>
+          <Search className="h-3.5 w-3.5 text-zinc-400" />
+          <span className="hidden sm:inline">Search tasks, workflows...</span>
           <kbd className="text-[10px] bg-white border border-zinc-200 rounded px-1.5 py-0.5 font-mono text-zinc-400">⌘K</kbd>
         </button>
 
@@ -117,22 +104,22 @@ export function Topbar() {
         <div className="relative">
           <button
             onClick={() => setNotificationsOpen(!notificationsOpen)}
-            className="p-2 text-zinc-500 hover:text-zinc-800 rounded-lg hover:bg-zinc-100 transition-colors relative"
+            className="p-2 text-zinc-500 hover:text-zinc-800 rounded-xl hover:bg-zinc-100 transition-colors relative"
           >
             <Bell className="h-4 w-4" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-rose-600 border border-white" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[#2563eb] border-2 border-white" />
             )}
           </button>
 
           {notificationsOpen && (
             <>
               <div className="fixed inset-0 z-30" onClick={() => setNotificationsOpen(false)} />
-              <div className="absolute right-0 mt-2 w-80 bg-white border border-zinc-200 rounded-xl shadow-xl z-40 overflow-hidden">
+              <div className="absolute right-0 mt-2 w-80 bg-white border border-zinc-200/90 rounded-2xl shadow-xl z-40 overflow-hidden">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100">
                   <p className="text-xs font-semibold text-zinc-900">Notifications</p>
                   {unreadCount > 0 && (
-                    <span className="text-[10px] bg-rose-500 text-white px-1.5 py-0.5 rounded-full font-bold">
+                    <span className="text-[10px] bg-[#2563eb] text-white px-2 py-0.5 rounded-full font-bold">
                       {unreadCount} new
                     </span>
                   )}
@@ -147,7 +134,7 @@ export function Topbar() {
                     notifications.map((n, idx) => {
                       const conf = ACTION_LABELS[n.action] || { label: n.action, color: "text-zinc-600" };
                       return (
-                        <div key={idx} className={cn("px-4 py-3 hover:bg-zinc-50 transition-colors", idx < unreadCount && "bg-rose-50/30")}>
+                        <div key={idx} className={cn("px-4 py-3 hover:bg-zinc-50 transition-colors", idx < unreadCount && "bg-blue-50/20")}>
                           <div className="flex items-start gap-2.5">
                             <div className={cn("h-1.5 w-1.5 rounded-full mt-1.5 shrink-0 bg-current", conf.color)} />
                             <div className="flex-1 min-w-0">
@@ -168,7 +155,7 @@ export function Topbar() {
                 <div className="px-4 py-2 border-t border-zinc-100">
                   <Link
                     href="/analytics"
-                    className="text-[10px] text-rose-600 hover:text-rose-700 font-medium"
+                    className="text-[10px] text-[#2563eb] hover:text-[#1d4ed8] font-semibold"
                     onClick={() => setNotificationsOpen(false)}
                   >
                     View all activity →
