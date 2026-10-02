@@ -25,7 +25,10 @@ export function IntegrationsSection() {
 
         {/* Staggered Floating Squircles Row 1 */}
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform p-3" title="Proforms">
+            <img src="/proforms.ico" alt="Proforms" className="w-8 h-8 object-contain rounded-md" />
+          </div>
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-indigo-50 border border-indigo-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
             <span className="font-bold text-sm sm:text-base text-indigo-600 font-mono">Penna</span>
           </div>
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-50 border border-emerald-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">

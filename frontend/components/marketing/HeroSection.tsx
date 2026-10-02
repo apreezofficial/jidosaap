@@ -142,9 +142,9 @@ export function HeroSection() {
                 </svg>
               </div>
 
-              {/* Penna */}
-              <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 shadow-2xs flex items-center justify-center" title="Penna.dev Newsletters">
-                <span className="font-extrabold text-xs text-indigo-600 font-mono tracking-tighter">P</span>
+              {/* Proforms */}
+              <div className="w-9 h-9 rounded-xl bg-white border border-zinc-200/80 shadow-2xs flex items-center justify-center p-1.5" title="Proforms">
+                <img src="/proforms.ico" alt="Proforms" className="w-5 h-5 object-contain rounded" />
               </div>
 
               {/* Stripe */}
@@ -192,12 +192,19 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* EXACT TEXT PRESERVED: SOLID BLACK LINE 1 + MUTED MATTE GRAY LINE 2 (MATCHING REFERENCE EXACTLY) */}
-          <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-extrabold tracking-[-0.035em] leading-[1.08]">
-            <span className="block text-zinc-950 whitespace-normal sm:whitespace-nowrap">
+          {/* EXACT TYPOGRAPHY: HELVETICA NEUE / SF PRO DISPLAY 400 (REGULAR), 56PX, -2PX TRACKING, 1.0 LINE-HEIGHT */}
+          <h1
+            className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.0] max-w-4xl mx-auto"
+            style={{
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif',
+              letterSpacing: "-2px",
+              fontWeight: 400,
+            }}
+          >
+            <span className="block text-zinc-950 whitespace-normal sm:whitespace-nowrap font-normal">
               Your WhatsApp can do
             </span>
-            <span className="block text-[#9ca3af] font-extrabold whitespace-normal sm:whitespace-nowrap mt-1 sm:mt-2">
+            <span className="block text-[#9ca3af] whitespace-normal sm:whitespace-nowrap mt-1 sm:mt-1.5 font-normal">
               more than you think.
             </span>
           </h1>
