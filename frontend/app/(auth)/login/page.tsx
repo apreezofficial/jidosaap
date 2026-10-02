@@ -90,12 +90,12 @@ export default function LoginPage() {
       </form>
 
       <div className="text-center text-xs text-zinc-500">
-        Don&apos;t have an account yet?{" "}
+        Don&apos;t have an instance yet?{" "}
         <Link
-          href="/register"
-          className="text-rose-600 hover:text-rose-700 font-semibold"
+          href="/request-integration"
+          className="text-[#2563eb] hover:text-[#1d4ed8] font-semibold"
         >
-          Create workspace
+          Request integration
         </Link>
       </div>
     </div>

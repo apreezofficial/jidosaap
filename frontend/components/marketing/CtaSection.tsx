@@ -17,12 +17,12 @@ export function CtaSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative">
           <Link href="/request-integration">
             <button className="h-12 px-8 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium text-sm shadow-[0_8px_20px_rgba(37,99,235,0.28)] hover:shadow-[0_12px_24px_rgba(37,99,235,0.36)] transition-all hover:-translate-y-0.5">
-              Request Your Integration &amp; Subdomain
+              Request Demo &amp; Integration
             </button>
           </Link>
-          <Link href="/register">
+          <Link href="/solutions">
             <button className="h-12 px-8 rounded-xl bg-transparent border border-zinc-700 hover:bg-zinc-900 text-white font-medium text-sm transition-all">
-              Self-Service Sign Up
+              Explore Solutions
             </button>
           </Link>
         </div>
