@@ -290,14 +290,14 @@ export default function LandingPage() {
                 <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-[11px] text-zinc-400">
-                      <span>penna.dev/editor</span>
-                      <span className="text-emerald-400">Draft Ready</span>
+                      <span>penna.dev/apcodesphere</span>
+                      <span className="text-emerald-400 font-medium">Published on Penna</span>
                     </div>
-                    <div className="text-sm font-bold text-zinc-100">
-                      Issue #48: Why Simple Architectures Win
+                    <div className="text-sm font-bold text-zinc-100 leading-snug">
+                      User Experience: the gateway to the users heart
                     </div>
                     <p className="text-xs text-zinc-400 line-clamp-2">
-                      Modern dev teams are overengineering their pipelines. Here is why simplicity wins in 2026.
+                      Tears of an ex developer — exploring why thoughtful craft, empathy, and intuitive flows unlock true customer devotion.
                     </p>
                   </div>
 
@@ -336,9 +336,18 @@ export default function LandingPage() {
                     {preciousPublished ? (
                       <div className="space-y-2 animate-in fade-in zoom-in-95 duration-300">
                         <div className="bg-indigo-950/80 border border-indigo-500/40 rounded-lg p-3 text-left space-y-1">
-                          <div className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">New Newsletter Issue</div>
-                          <div className="text-xs font-bold text-white">Why Simple Architectures Win</div>
-                          <div className="text-[11px] text-zinc-300 underline font-mono">penna.dev/p/issue-48</div>
+                          <div className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">New Newsletter Issue · Penna.dev</div>
+                          <div className="text-xs font-bold text-white leading-snug">
+                            User Experience: the gateway to the users heart
+                          </div>
+                          <a
+                            href="https://www.penna.dev/apcodesphere/8078b477-011e-4b6b-bcf1-30414d28faf7"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[11px] text-zinc-300 hover:text-white underline font-mono block truncate"
+                          >
+                            penna.dev/apcodesphere/8078b477-011e-4b6b-bcf1-30414d28faf7
+                          </a>
                         </div>
                         <div className="text-[11px] text-emerald-400 font-mono">
                           🔥 Live on WhatsApp Status · {preciousViews} views

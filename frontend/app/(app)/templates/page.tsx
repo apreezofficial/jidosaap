@@ -87,8 +87,8 @@ export default function TemplatesPage() {
               setForm({
                 name: "Precious · penna.dev Status Bridge",
                 category: "marketing",
-                header: "📰 New Newsletter Issue",
-                body: "Fresh drop on penna.dev: {{issue_title}}!\n\nRead the full issue: {{issue_url}}",
+                header: "📰 New Newsletter Issue · Penna",
+                body: "Fresh drop on penna.dev: User Experience: the gateway to the users heart\n\nRead the full piece on Tears of an ex developer: https://www.penna.dev/apcodesphere/8078b477-011e-4b6b-bcf1-30414d28faf7",
                 footer: "Shared via JidoSapp Bridge",
                 language: "en",
                 variables: "issue_title, issue_url",
