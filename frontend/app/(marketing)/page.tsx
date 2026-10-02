@@ -24,6 +24,14 @@ import {
   AlertTriangle,
   Clock3,
   ExternalLink,
+  ChevronRight,
+  Share2,
+  SlidersHorizontal,
+  FolderKanban,
+  Calendar,
+  Layers,
+  ShieldCheck,
+  Building,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -134,12 +142,12 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="space-y-24 pb-24">
-      {/* ─── HERO SECTION (EXACT STRUCTURE & SIZING FROM INSPIRATION) ─── */}
+    <div className="space-y-32 pb-32">
+      {/* ─── 1. HERO SECTION (EXACT STRUCTURE & SIZING FROM INSPIRATION) ─── */}
       <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 pt-2">
         <div className="relative w-full rounded-[28px] sm:rounded-[36px] border border-zinc-200/90 bg-[#fafafa] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden min-h-[640px] sm:min-h-[700px] lg:min-h-[750px] flex flex-col items-center justify-center text-center px-6 py-20 lg:py-28">
           
-          {/* Subtle Dot Grid Background (Identical to Inspiration) */}
+          {/* Subtle Dot Grid Background */}
           <div
             className="absolute inset-0 pointer-events-none opacity-60"
             style={{
@@ -151,7 +159,6 @@ export default function LandingPage() {
           {/* ── TOP-LEFT WIDGET: Post-It Sticky Note (Precious Use Case) ── */}
           <div className="hidden md:block absolute top-8 lg:top-12 left-8 lg:left-14 -rotate-3 z-10 transition-transform hover:-rotate-1 duration-300">
             <div className="w-60 lg:w-64 bg-[#fef08a] border border-amber-300/60 shadow-[0_16px_36px_rgba(0,0,0,0.07)] rounded-sm p-4 text-left relative">
-              {/* Red Push Pin */}
               <div className="w-3.5 h-3.5 rounded-full bg-red-500 shadow-md mx-auto -mt-2 mb-2 border border-red-600/40 relative">
                 <span className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/60"></span>
               </div>
@@ -197,7 +204,6 @@ export default function LandingPage() {
             <div className="w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200/90 shadow-[0_16px_36px_rgba(0,0,0,0.06)] p-4 text-left space-y-3">
               <div className="text-xs font-bold text-zinc-900">Today's tasks</div>
               
-              {/* Task 1 */}
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-[11px]">
                   <div className="flex items-center gap-1.5">
@@ -211,7 +217,6 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Task 2 */}
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-[11px]">
                   <div className="flex items-center gap-1.5">
@@ -235,7 +240,6 @@ export default function LandingPage() {
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
               
-              {/* App Icon Squircles Row */}
               <div className="flex items-center gap-2 pt-1">
                 <div className="w-10 h-10 rounded-xl bg-white border border-zinc-200/90 shadow-sm flex items-center justify-center">
                   <span className="font-bold text-xs text-indigo-600">P</span>
@@ -259,7 +263,6 @@ export default function LandingPage() {
 
           {/* ── CENTER HERO CONTENT ── */}
           <div className="relative z-20 max-w-3xl mx-auto space-y-5">
-            {/* Center Floating App Icon (Exact 4-dot Badge from Inspiration) */}
             <div className="w-16 h-16 rounded-[22px] bg-white border border-zinc-100 shadow-[0_12px_32px_rgba(0,0,0,0.08)] flex items-center justify-center mx-auto mb-6 hover:scale-105 transition-transform duration-300">
               <div className="grid grid-cols-2 gap-1.5 w-6 h-6 items-center justify-center">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#0284c7]"></span>
@@ -269,7 +272,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Giant 2-Line Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-extrabold tracking-[-0.035em] text-zinc-950 leading-[1.06]">
               Your WhatsApp can do
               <span className="block text-[#94a3b8] font-extrabold mt-1 sm:mt-2">
@@ -277,12 +279,10 @@ export default function LandingPage() {
               </span>
             </h1>
 
-            {/* Subtitle */}
             <p className="text-sm sm:text-base lg:text-[17px] text-[#475569] font-normal max-w-xl mx-auto leading-relaxed pt-1">
               Efficiently automate status drops, 7 AM designer broadcasts, spam filters &amp; 24/7 auto-responders.
             </p>
 
-            {/* Blue Pill CTA Button */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/request-integration">
                 <button className="h-12 px-8 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium text-sm shadow-[0_8px_20px_rgba(37,99,235,0.28)] hover:shadow-[0_12px_24px_rgba(37,99,235,0.36)] transition-all hover:-translate-y-0.5">
@@ -294,531 +294,540 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── LIVE SUBDOMAIN CLAIM BAR (*.jidosaap.xyz) ────────────────── */}
-      <section id="subdomains" className="max-w-2xl mx-auto px-6 text-center space-y-4">
-        <div className="text-xs font-bold uppercase tracking-wider text-[#0284c7]">
-          Every Client Gets Their Own Dedicated Subdomain
-        </div>
-
-        <form onSubmit={handleCheckSubdomain} className="bg-white border-2 border-zinc-900 rounded-2xl p-1.5 shadow-xl flex flex-col sm:flex-row items-center gap-2">
-          <div className="flex-1 flex items-center px-3 w-full">
-            <span className="text-xs font-semibold text-zinc-400 mr-1">https://</span>
-            <input
-              type="text"
-              placeholder="precious, shola, michael, or yourbrand"
-              value={subdomainQuery}
-              onChange={(e) => {
-                setSubdomainQuery(e.target.value);
-                setCheckStatus("idle");
-              }}
-              className="w-full text-sm font-semibold text-zinc-900 placeholder:text-zinc-300 focus:outline-none"
-            />
-            <span className="text-xs font-bold text-[#0284c7] font-mono bg-sky-50 px-2 py-0.5 rounded">.jidosaap.xyz</span>
+      {/* ─── 2. "SOLUTIONS" SECTION (MATCHING SCREENSHOT 1: media_1790959521082.png) ─── */}
+      <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-zinc-200/80 shadow-xs text-xs font-semibold text-zinc-700">
+            Solutions
           </div>
-          <Button type="submit" size="sm" className="w-full sm:w-auto px-6 h-10 bg-zinc-950 hover:bg-zinc-800 text-white font-medium shrink-0">
-            Claim Subdomain
-          </Button>
-        </form>
-
-        {checkStatus !== "idle" && (
-          <div className={`text-xs flex items-center justify-center gap-1.5 font-medium ${checkStatus === "available" ? "text-emerald-600" : checkStatus === "checking" ? "text-zinc-500" : "text-rose-600"}`}>
-            {checkStatus === "checking" && <span>Checking availability on jidosaap.xyz…</span>}
-            {checkStatus === "available" && (
-              <>
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                <span>{checkMessage}</span>
-                <Link href={`/request-integration?subdomain=${subdomainQuery}`} className="ml-2 font-bold underline text-emerald-700">
-                  Provision Account &rarr;
-                </Link>
-              </>
-            )}
-            {checkStatus === "taken" && (
-              <>
-                <AlertTriangle className="h-4 w-4 text-rose-600" />
-                <span>{checkMessage}</span>
-              </>
-            )}
-          </div>
-        )}
-      </section>
-
-      {/* ─── THE 4 STAR REAL-WORLD USE CASES & SIMULATORS ─────────────── */}
-      <section id="use-cases" className="max-w-7xl mx-auto px-6 lg:px-12 space-y-24">
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <div className="text-xs font-bold uppercase tracking-wider text-[#2563eb]">Proven In The Real World</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
-            Four Stories. Four WhatsApp Superpowers.
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+            Solve your team's biggest challenges
           </h2>
-          <p className="text-sm text-zinc-600">
-            Interact with live simulators of real creators, designers, group admins, and 24/7 auto-responders.
-          </p>
         </div>
 
-        {/* ── USE CASE 1: PRECIOUS @ PENNA.DEV ── */}
-        <div id="use-case-precious" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">
-                <Newspaper className="h-3.5 w-3.5" />
-                <span>Use Case #1 · Newsletter-to-Status Bridge</span>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-                Precious publishes at <span className="text-indigo-600">penna.dev</span>. With 1 tap, it’s on WhatsApp Status.
-              </h3>
-
-              <p className="text-sm text-zinc-600 leading-relaxed">
-                Precious writes tech essays on penna.dev. Writing is hard enough; he hated switching between tabs, copying links, and typing out WhatsApp Status updates manually.
-              </p>
-
-              <div className="space-y-3 text-xs text-zinc-700">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Zero Manual Tab Switching:</strong> Hit publish in penna.dev or tap the Jido bridge button.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Automatic Status Formatting:</strong> JidoSapp generates the story card and includes the tracked read link.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Dedicated Subdomain:</strong> Isolated at <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-indigo-600 font-semibold">precious.jidosaap.xyz</code>.</span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link href="/request-integration?use_case=newsletter_bridge&subdomain=precious">
-                  <Button className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2 text-xs h-10 px-5">
-                    <span>Setup Newsletter Bridge For Me</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
-              </div>
+        {/* 3 Value Pillars with Connecting Dots */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left relative pt-4">
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+              <Zap className="h-4 w-4" />
             </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong>1-Tap Bridge (Precious):</strong> Ensure your audience is always reading your latest penna.dev issues with single-tap status sharing.
+            </p>
+          </div>
 
-            {/* Interactive Live Playground: Precious */}
-            <div className="lg:col-span-7 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">penna.dev ➔ jidosaap webhook bridge</span>
-                </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">precious.jidosaap.xyz</span>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {/* Penna.dev Real Article Card */}
-                <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-[11px] text-zinc-400">
-                      <span>penna.dev/apcodesphere</span>
-                      <span className="text-emerald-400 font-medium">Published</span>
-                    </div>
-                    <div className="text-sm font-bold text-zinc-100 leading-snug">
-                      User Experience: the gateway to the users heart
-                    </div>
-                    <p className="text-xs text-zinc-400 line-clamp-2">
-                      Tears of an ex developer — exploring how thoughtful craft, empathy, and intuitive flows unlock true customer devotion.
-                    </p>
-                  </div>
-
-                  <Button
-                    onClick={handlePreciousPublish}
-                    size="sm"
-                    className={`w-full text-xs font-medium gap-1.5 transition-all ${
-                      preciousPublished ? "bg-emerald-600 hover:bg-emerald-500 text-white" : "bg-indigo-600 hover:bg-indigo-500 text-white"
-                    }`}
-                  >
-                    {preciousPublished ? (
-                      <>
-                        <Check className="h-3.5 w-3.5" />
-                        <span>Bridged to WhatsApp Status!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-3.5 w-3.5" />
-                        <span>Tap: Post to WhatsApp Status</span>
-                      </>
-                    )}
-                  </Button>
-                </div>
-
-                {/* WhatsApp Status Simulation Card */}
-                <div className="bg-zinc-900/90 border border-emerald-500/30 rounded-xl p-4 relative overflow-hidden flex flex-col justify-between">
-                  <div className="flex items-center justify-between text-[11px] border-b border-zinc-800/80 pb-2">
-                    <div className="flex items-center gap-1.5 text-zinc-300 font-semibold">
-                      <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                      <span>Precious's WhatsApp Status</span>
-                    </div>
-                    <span className="text-zinc-500 text-[10px]">{preciousPublished ? "Just now" : "Waiting for publish…"}</span>
-                  </div>
-
-                  <div className="py-4 space-y-2 text-center">
-                    {preciousPublished ? (
-                      <div className="space-y-2 animate-in fade-in zoom-in-95 duration-300 text-left">
-                        <div className="bg-indigo-950/80 border border-indigo-500/40 rounded-lg p-3 space-y-1">
-                          <div className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">New Newsletter Issue · Penna.dev</div>
-                          <div className="text-xs font-bold text-white leading-snug">
-                            User Experience: the gateway to the users heart
-                          </div>
-                          <a
-                            href="https://www.penna.dev/apcodesphere/8078b477-011e-4b6b-bcf1-30414d28faf7"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[11px] text-zinc-300 hover:text-white underline font-mono block truncate"
-                          >
-                            penna.dev/apcodesphere/8078b477...
-                          </a>
-                        </div>
-                        <div className="text-[11px] text-emerald-400 font-mono text-center">
-                          🔥 Live on WhatsApp Status · {preciousViews} views
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-xs text-zinc-500 py-6">
-                        Click the button on the left to fire the 1-tap bridge
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="text-[10px] text-zinc-500 text-center border-t border-zinc-800/60 pt-1.5">
-                    Synced via Meta Cloud API Status Engine
-                  </div>
-                </div>
-              </div>
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0284c7] flex items-center justify-center">
+              <Clock className="h-4 w-4" />
             </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong>7:00 AM Drops (Shola):</strong> Prioritize and broadcast your design work automatically every morning so you win high-ticket retainers.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <ShieldAlert className="h-4 w-4" />
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              <strong>Group Shield (Michael):</strong> Keep community chats clean and protected 24/7 without constant manual moderator check-ins.
+            </p>
           </div>
         </div>
 
-        {/* ── USE CASE 2: SHOLA THE GRAPHIC DESIGNER ── */}
-        <div id="use-case-shola" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            {/* Simulator Left */}
-            <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">7:00 am cron queue &amp; lead tracker</span>
-                </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">shola.jidosaap.xyz</span>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="text-amber-400 font-semibold flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> Daily at 07:00 AM
-                    </span>
-                    <span className="text-emerald-400 font-mono text-[10px]">Active</span>
-                  </div>
-
-                  <div className="aspect-video bg-zinc-800 rounded-lg border border-zinc-700 p-3 flex flex-col justify-end relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
-                    <div className="relative text-left">
-                      <span className="text-[9px] font-mono bg-rose-600 text-white px-1.5 py-0.5 rounded uppercase font-bold">Today's Showcase</span>
-                      <div className="text-xs font-bold text-white mt-0.5">FinTech Mobile UI Rebrand</div>
-                    </div>
-                  </div>
-
-                  <Button
-                    onClick={handleSholaTriggerDrop}
-                    size="sm"
-                    className="w-full text-xs font-medium bg-amber-600 hover:bg-amber-500 text-white gap-1.5"
-                  >
-                    <Play className="h-3.5 w-3.5" />
-                    <span>Simulate 7:00 AM Auto-Drop</span>
-                  </Button>
-                </div>
-
-                <div className="bg-zinc-900/90 border border-zinc-800 rounded-xl p-4 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-[11px] border-b border-zinc-800 pb-2 mb-3">
-                      <span className="font-semibold text-zinc-300">Incoming Client DMs</span>
-                      <span className="bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded text-[10px] font-bold">
-                        {sholaInquiryCount} new inquiries
-                      </span>
-                    </div>
-
-                    <div className="space-y-2 text-left">
-                      <div className="bg-zinc-800/80 p-2.5 rounded-lg border border-zinc-700/60 text-xs space-y-1">
-                        <div className="flex items-center justify-between text-[10px] text-zinc-400">
-                          <span className="font-bold text-zinc-200">Alex (Tech Founder)</span>
-                          <span>07:08 AM</span>
-                        </div>
-                        <p className="text-zinc-300 text-[11px]">
-                          "Hey Shola! Saw your 7 AM status drop. Can you design our pitch deck this week?"
-                        </p>
-                      </div>
-
-                      {sholaTriggered && (
-                        <div className="bg-amber-950/40 p-2.5 rounded-lg border border-amber-500/40 text-xs space-y-1 animate-in fade-in slide-in-from-top-2">
-                          <div className="flex items-center justify-between text-[10px] text-amber-300 font-semibold">
-                            <span>Kemi (Brand Director)</span>
-                            <span>Just now</span>
-                          </div>
-                          <p className="text-zinc-200 text-[11px]">
-                            "Love the daily consistency. Need your rate card for a 3-month retainer!"
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="text-[10px] text-zinc-500 text-center border-t border-zinc-800/60 pt-2 mt-3">
-                    Auto-captured directly into JidoSapp CRM Leads
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Story Right */}
-            <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold">
-                <Palette className="h-3.5 w-3.5" />
-                <span>Use Case #2 · Consistency Engine for Freelancers</span>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-                Shola is a graphic designer. JidoSapp posts daily at <span className="text-amber-600">7:00 AM sharp</span>.
-              </h3>
-
-              <p className="text-sm text-zinc-600 leading-relaxed">
-                Clients hire the designers they see every single day. Shola struggled with waking up early and remembering to post daily portfolio designs. With JidoSapp, he queues a month in advance and lets consistency work for him.
-              </p>
-
-              <div className="space-y-3 text-xs text-zinc-700">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Automatic 7:00 AM Cron Posting:</strong> Broadcasts daily visual graphics to status &amp; VIP broadcast lists.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Consistency Converts:</strong> Clients see relentless professionalism, driving high-ticket retainer inquiries.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Dedicated Subdomain:</strong> Hosted at <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-amber-700 font-semibold">shola.jidosaap.xyz</code>.</span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link href="/request-integration?use_case=graphic_scheduler&subdomain=shola">
-                  <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2 text-xs h-10 px-5">
-                    <span>Setup Daily 7 AM Scheduler</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
-              </div>
+        {/* Big Radiant Dashboard Frame with Floating Badges */}
+        <div className="relative max-w-6xl mx-auto pt-6">
+          {/* Floating '20' Squircle */}
+          <div className="hidden sm:flex absolute -top-2 left-6 z-20 w-16 h-16 rounded-2xl bg-white shadow-xl border border-zinc-100 items-center justify-center text-xl font-bold text-zinc-900 -rotate-12">
+            20
+          </div>
+          {/* Floating Teal Checkmark Squircle */}
+          <div className="hidden sm:flex absolute top-16 right-4 z-20 w-16 h-16 rounded-2xl bg-white shadow-xl border border-zinc-100 items-center justify-center rotate-12">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center">
+              <Check className="h-5 w-5 stroke-[2.5]" />
             </div>
           </div>
-        </div>
 
-        {/* ── USE CASE 3: MICHAEL'S GROUP SPAM GUARDIAN ── */}
-        <div id="use-case-michael" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold">
-                <ShieldAlert className="h-3.5 w-3.5" />
-                <span>Use Case #3 · 24/7 Group Guardian &amp; Strike System</span>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-                Michael runs WhatsApp groups. JidoSapp <span className="text-emerald-600">filters spam links, issues strikes, and auto-exits</span> offenders.
-              </h3>
-
-              <p className="text-sm text-zinc-600 leading-relaxed">
-                Spammers constantly invade community groups with scam crypto links and telegram invites. Michael couldn’t monitor the group 24/7. JidoSapp inspects messages, issues strike flags, and kicks scammers automatically.
-              </p>
-
-              <div className="space-y-3 text-xs text-zinc-700">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Real-Time Link &amp; Pattern Inspector:</strong> Banned domains and scam invite links are trapped immediately.</span>
+          {/* Cyan Glow Frame */}
+          <div className="rounded-[32px] sm:rounded-[40px] bg-gradient-to-b from-[#00b4d8] to-[#0284c7] p-3 sm:p-5 shadow-2xl">
+            <div className="bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-10 text-left space-y-8 shadow-inner overflow-hidden">
+              {/* Internal Dashboard Mockup */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-zinc-100 pb-5 gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="grid grid-cols-2 gap-1 w-5 h-5">
+                    <span className="w-2 h-2 rounded-full bg-[#0284c7]"></span>
+                    <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+                    <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+                    <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+                  </div>
+                  <span className="font-bold text-base text-zinc-900">JidoSapp Engine</span>
+                  <span className="text-xs font-mono text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded">
+                    tenant://pipeline.live
+                  </span>
                 </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Strike Warnings &amp; Auto-Exit:</strong> Automated warnings on strike 1; immediate removal from the group on strike 2.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Dedicated Subdomain:</strong> Managed on <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-emerald-700 font-semibold">michael.jidosaap.xyz</code>.</span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link href="/request-integration?use_case=group_spam_guardian&subdomain=michael">
-                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 text-xs h-10 px-5">
-                    <span>Protect My WhatsApp Group</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Interactive Live Playground: Michael */}
-            <div className="lg:col-span-7 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                 <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">group spam sentinel &amp; strike engine</span>
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="text-xs font-semibold text-emerald-600">Meta Cloud API Connected</span>
                 </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">michael.jidosaap.xyz</span>
               </div>
 
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
-                <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
-                  <div className="flex items-center gap-2 font-bold text-zinc-200">
-                    <Users className="h-4 w-4 text-emerald-400" />
-                    <span>Frontend Developers Hub (1,480 Members)</span>
+              {/* Console Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-[#fafafa] border border-zinc-200/80 rounded-2xl p-5 space-y-4">
+                  <div className="flex items-center justify-between text-xs font-bold text-zinc-900">
+                    <span>1-Tap Status Pipeline</span>
+                    <span className="text-[10px] text-indigo-600 font-mono">penna.dev</span>
                   </div>
-                  <button onClick={handleMichaelReset} className="text-zinc-500 hover:text-zinc-300 flex items-center gap-1 text-[11px]">
-                    <RotateCcw className="h-3 w-3" /> Reset Test
-                  </button>
-                </div>
-
-                {/* Simulated Chat Feed */}
-                <div className="h-52 overflow-y-auto space-y-2.5 pr-2 font-sans text-xs">
-                  {michaelLog.map((item) => (
-                    <div
-                      key={item.id}
-                      className={`p-2.5 rounded-lg border text-left ${
-                        item.type === "normal"
-                          ? "bg-zinc-800/80 border-zinc-700 text-zinc-200"
-                          : item.type === "warning"
-                          ? "bg-amber-950/60 border-amber-600/50 text-amber-200 font-medium"
-                          : "bg-rose-950/70 border-rose-600/50 text-rose-200 font-bold"
-                      }`}
-                    >
-                      {item.text}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Test Action Controls */}
-                <div className="pt-2 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <div className="text-[11px] text-zinc-400">
-                    Spammer Strikes: <span className="font-bold text-rose-400 font-mono">{michaelSpamCount} / 2</span>
+                  <div className="bg-white p-3 rounded-xl border border-zinc-200/60 shadow-xs text-xs space-y-1">
+                    <div className="text-[10px] text-zinc-400">Latest Synced Issue</div>
+                    <div className="font-bold text-zinc-800">User Experience: the gateway to the users heart</div>
+                    <div className="text-[10px] text-emerald-600 font-mono">Status Posted · 384 views</div>
                   </div>
-                  <Button
-                    onClick={handleMichaelSimulateSpam}
-                    disabled={michaelSpamCount >= 2}
-                    size="sm"
-                    className="w-full sm:w-auto text-xs bg-rose-600 hover:bg-rose-500 text-white font-semibold gap-1.5"
-                  >
-                    <Flame className="h-3.5 w-3.5" />
-                    <span>{michaelSpamCount === 0 ? "Test: Spammer Posts Scam Link" : michaelSpamCount === 1 ? "Test: Spammer Repeats Infraction" : "Spammer Exited by Bot"}</span>
-                  </Button>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* ── USE CASE 4: 24/7 AUTO-RESPONDER & SMART LEAD CAPTURE ── */}
-        <div id="use-case-auto-responder" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            {/* Live Chat Simulator Left */}
-            <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">24/7 smart auto-responder · zero latency</span>
-                </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">auto-replied in 0.8s</span>
-              </div>
-
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
-                <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
-                  <div className="flex items-center gap-2 font-bold text-zinc-200">
-                    <Bot className="h-4 w-4 text-blue-400" />
-                    <span>Business WhatsApp Bot (Live Simulation)</span>
+                <div className="bg-[#fafafa] border border-zinc-200/80 rounded-2xl p-5 space-y-4">
+                  <div className="flex items-center justify-between text-xs font-bold text-zinc-900">
+                    <span>Cron Scheduler</span>
+                    <span className="text-[10px] text-amber-600 font-mono">07:00 AM</span>
                   </div>
-                  <span className="text-emerald-400 font-mono text-[10px]">Online 24/7</span>
+                  <div className="bg-white p-3 rounded-xl border border-zinc-200/60 shadow-xs text-xs space-y-1">
+                    <div className="text-[10px] text-zinc-400">Daily Drop Status</div>
+                    <div className="font-bold text-zinc-800">Shola's Brand Identity Showcase</div>
+                    <div className="text-[10px] text-[#0284c7] font-mono">Broadcast delivered to 1,240 leads</div>
+                  </div>
                 </div>
 
-                {/* Chat Feed */}
-                <div className="h-56 overflow-y-auto space-y-3 pr-2 text-xs">
-                  {autoChatLog.map((msg, idx) => (
-                    <div
-                      key={idx}
-                      className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"}`}
-                    >
-                      <div
-                        className={`max-w-[85%] rounded-2xl p-3 text-left ${
-                          msg.sender === "user"
-                            ? "bg-[#2563eb] text-white rounded-br-none"
-                            : "bg-zinc-800 border border-zinc-700/80 text-zinc-200 rounded-bl-none"
-                        }`}
-                      >
-                        {msg.text}
-                      </div>
-                      <span className="text-[9px] text-zinc-500 mt-1 px-1">{msg.time}</span>
-                    </div>
-                  ))}
+                <div className="bg-[#fafafa] border border-zinc-200/80 rounded-2xl p-5 space-y-4">
+                  <div className="flex items-center justify-between text-xs font-bold text-zinc-900">
+                    <span>Group Guardian</span>
+                    <span className="text-[10px] text-emerald-600 font-mono">24/7 Shield</span>
+                  </div>
+                  <div className="bg-white p-3 rounded-xl border border-zinc-200/60 shadow-xs text-xs space-y-1">
+                    <div className="text-[10px] text-zinc-400">Scam Shield Activity</div>
+                    <div className="font-bold text-zinc-800">Michael's Community Hub</div>
+                    <div className="text-[10px] text-rose-600 font-mono">3 spam links deleted · 1 user exited</div>
+                  </div>
                 </div>
-
-                {/* Input box */}
-                <form onSubmit={handleSendAutoChat} className="pt-2 border-t border-zinc-800 flex items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Type 'pricing', 'book call', or anything..."
-                    value={testUserMsg}
-                    onChange={(e) => setTestUserMsg(e.target.value)}
-                    className="flex-1 bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
-                  />
-                  <Button type="submit" size="sm" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs h-8 px-4">
-                    Send
-                  </Button>
-                </form>
-              </div>
-            </div>
-
-            {/* Story Right */}
-            <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">
-                <Bot className="h-3.5 w-3.5" />
-                <span>Use Case #4 · 24/7 Auto-Responder &amp; CRM</span>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-                Never leave a client on "read". <span className="text-[#2563eb]">Auto-respond in seconds</span> at 2:00 AM.
-              </h3>
-
-              <p className="text-sm text-zinc-600 leading-relaxed">
-                When prospects reach out after business hours or while you're focused, delay means lost revenue. JidoSapp answers inquiries instantly with intelligent menus, pricing, catalog links, and captures leads directly into your CRM.
-              </p>
-
-              <div className="space-y-3 text-xs text-zinc-700">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Zero-Latency Replies:</strong> Instant replies 24/7 without keeping prospects waiting.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Automatic CRM Capture:</strong> Extracts client intent, budget, and tags qualified leads into Kanban pipelines.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Smart Human Escalation:</strong> Escalates to your team when human intervention or closure is required.</span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link href="/request-integration?use_case=custom">
-                  <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white gap-2 text-xs h-10 px-5">
-                    <span>Setup 24/7 Auto-Responder</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── READY TO LAUNCH CTA ────────────────────────────────────── */}
+      {/* ─── 3. BENTO GRID FEATURES (MATCHING SCREENSHOT 2: media_1790959532339.png) ─── */}
+      <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Bento Card 1: Seamless Collaboration / Penna.dev Status Bridge */}
+          <div className="rounded-[28px] border border-zinc-200/90 bg-white p-8 sm:p-10 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="h-44 bg-[#fafafa] rounded-2xl border border-zinc-100 p-4 flex flex-col justify-center relative overflow-hidden">
+              <div className="bg-white rounded-xl border border-zinc-200 p-3 shadow-md w-fit max-w-[280px] space-y-1 -rotate-2">
+                <div className="text-[10px] font-bold text-indigo-600">penna.dev status bridge</div>
+                <div className="text-xs font-bold text-zinc-900 truncate">User Experience: the gateway...</div>
+                <div className="text-[10px] text-zinc-400">1-Tap published directly to status</div>
+              </div>
+            </div>
+            <div className="space-y-2 text-left">
+              <h3 className="text-xl font-bold text-zinc-950">Seamless Newsletter Publishing</h3>
+              <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
+                Precious publishes on penna.dev and with a single tap, JidoSapp bridges the formatted update and tracked link to WhatsApp Status.
+              </p>
+            </div>
+          </div>
+
+          {/* Bento Card 2: Time Management Tools / Shola 7 AM Drops */}
+          <div className="rounded-[28px] border border-zinc-200/90 bg-white p-8 sm:p-10 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="h-44 bg-[#fafafa] rounded-2xl border border-zinc-100 p-4 flex items-center justify-around relative overflow-hidden">
+              <div className="text-center space-y-1">
+                <div className="text-xl font-extrabold text-[#0284c7] font-mono">07:00 AM</div>
+                <div className="text-[10px] text-zinc-400">Daily Cron Drop</div>
+              </div>
+              <div className="h-20 w-px bg-zinc-200"></div>
+              <div className="text-center space-y-1">
+                <div className="text-xl font-extrabold text-emerald-600 font-mono">+340%</div>
+                <div className="text-[10px] text-zinc-400">Client Inquiries</div>
+              </div>
+            </div>
+            <div className="space-y-2 text-left">
+              <h3 className="text-xl font-bold text-zinc-950">Consistency &amp; Schedule Engines</h3>
+              <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
+                Optimize your workflow with scheduled morning drops. Shola queues his designs in advance, ensuring daily client visibility without waking up early.
+              </p>
+            </div>
+          </div>
+
+          {/* Bento Card 3: Advanced Lead Tracking & 24/7 Auto-Responder */}
+          <div className="rounded-[28px] border border-zinc-200/90 bg-white p-8 sm:p-10 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="h-44 bg-[#fafafa] rounded-2xl border border-zinc-100 p-4 flex flex-col justify-center space-y-2 relative overflow-hidden text-left">
+              <div className="bg-white p-2.5 rounded-xl border border-zinc-200 shadow-sm text-xs space-y-0.5">
+                <span className="text-[10px] font-bold text-rose-600">Client Inquiry (02:14 AM)</span>
+                <p className="text-[11px] text-zinc-700">"What are your retainer rates?"</p>
+              </div>
+              <div className="bg-[#2563eb] text-white p-2.5 rounded-xl shadow-sm text-xs space-y-0.5">
+                <span className="text-[10px] font-bold text-blue-200">Auto-Responder (02:14 AM)</span>
+                <p className="text-[11px]">"Our retainers start at $1,800/mo. Here is our booking link..."</p>
+              </div>
+            </div>
+            <div className="space-y-2 text-left">
+              <h3 className="text-xl font-bold text-zinc-950">24/7 Zero-Latency Auto-Responder</h3>
+              <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
+                Never leave potential clients on "read". Automatically answer pricing questions, send booking links, and capture qualified leads into CRM.
+              </p>
+            </div>
+          </div>
+
+          {/* Bento Card 4: Customizable Workspaces on *.jidosaap.xyz (Dashed Border) */}
+          <div className="rounded-[28px] border-2 border-dashed border-zinc-300 bg-[#fafafa] p-8 sm:p-10 space-y-6 shadow-sm hover:border-zinc-400 transition-colors">
+            <div className="h-44 flex flex-col items-center justify-center space-y-3">
+              <div className="w-14 h-14 rounded-2xl bg-amber-400 text-zinc-900 font-bold flex items-center justify-center text-lg shadow-md">
+                04:21
+              </div>
+              <div className="text-xs font-mono font-bold text-zinc-800 bg-white border border-zinc-200 px-3 py-1 rounded-xl shadow-xs">
+                https://yourbrand.jidosaap.xyz
+              </div>
+            </div>
+            <div className="space-y-2 text-left">
+              <h3 className="text-xl font-bold text-zinc-950">Dedicated Isolated Subdomains</h3>
+              <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
+                Every client gets their own dedicated <code className="font-mono font-bold text-zinc-900">*.jidosaap.xyz</code> subdomain with an isolated WhatsApp Cloud API instance.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center text-xs font-medium text-zinc-400">
+          and a lot more superpowers...
+        </div>
+      </section>
+
+      {/* ─── 4. "INTEGRATIONS" SECTION (MATCHING SCREENSHOT 3: media_1790959542837.png) ─── */}
+      <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-zinc-200/80 shadow-xs text-xs font-semibold text-zinc-700">
+            Integrations
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+            Connect integrations you use every day
+          </h2>
+        </div>
+
+        {/* Brand Center Icon with Guide Lines */}
+        <div className="relative max-w-4xl mx-auto py-6">
+          <div className="w-16 h-16 rounded-[22px] bg-white border border-zinc-200/90 shadow-[0_12px_32px_rgba(0,0,0,0.08)] flex items-center justify-center mx-auto mb-10">
+            <div className="grid grid-cols-2 gap-1.5 w-6 h-6 items-center justify-center">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#0284c7]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-900"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-900"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-900"></span>
+            </div>
+          </div>
+
+          {/* Staggered Floating Squircles Row 1 */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-indigo-600 font-mono">Penna</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-50 border border-emerald-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-emerald-600">WhatsApp</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-blue-50 border border-blue-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-[#0284c7]">Meta API</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-rose-50 border border-rose-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-rose-600">Slack</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-50 border border-amber-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-amber-600">Gmail</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-purple-50 border border-purple-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-purple-600">Figma</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-sky-50 border border-sky-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-sky-600">Notion</span>
+            </div>
+          </div>
+
+          {/* Staggered Floating Squircles Row 2 */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-4 sm:mt-6">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-violet-600">Stripe</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-zinc-900">OpenAI</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-teal-600">Zendesk</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-orange-500">HubSpot</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-zinc-800">Cal.com</span>
+            </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center hover:scale-105 transition-transform">
+              <span className="font-bold text-sm sm:text-base text-blue-700">Webhook</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 5. "TESTIMONIALS" SECTION (MATCHING SCREENSHOT 4: media_1790959551582.png) ─── */}
+      <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-zinc-200/80 shadow-xs text-xs font-semibold text-zinc-700">
+            Testimonials
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+            People just like you are already using JidoSapp
+          </h2>
+        </div>
+
+        {/* Masonry-style Grid of Testimonials */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
+          {/* Card 1 */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-6 shadow-xs flex flex-col justify-between">
+            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+              "The 1-tap WhatsApp Status bridge completely transformed how I distribute my newsletter on penna.dev. I never have to manually copy, paste, and reformat on my phone again."
+            </p>
+            <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
+              <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-xs">
+                PO
+              </div>
+              <div>
+                <div className="text-xs font-bold text-zinc-900">Precious Okon</div>
+                <div className="text-[11px] text-zinc-400">Founder @ penna.dev</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-6 shadow-xs flex flex-col justify-between">
+            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+              "Posting daily portfolio designs at 7:00 AM sharp without having to wake up early changed my business. Clients think I never sleep. It influenced inquiries so heavily my retainer booked out."
+            </p>
+            <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
+              <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-xs">
+                SW
+              </div>
+              <div>
+                <div className="text-xs font-bold text-zinc-900">Shola W.</div>
+                <div className="text-[11px] text-zinc-400">Freelance Brand Designer</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-6 shadow-xs flex flex-col justify-between">
+            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+              "Running developer groups with over 3,000 members used to be a full-time moderation nightmare. JidoSapp's spam filter deletes scam links in seconds and boots repeat offenders instantly."
+            </p>
+            <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
+              <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs">
+                MJ
+              </div>
+              <div>
+                <div className="text-xs font-bold text-zinc-900">Michael J.</div>
+                <div className="text-[11px] text-zinc-400">Community Director</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-6 shadow-xs flex flex-col justify-between">
+            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+              "The 24/7 auto-responder answers high-intent client inquiries at 2:00 AM with our rate card and Calendly link. We captured $14,000 in retainers from leads who would have moved on."
+            </p>
+            <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
+              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs">
+                DT
+              </div>
+              <div>
+                <div className="text-xs font-bold text-zinc-900">Daniela T.</div>
+                <div className="text-[11px] text-zinc-400">Agency Director</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 5 */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-7 space-y-6 shadow-xs flex flex-col justify-between">
+            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+              "Getting our own dedicated subdomain on jidosaap.xyz meant zero bot collisions and pure isolated webhooks. The architecture is enterprise grade."
+            </p>
+            <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
+              <div className="w-10 h-10 rounded-full bg-rose-100 text-rose-700 font-bold flex items-center justify-center text-xs">
+                AM
+              </div>
+              <div>
+                <div className="text-xs font-bold text-zinc-900">Alex M.</div>
+                <div className="text-[11px] text-zinc-400">Full-Stack Lead</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 6: Video Testimonial Card with YouTube Squircle */}
+          <div className="rounded-3xl border border-zinc-200/80 bg-zinc-900 text-white p-7 space-y-6 shadow-md flex flex-col justify-between relative overflow-hidden">
+            {/* Floating YouTube Badge */}
+            <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shadow-md">
+              <Play className="h-5 w-5 fill-white" />
+            </div>
+            <div className="space-y-2 pt-6">
+              <div className="text-xs font-bold text-emerald-400 font-mono">CASE STUDY VIDEO</div>
+              <h4 className="text-base font-bold text-white">How Shola 3x'd his client conversions</h4>
+              <p className="text-xs text-zinc-400">Watch the 2-minute walkthrough of the 7:00 AM consistency engine.</p>
+            </div>
+            <Link href="/request-integration">
+              <button className="h-9 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white border border-white/20 transition-all">
+                Watch video review
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 6. "PRICING" SECTION (MATCHING SCREENSHOT 5: media_1790959567570.png) ─── */}
+      <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-zinc-200/80 shadow-xs text-xs font-semibold text-zinc-700">
+            Pricing
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+            Simple pricing plans
+          </h2>
+        </div>
+
+        {/* 3 Pricing Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-center">
+          {/* Card 1: Basic Plan */}
+          <div className="rounded-[30px] border border-zinc-200/80 bg-white p-8 sm:p-10 space-y-8 shadow-xs text-left">
+            <div className="space-y-1">
+              <h3 className="text-lg font-bold text-zinc-950">Basic plan</h3>
+              <p className="text-xs text-zinc-400">Perfect for individuals.</p>
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-4xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight">
+                $15<span className="text-base font-normal text-zinc-400">/mo</span>
+              </div>
+            </div>
+
+            <Link href="/request-integration" className="block">
+              <button className="w-full h-11 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold transition-all">
+                Get started
+              </button>
+            </Link>
+
+            <div className="space-y-3 pt-2 text-xs text-zinc-600">
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>Dedicated *.jidosaap.xyz subdomain</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>1 Official WhatsApp Connection</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>1-Tap Newsletter Bridge</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>Standard support</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Pro Plan (HERO BLUE CARD WITH FLOATING 3D LIGHTNING BOLT) */}
+          <div className="relative rounded-[32px] bg-[#2563eb] text-white p-8 sm:p-11 space-y-8 shadow-2xl text-left scale-100 md:scale-105 z-10">
+            {/* Floating 3D Yellow Lightning Bolt Squircle */}
+            <div className="absolute -top-5 right-6 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center rotate-12 border border-blue-100">
+              <Zap className="h-7 w-7 text-amber-500 fill-amber-400" />
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="text-xl font-bold text-white">Pro plan</h3>
+              <p className="text-xs text-blue-100">Ideal for creators &amp; small teams.</p>
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                $39<span className="text-base font-normal text-blue-200">/mo</span>
+              </div>
+              <div className="text-[11px] font-semibold text-blue-200">Best choice for growing businesses</div>
+            </div>
+
+            <Link href="/request-integration" className="block">
+              <button className="w-full h-11 rounded-xl bg-white hover:bg-zinc-100 text-zinc-900 text-xs font-bold transition-all shadow-md">
+                Get started
+              </button>
+            </Link>
+
+            <div className="space-y-3 pt-2 text-xs text-blue-50">
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-white shrink-0" />
+                <span>All product features</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-white shrink-0" />
+                <span>7:00 AM Daily Cron Drop Engine</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-white shrink-0" />
+                <span>24/7 Smart Auto-Responder</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-white shrink-0" />
+                <span>Group Spam Sentinel &amp; Strikes</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-white shrink-0" />
+                <span>Unlimited file storage &amp; CRM capture</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Advanced Plan */}
+          <div className="rounded-[30px] border border-zinc-200/80 bg-white p-8 sm:p-10 space-y-8 shadow-xs text-left">
+            <div className="space-y-1">
+              <h3 className="text-lg font-bold text-zinc-950">Advanced plan</h3>
+              <p className="text-xs text-zinc-400">Best for agencies &amp; multi-community.</p>
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-4xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight">
+                $99<span className="text-base font-normal text-zinc-400">/mo</span>
+              </div>
+            </div>
+
+            <Link href="/request-integration" className="block">
+              <button className="w-full h-11 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold transition-all">
+                Get started
+              </button>
+            </Link>
+
+            <div className="space-y-3 pt-2 text-xs text-zinc-600">
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>Unlimited official WhatsApp connections</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>Multi-community group sentinel &amp; auto-kick</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>Dedicated account manager &amp; custom webhooks</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-zinc-800 shrink-0" />
+                <span>Priority 24/7 SLA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 7. READY TO LAUNCH BOTTOM CTA ──────────────────────────── */}
       <section className="max-w-5xl mx-auto px-6">
-        <div className="rounded-3xl bg-zinc-950 p-10 sm:p-16 text-center text-white space-y-8 relative overflow-hidden border border-zinc-800">
+        <div className="rounded-[32px] bg-zinc-950 p-10 sm:p-16 text-center text-white space-y-8 relative overflow-hidden border border-zinc-800">
           <div className="space-y-4 max-w-2xl mx-auto relative">
             <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
               Ready to give your WhatsApp superpowers?
@@ -830,15 +839,14 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative">
             <Link href="/request-integration">
-              <Button size="lg" className="h-12 px-8 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold gap-2 shadow-lg shadow-blue-600/20">
-                <span>Request Your Integration &amp; Subdomain</span>
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+              <button className="h-12 px-8 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium text-sm shadow-[0_8px_20px_rgba(37,99,235,0.28)] hover:shadow-[0_12px_24px_rgba(37,99,235,0.36)] transition-all hover:-translate-y-0.5">
+                Request Your Integration &amp; Subdomain
+              </button>
             </Link>
             <Link href="/register">
-              <Button variant="outline" size="lg" className="h-12 px-8 text-white border-zinc-700 hover:bg-zinc-900">
+              <button className="h-12 px-8 rounded-xl bg-transparent border border-zinc-700 hover:bg-zinc-900 text-white font-medium text-sm transition-all">
                 Self-Service Sign Up
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
