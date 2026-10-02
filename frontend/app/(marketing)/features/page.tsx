@@ -27,7 +27,7 @@ export default function FeaturesPage() {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-semibold text-zinc-700 shadow-2xs">
           <span>Enterprise Platform Capabilities</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+        <h1 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
           Your WhatsApp can do more than you think.
         </h1>
         <p className="text-base sm:text-lg text-zinc-500 leading-relaxed max-w-2xl mx-auto">

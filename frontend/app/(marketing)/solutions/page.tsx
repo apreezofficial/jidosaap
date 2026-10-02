@@ -76,7 +76,7 @@ export default function SolutionsHubPage() {
           <Sparkles className="h-3.5 w-3.5 text-[#2563eb]" />
           <span>Tailored WhatsApp Automations</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+        <h1 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
           Solutions engineered for how you actually work.
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">

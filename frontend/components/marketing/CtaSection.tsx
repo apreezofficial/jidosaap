@@ -6,7 +6,7 @@ export function CtaSection() {
     <section className="max-w-5xl mx-auto px-6">
       <div className="rounded-[32px] bg-zinc-950 p-10 sm:p-16 text-center text-white space-y-8 relative overflow-hidden border border-zinc-800">
         <div className="space-y-4 max-w-2xl mx-auto relative">
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] leading-[1.15] text-white">
             Ready to give your WhatsApp superpowers?
           </h2>
           <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">

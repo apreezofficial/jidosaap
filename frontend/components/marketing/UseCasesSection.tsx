@@ -104,7 +104,7 @@ export function UseCasesSection() {
     <section id="use-cases" className="max-w-7xl mx-auto px-6 lg:px-12 space-y-24">
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="text-xs font-bold uppercase tracking-wider text-[#2563eb]">Proven In The Real World</div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
+        <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
           Four Stories. Four WhatsApp Superpowers.
         </h2>
         <p className="text-sm text-zinc-600">

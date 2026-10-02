@@ -29,8 +29,8 @@ export function SolutionsSection() {
         <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-zinc-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-xs font-semibold text-zinc-700">
           Solutions
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-          Solve your team's biggest challenges
+        <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
+          Solve your team&apos;s biggest challenges
         </h2>
       </div>
 

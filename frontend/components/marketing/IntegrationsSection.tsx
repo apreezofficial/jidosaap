@@ -113,7 +113,7 @@ export function IntegrationsSection() {
           <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
           <span>Ecosystem &amp; Integrations</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-[1.15]">
+        <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
           Connect the tools you rely on <br className="hidden sm:inline" />
           <span className="bg-gradient-to-r from-[#2563eb] via-[#1d4ed8] to-[#00b4d8] bg-clip-text text-transparent">
             every single day
