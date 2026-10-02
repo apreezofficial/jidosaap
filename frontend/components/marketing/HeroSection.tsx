@@ -192,11 +192,11 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* EXACT TYPOGRAPHY: HELVETICA NEUE / SF PRO DISPLAY 400 (REGULAR), 56PX, -2PX TRACKING, 1.0 LINE-HEIGHT */}
+          {/* EXACT TYPOGRAPHY: PLUS JAKARTA SANS 400 (REGULAR), 56PX, -2PX TRACKING, 1.0 LINE-HEIGHT */}
           <h1
             className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.0] max-w-4xl mx-auto"
             style={{
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif',
+              fontFamily: 'var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif',
               letterSpacing: "-2px",
               fontWeight: 400,
             }}
