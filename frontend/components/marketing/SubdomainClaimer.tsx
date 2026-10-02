@@ -90,7 +90,7 @@ export function SubdomainClaimer() {
                 : "text-zinc-600 hover:text-zinc-950"
             }`}
           >
-            🚀 Managed Subdomain (jidosaap.xyz)
+            Managed Subdomain (jidosaap.xyz)
           </button>
           <button
             onClick={() => setActiveTab("selfhost")}
@@ -100,7 +100,7 @@ export function SubdomainClaimer() {
                 : "text-zinc-600 hover:text-zinc-950"
             }`}
           >
-            💻 100% Self-Hostable (Docker / VPS)
+            100% Self-Hostable (Docker / VPS)
           </button>
         </div>
       </div>

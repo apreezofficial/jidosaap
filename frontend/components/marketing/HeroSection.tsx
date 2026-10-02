@@ -211,12 +211,12 @@ export function HeroSection() {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link href="/request-integration">
               <button className="h-11 px-7 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold text-xs shadow-[0_4px_14px_rgba(37,99,235,0.22)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5">
-                Request Dedicated Subdomain &amp; Demo
+                Request Demo
               </button>
             </Link>
             <Link href="/solutions">
               <button className="h-11 px-6 rounded-xl bg-white hover:bg-zinc-50 border border-zinc-200/90 text-zinc-700 font-medium text-xs shadow-2xs transition-all">
-                Explore All Solutions
+                Explore Solutions
               </button>
             </Link>
           </div>

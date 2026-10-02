@@ -1,6 +1,5 @@
 import React from "react";
 import { HeroSection } from "@/components/marketing/HeroSection";
-import { SubdomainClaimer } from "@/components/marketing/SubdomainClaimer";
 import { SolutionsSection } from "@/components/marketing/SolutionsSection";
 import { BentoGridSection } from "@/components/marketing/BentoGridSection";
 import { UseCasesSection } from "@/components/marketing/UseCasesSection";
@@ -15,28 +14,25 @@ export default function LandingPage() {
       {/* 1. Hero Section with Top Badge, Sizing, and 4 Corner Widgets */}
       <HeroSection />
 
-      {/* 2. Subdomain Claimer (*.jidosaap.xyz) */}
-      <SubdomainClaimer />
-
-      {/* 3. Solutions Section (Cyan console frame + 20% badge) */}
+      {/* 2. Solutions Section (Cyan console frame + 20 and Checkmark badges) */}
       <SolutionsSection />
 
-      {/* 4. Bento Grid (4 Cards matching ChronoTask Bento design) */}
+      {/* 3. Bento Grid (4 Cards matching reference Bento design) */}
       <BentoGridSection />
 
-      {/* 5. Live Interactive Use Cases (Precious, Shola, Michael, Auto-Responder) */}
+      {/* 4. Live Interactive Use Cases (Precious, Shola, Michael, Auto-Responder) */}
       <UseCasesSection />
 
-      {/* 6. Integrations Grid Matrix */}
+      {/* 5. Integrations Grid Matrix */}
       <IntegrationsSection />
 
-      {/* 7. Testimonials Masonry + Video Case Study Badge */}
+      {/* 6. Testimonials Masonry + Video Case Study Badge */}
       <TestimonialsSection />
 
-      {/* 8. Pricing Plans with Hero Blue Card & 3D Lightning Bolt */}
+      {/* 7. Pricing Plans with Hero Blue Card & 3D Lightning Bolt */}
       <PricingSection />
 
-      {/* 9. Bottom CTA Section */}
+      {/* 8. Bottom CTA Section */}
       <CtaSection />
     </div>
   );

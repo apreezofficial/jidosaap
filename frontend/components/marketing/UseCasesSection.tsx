@@ -38,7 +38,7 @@ export function UseCasesSection() {
   // Interactive Demo 4: Auto-Responder
   const [autoChatLog, setAutoChatLog] = useState<Array<{ sender: "user" | "bot"; text: string; time: string }>>([
     { sender: "user", text: "Hey! What are your rates for a 3-month brand design retainer?", time: "02:14 AM" },
-    { sender: "bot", text: "Hi there! 👋 Thanks for reaching out. Our design retainers start at $1,800/mo including unlimited revisions. Would you like to view our portfolio or book a 15-min discovery call?", time: "02:14 AM" },
+    { sender: "bot", text: "Hello! Thanks for reaching out. Our design retainers start at $1,800/mo including unlimited revisions. Would you like to view our portfolio or book a 15-min discovery call?", time: "02:14 AM" },
   ]);
   const [testUserMsg, setTestUserMsg] = useState("");
 
@@ -59,14 +59,14 @@ export function UseCasesSection() {
     if (nextCount === 1) {
       setMichaelLog((prev) => [
         ...prev,
-        { id: Date.now(), text: "CryptoBot99: 🔥 Claim Free $5000 USDT Now -> http://bit.ly/scam999", type: "warning" },
-        { id: Date.now() + 1, text: "🛡️ JidoSapp Guardian: [Strike 1/2] Unauthorized link deleted. Warning issued to CryptoBot99.", type: "warning" },
+        { id: Date.now(), text: "CryptoBot99: Claim Free $5000 USDT Now -> http://bit.ly/scam999", type: "warning" },
+        { id: Date.now() + 1, text: "JidoSapp Guardian: [Strike 1/2] Unauthorized link deleted. Warning issued to CryptoBot99.", type: "warning" },
       ]);
     } else {
       setMichaelLog((prev) => [
         ...prev,
         { id: Date.now(), text: "CryptoBot99: CLICK BEFORE EXPIRED: t.me/fast_money_scam", type: "kicked" },
-        { id: Date.now() + 1, text: "🚫 JidoSapp Guardian: [Strike 2/2 Maximum Reached] Spam deleted. Offender CryptoBot99 has been exited from the group.", type: "kicked" },
+        { id: Date.now() + 1, text: "JidoSapp Guardian: [Strike 2/2 Maximum Reached] Spam deleted. Offender CryptoBot99 has been exited from the group.", type: "kicked" },
       ]);
     }
   };
@@ -227,7 +227,7 @@ export function UseCasesSection() {
                         </a>
                       </div>
                       <div className="text-[11px] text-emerald-400 font-mono text-center">
-                        🔥 Live on WhatsApp Status · {preciousViews} views
+                        Live on WhatsApp Status · {preciousViews} views
                       </div>
                     </div>
                   ) : (
