@@ -82,11 +82,14 @@ export default function PricingPage() {
     <div className="py-16 px-6 lg:px-12 max-w-7xl mx-auto space-y-16">
       {/* Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200">
+          <span>Your WhatsApp Can Do More Than You Think</span>
+        </div>
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
-          Transparent, Predictable Pricing
+          Simple, Transparent Pricing
         </h1>
         <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
-          Put your business WhatsApp on autopilot. Choose the tier that matches your conversation volume and automation needs.
+          Every plan includes your dedicated <code className="font-mono font-bold text-zinc-900">*.jidosaap.xyz</code> subdomain, official Meta WhatsApp Cloud API connection, and automated bridge engine.
         </p>
 
         {/* Monthly / Yearly Toggle */}

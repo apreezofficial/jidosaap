@@ -212,4 +212,103 @@ final class WorkspaceService
         $del = $pdo->prepare("DELETE FROM workspaces WHERE id = ?");
         $del->execute([$workspaceId]);
     }
+
+    public function checkSubdomainAvailability(string $subdomain): array
+    {
+        $slug = strtolower(trim($subdomain));
+        $slug = preg_replace('/[^a-z0-9-]/', '', $slug);
+
+        if (strlen($slug) < 3) {
+            return [
+                'available' => false,
+                'subdomain' => $slug,
+                'fqdn' => ($slug ?: 'subdomain') . '.jidosaap.xyz',
+                'reason' => 'Subdomain must be at least 3 characters long',
+            ];
+        }
+
+        $reserved = [
+            'www', 'api', 'app', 'admin', 'auth', 'billing', 'mail', 'smtp',
+            'support', 'dashboard', 'status', 'bot', 'system', 'root', 'static', 'cdn'
+        ];
+
+        if (in_array($slug, $reserved, true)) {
+            return [
+                'available' => false,
+                'subdomain' => $slug,
+                'fqdn' => "{$slug}.jidosaap.xyz",
+                'reason' => 'This subdomain name is reserved by system',
+            ];
+        }
+
+        $pdo = Connection::get();
+
+        // Check active workspaces
+        $stmt = $pdo->prepare("SELECT 1 FROM workspaces WHERE slug = ?");
+        $stmt->execute([$slug]);
+        if ($stmt->fetch()) {
+            return [
+                'available' => false,
+                'subdomain' => $slug,
+                'fqdn' => "{$slug}.jidosaap.xyz",
+                'reason' => 'Subdomain is already claimed by an active workspace',
+            ];
+        }
+
+        return [
+            'available' => true,
+            'subdomain' => $slug,
+            'fqdn' => "{$slug}.jidosaap.xyz",
+            'reason' => 'Subdomain is available for reservation',
+        ];
+    }
+
+    public function createIntegrationRequest(array $data): array
+    {
+        $name = trim((string)($data['full_name'] ?? ''));
+        $email = strtolower(trim((string)($data['email'] ?? '')));
+        $phone = trim((string)($data['phone_number'] ?? ''));
+        $brand = trim((string)($data['brand_name'] ?? ''));
+        $subdomain = strtolower(trim((string)($data['subdomain'] ?? '')));
+        $subdomain = preg_replace('/[^a-z0-9-]/', '', $subdomain);
+        $useCase = trim((string)($data['use_case'] ?? 'custom'));
+        $notes = trim((string)($data['notes'] ?? ''));
+
+        if (empty($name) || empty($email) || empty($phone) || empty($subdomain)) {
+            throw new RuntimeException("Name, email, phone number, and subdomain are required", 422);
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new RuntimeException("Valid email address is required", 422);
+        }
+
+        $check = $this->checkSubdomainAvailability($subdomain);
+        if (!$check['available']) {
+            throw new RuntimeException($check['reason'], 409);
+        }
+
+        $pdo = Connection::get();
+        $id = uuid_v4();
+        $now = current_timestamp();
+
+        $stmt = $pdo->prepare("
+            INSERT INTO integration_requests (id, full_name, email, phone_number, brand_name, subdomain, use_case, notes, status, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?)
+        ");
+        $stmt->execute([$id, $name, $email, $phone, $brand ?: $name, $subdomain, $useCase, $notes, $now, $now]);
+
+        return [
+            'id' => $id,
+            'full_name' => $name,
+            'email' => $email,
+            'phone_number' => $phone,
+            'brand_name' => $brand,
+            'subdomain' => $subdomain,
+            'fqdn' => "{$subdomain}.jidosaap.xyz",
+            'use_case' => $useCase,
+            'status' => 'pending',
+            'created_at' => $now,
+            'message' => "Your dedicated WhatsApp instance on {$subdomain}.jidosaap.xyz is queued for provisioning!",
+        ];
+    }
 }

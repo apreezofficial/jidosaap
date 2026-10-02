@@ -20,9 +20,20 @@ final class TenantMiddleware implements MiddlewareInterface
         }
 
         $workspaceId = $request->header('x-workspace-id');
+        $subdomain = $request->header('x-subdomain') ?: $request->header('x-workspace-slug');
+
+        if (empty($subdomain)) {
+            $host = $request->header('host');
+            if ($host && preg_match('/^([a-z0-9-]+)\.(?:jidosaap\.xyz|localhost)/i', $host, $m)) {
+                if ($m[1] !== 'www' && $m[1] !== 'api' && $m[1] !== 'app') {
+                    $subdomain = strtolower($m[1]);
+                }
+            }
+        }
+
         $pdo = Connection::get();
 
-        if (empty($workspaceId)) {
+        if (empty($workspaceId) && empty($subdomain)) {
             // Find user's first/default workspace
             $stmt = $pdo->prepare("
                 SELECT w.*, wm.role 
@@ -47,14 +58,24 @@ final class TenantMiddleware implements MiddlewareInterface
             return;
         }
 
-        // Verify membership in specified workspace
-        $stmt = $pdo->prepare("
-            SELECT w.*, wm.role 
-            FROM workspaces w
-            JOIN workspace_members wm ON w.id = wm.workspace_id
-            WHERE w.id = ? AND wm.user_id = ?
-        ");
-        $stmt->execute([$workspaceId, $userId]);
+        // Verify membership in specified workspace by ID or Subdomain (slug)
+        if (!empty($subdomain)) {
+            $stmt = $pdo->prepare("
+                SELECT w.*, wm.role 
+                FROM workspaces w
+                JOIN workspace_members wm ON w.id = wm.workspace_id
+                WHERE (w.slug = ? OR w.id = ?) AND wm.user_id = ?
+            ");
+            $stmt->execute([$subdomain, $workspaceId ?? '', $userId]);
+        } else {
+            $stmt = $pdo->prepare("
+                SELECT w.*, wm.role 
+                FROM workspaces w
+                JOIN workspace_members wm ON w.id = wm.workspace_id
+                WHERE w.id = ? AND wm.user_id = ?
+            ");
+            $stmt->execute([$workspaceId, $userId]);
+        }
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {

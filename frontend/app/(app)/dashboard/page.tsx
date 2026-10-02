@@ -77,14 +77,19 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-zinc-200/80">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2">
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2 flex-wrap">
             <span>Welcome, {user?.name?.split(" ")[0] || "Operator"}</span>
             <span className="text-xs font-normal px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 border border-zinc-200">
               {currentWorkspace?.name || "Workspace"}
             </span>
+            {currentWorkspace?.slug && (
+              <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200/80">
+                {currentWorkspace.slug}.jidosaap.xyz
+              </span>
+            )}
           </h1>
           <p className="text-xs text-zinc-500 mt-0.5">
-            Your WhatsApp operations, automated workflows, and AI customer agents at a glance.
+            Your WhatsApp can do more than you think · Dedicated instance running on <span className="font-mono text-zinc-700 font-semibold">{currentWorkspace?.slug || "workspace"}.jidosaap.xyz</span>
           </p>
         </div>
         <div className="flex items-center gap-2">

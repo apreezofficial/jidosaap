@@ -14,6 +14,8 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [workspaceName, setWorkspaceName] = useState("");
+  const [subdomain, setSubdomain] = useState("");
+  const [subdomainModified, setSubdomainModified] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,11 +85,41 @@ export default function RegisterPage() {
         <Input
           label="Company / Workspace Name"
           type="text"
-          placeholder="Tokyo Retail Group"
+          placeholder="e.g. Penna Tech or Shola Studio"
           value={workspaceName}
-          onChange={(e) => setWorkspaceName(e.target.value)}
+          onChange={(e) => {
+            setWorkspaceName(e.target.value);
+            if (!subdomainModified) {
+              setSubdomain(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""));
+            }
+          }}
           required
         />
+
+        <div>
+          <label className="text-xs font-semibold text-zinc-700 block mb-1">
+            Dedicated Subdomain (jidosaap.xyz)
+          </label>
+          <div className="flex items-center rounded-xl border border-zinc-200 bg-white px-3 focus-within:border-zinc-950 focus-within:ring-1 focus-within:ring-zinc-950">
+            <span className="text-xs font-semibold text-zinc-400">https://</span>
+            <input
+              type="text"
+              placeholder="brand"
+              value={subdomain}
+              onChange={(e) => {
+                setSubdomainModified(true);
+                setSubdomain(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""));
+              }}
+              className="w-full h-10 px-1 text-xs font-bold text-zinc-900 focus:outline-none"
+            />
+            <span className="text-xs font-bold text-rose-600 font-mono bg-rose-50 px-2 py-0.5 rounded">
+              .jidosaap.xyz
+            </span>
+          </div>
+          <span className="text-[10px] text-zinc-400 mt-1 block">
+            Your team and bot endpoints will resolve at this isolated domain.
+          </span>
+        </div>
 
         <Input
           label="Password (min. 8 characters)"
@@ -105,7 +137,7 @@ export default function RegisterPage() {
           </div>
           <div className="flex items-center gap-1.5 text-[11px] text-zinc-500">
             <Check className="h-3.5 w-3.5 text-emerald-600" />
-            <span>14-day full feature trial, no credit card required</span>
+            <span>Dedicated isolated workspace on *.jidosaap.xyz</span>
           </div>
         </div>
 

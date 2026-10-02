@@ -70,6 +70,91 @@ export default function TemplatesPage() {
         </Button>
       </div>
 
+      {/* Star Use Case Starter Blueprints */}
+      <div className="bg-gradient-to-r from-zinc-900 to-zinc-950 rounded-2xl p-5 text-white border border-zinc-800 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
+            <span className="text-xs font-bold uppercase tracking-wider text-rose-400">Featured Narrative Blueprints</span>
+          </div>
+          <span className="text-[11px] text-zinc-400 font-mono">1-Tap Preset Loaders</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+          <button
+            type="button"
+            onClick={() => {
+              setForm({
+                name: "Precious · penna.dev Status Bridge",
+                category: "marketing",
+                header: "📰 New Newsletter Issue",
+                body: "Fresh drop on penna.dev: {{issue_title}}!\n\nRead the full issue: {{issue_url}}",
+                footer: "Shared via JidoSapp Bridge",
+                language: "en",
+                variables: "issue_title, issue_url",
+              });
+              setShowCreate(true);
+            }}
+            className="p-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
+          >
+            <div className="text-xs font-bold text-indigo-400 group-hover:text-indigo-300">
+              Precious's Newsletter Bridge
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-0.5">
+              Formats penna.dev articles for 1-tap WhatsApp Status & broadcasts.
+            </p>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setForm({
+                name: "Shola · 7:00 AM Daily Graphic Drop",
+                category: "marketing",
+                header: "🎨 Daily Design Drop · 07:00 AM",
+                body: "Today's featured concept: {{project_name}}.\n\nCrafted for high-growth founders. Reply directly to book our next sprint!",
+                footer: "Consistency powered by JidoSapp",
+                language: "en",
+                variables: "project_name",
+              });
+              setShowCreate(true);
+            }}
+            className="p-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
+          >
+            <div className="text-xs font-bold text-amber-400 group-hover:text-amber-300">
+              Shola's 7 AM Design Drop
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-0.5">
+              Client-attracting morning portfolio broadcast template.
+            </p>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setForm({
+                name: "Michael · Group Anti-Spam Warning",
+                category: "utility",
+                header: "🛡️ Community Guardian Alert",
+                body: "Warning [Strike {{strike_count}}/2]: @{{user_name}}, promotional or unauthorized links are prohibited in this group. Repeat offenses result in immediate exit.",
+                footer: "Protected by JidoSapp Sentinel",
+                language: "en",
+                variables: "strike_count, user_name",
+              });
+              setShowCreate(true);
+            }}
+            className="p-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
+          >
+            <div className="text-xs font-bold text-emerald-400 group-hover:text-emerald-300">
+              Michael's Group Spam Shield
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-0.5">
+              Real-time strike warning notice for group spam links.
+            </p>
+          </button>
+        </div>
+      </div>
+
       {/* Templates Grid */}
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

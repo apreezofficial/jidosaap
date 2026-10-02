@@ -1,61 +1,75 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, Zap, Bot, Kanban, BarChart3, Sparkles, Lock, Server, ShieldCheck, Send } from "lucide-react";
+import {
+  Sparkles,
+  Newspaper,
+  Palette,
+  ShieldAlert,
+  ArrowRight,
+  Zap,
+  Globe,
+  Bot,
+  Calendar,
+} from "lucide-react";
 
 export default function CapabilitiesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-16">
-      <section id="features" className="grid md:grid-cols-3 gap-8">
-        {/* Card 1: Content Scheduling */}
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-          <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><Calendar className="h-5 w-5" /></div>
-          <h3 className="font-semibold text-zinc-900">Content Studio &amp; Calendar</h3>
+    <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 space-y-16">
+      <div className="text-center space-y-4 max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200">
+          <Sparkles className="h-3.5 w-3.5" />
+          <span>Core Capabilities &amp; Multi-Tenant Architecture</span>
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
+          Your WhatsApp can do more than you think.
+        </h1>
+        <p className="text-base text-zinc-600">
+          Discover how JidoSapp empowers businesses, newsletter creators, graphic designers, and community leaders with isolated instances on <code className="font-mono font-bold text-zinc-900">*.jidosaap.xyz</code>.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-3">
+          <div className="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <Newspaper className="h-5 w-5" />
+          </div>
+          <h3 className="font-bold text-zinc-900">1-Tap Newsletter Bridge</h3>
           <p className="text-xs text-zinc-500 leading-relaxed">
-            Compose rich WhatsApp updates, apply approved templates, and schedule recurring broadcasts respecting your workspace timezone.
+            Precious pushes directly from penna.dev to WhatsApp Status with a single tap. Zero context switching, zero manual copy-pasting.
           </p>
         </div>
-        {/* Card 2: AI Agents */}
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-          <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><Bot className="h-5 w-5" /></div>
-          <h3 className="font-semibold text-zinc-900">Autonomous AI Agents</h3>
+
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-3">
+          <div className="h-10 w-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+            <Palette className="h-5 w-5" />
+          </div>
+          <h3 className="font-bold text-zinc-900">7:00 AM Daily Designer Drops</h3>
           <p className="text-xs text-zinc-500 leading-relaxed">
-            Train AI agents on your business knowledge base with vector embeddings, execute explicit tools, and seamlessly escalate to human teammates.
+            Shola schedules portfolio updates that broadcast daily at 7 AM sharp, building unshakeable consistency and driving client inquiries.
           </p>
         </div>
-        {/* Card 3: API Automations */}
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-          <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><Zap className="h-5 w-5" /></div>
-          <h3 className="font-semibold text-zinc-900">API Integration &amp; Transformers</h3>
+
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-3">
+          <div className="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <ShieldAlert className="h-5 w-5" />
+          </div>
+          <h3 className="font-bold text-zinc-900">Group Spam Sentinel &amp; Strikes</h3>
           <p className="text-xs text-zinc-500 leading-relaxed">
-            Connect external REST APIs with encrypted secrets. Extract JSON fields and let AI generate dynamic, personalized WhatsApp notifications.
+            Michael's communities are protected 24/7. Scam links are deleted instantly, warnings issued, and repeat spammers exited automatically.
           </p>
         </div>
-        {/* Card 4: Visual Workflows */}
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-          <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><Sparkles className="h-5 w-5" /></div>
-          <h3 className="font-semibold text-zinc-900">Visual Flow Builder</h3>
-          <p className="text-xs text-zinc-500 leading-relaxed">
-            Construct multi-branch automation trees with triggers, filters, delays, and WhatsApp actions without writing a single line of code.
-          </p>
-        </div>
-        {/* Card 5: CRM Pipeline */}
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-          <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><Kanban className="h-5 w-5" /></div>
-          <h3 className="font-semibold text-zinc-900">Embedded CRM &amp; Leads</h3>
-          <p className="text-xs text-zinc-500 leading-relaxed">
-            Automatically capture contacts from incoming messages, qualify leads into a Kanban pipeline, and track conversions.
-          </p>
-        </div>
-        {/* Card 6: Analytics */}
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 space-y-3 hover:shadow-md transition-shadow">
-          <div className="h-10 w-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><BarChart3 className="h-5 w-5" /></div>
-          <h3 className="font-semibold text-zinc-900">Unified Analytics &amp; Audit</h3>
-          <p className="text-xs text-zinc-500 leading-relaxed">
-            Monitor messages sent, AI resolution rate, lead velocity, and complete immutable security audit trails.
-          </p>
-        </div>
-      </section>
+      </div>
+
+      <div className="text-center pt-8">
+        <Link href="/request-integration">
+          <Button size="lg" className="bg-rose-600 hover:bg-rose-500 text-white font-semibold">
+            Claim Your Subdomain &amp; Setup Instance
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -134,4 +134,23 @@ final class WorkspaceController
             $response->error('DELETE_FAILED', $e->getMessage(), 400)->send();
         }
     }
+
+    public function checkSubdomain(Request $request, Response $response): void
+    {
+        $subdomain = (string) ($request->query('slug') ?: $request->query('subdomain') ?: '');
+        $result = $this->service->checkSubdomainAvailability($subdomain);
+        $response->json($result)->send();
+    }
+
+    public function requestIntegration(Request $request, Response $response): void
+    {
+        $data = $request->all();
+        try {
+            $result = $this->service->createIntegrationRequest($data);
+            $response->json($result, 201, 'Integration request submitted successfully')->send();
+        } catch (Throwable $e) {
+            $code = $e->getCode() >= 400 && $e->getCode() < 600 ? (int) $e->getCode() : 400;
+            $response->error('INTEGRATION_REQUEST_FAILED', $e->getMessage(), $code)->send();
+        }
+    }
 }

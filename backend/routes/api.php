@@ -23,6 +23,18 @@ use App\Routing\Router;
 $router->group('/api/v1', [], function (Router $api) {
 
     // ──────────────────────────────────────────────
+    // Setup (public — only works before configured)
+    // ──────────────────────────────────────────────
+    $api->get('/setup/status',       [\App\Controllers\SetupController::class, 'status']);
+    $api->post('/setup/test-db',     [\App\Controllers\SetupController::class, 'testDb']);
+    $api->post('/setup/test-redis',  [\App\Controllers\SetupController::class, 'testRedis']);
+    $api->post('/setup/test-openai', [\App\Controllers\SetupController::class, 'testOpenAi']);
+    $api->post('/setup/test-whatsapp', [\App\Controllers\SetupController::class, 'testWhatsApp']);
+    $api->post('/setup/save',        [\App\Controllers\SetupController::class, 'save']);
+    $api->post('/setup/migrate',     [\App\Controllers\SetupController::class, 'migrate']);
+    $api->post('/setup/create-admin', [\App\Controllers\SetupController::class, 'createAdmin']);
+
+    // ──────────────────────────────────────────────
     // Health check
     // ──────────────────────────────────────────────
     $api->get('/health', function ($req, $res) {
@@ -38,6 +50,12 @@ $router->group('/api/v1', [], function (Router $api) {
     // Public: Billing plans (no auth required)
     // ──────────────────────────────────────────────
     $api->get('/plans', [BillingController::class, 'plans']);
+
+    // ──────────────────────────────────────────────
+    // Public: Custom Subdomains & Integration Requests
+    // ──────────────────────────────────────────────
+    $api->get('/subdomains/check',    [WorkspaceController::class, 'checkSubdomain']);
+    $api->post('/subdomains/request', [WorkspaceController::class, 'requestIntegration']);
 
     // ──────────────────────────────────────────────
     // Authentication (Rate limited)

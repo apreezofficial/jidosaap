@@ -78,6 +78,79 @@ export default function AutomationsPage() {
         </Button>
       </div>
 
+      {/* Star Narrative Automation Recipes */}
+      <div className="bg-gradient-to-r from-zinc-900 to-zinc-950 rounded-2xl p-5 text-white border border-zinc-800 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
+            <span className="text-xs font-bold uppercase tracking-wider text-rose-400">Star Workflow Blueprints</span>
+          </div>
+          <span className="text-[11px] text-zinc-400 font-mono">Instant Setup</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+          <button
+            type="button"
+            onClick={() => {
+              setForm({
+                name: "Precious · penna.dev Newsletter Status Bridge",
+                description: "Receives penna.dev publish webhook and posts issue summary to WhatsApp Status and broadcasts",
+                trigger_type: "webhook",
+              });
+              setShowCreate(true);
+            }}
+            className="p-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
+          >
+            <div className="text-xs font-bold text-indigo-400 group-hover:text-indigo-300">
+              Precious: Newsletter Bridge
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-1">
+              Trigger: Webhook ➔ Transformer ➔ WhatsApp Status Post
+            </p>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setForm({
+                name: "Shola · 07:00 AM Daily Graphic Auto-Drop",
+                description: "Pulls queued visual portfolio pieces from studio and broadcasts to WhatsApp at 7:00 AM sharp",
+                trigger_type: "schedule",
+              });
+              setShowCreate(true);
+            }}
+            className="p-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
+          >
+            <div className="text-xs font-bold text-amber-400 group-hover:text-amber-300">
+              Shola: 7 AM Daily Drop
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-1">
+              Trigger: Cron 07:00 AM ➔ Media Loader ➔ Status & Broadcast
+            </p>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setForm({
+                name: "Michael · Group Spam Link Sentinel & Strike Exit",
+                description: "Inspects incoming group messages, issues strikes for unauthorized links, and auto-kicks spammers",
+                trigger_type: "incoming_message",
+              });
+              setShowCreate(true);
+            }}
+            className="p-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
+          >
+            <div className="text-xs font-bold text-emerald-400 group-hover:text-emerald-300">
+              Michael: Group Spam Shield
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-1">
+              Trigger: Incoming Message ➔ Link Filter ➔ Strike / Kick
+            </p>
+          </button>
+        </div>
+      </div>
+
       {/* Search */}
       <div className="relative max-w-sm">
         <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
