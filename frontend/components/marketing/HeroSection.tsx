@@ -8,12 +8,11 @@ export function HeroSection() {
   return (
     <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 pt-2">
       <div className="relative w-full rounded-[28px] sm:rounded-[36px] border border-zinc-200/90 bg-[#fafafa] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden min-h-[640px] sm:min-h-[700px] lg:min-h-[750px] flex flex-col items-center justify-center text-center px-6 py-20 lg:py-28">
-        {/* Subtle Dot Grid Background */}
+        {/* Custom Hero Texture & Dot Grid Background */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-60"
+          className="absolute inset-0 pointer-events-none bg-cover bg-center opacity-90 transition-opacity"
           style={{
-            backgroundImage: "radial-gradient(#d4d4d8 1.1px, transparent 1.1px)",
-            backgroundSize: "22px 22px",
+            backgroundImage: "url('/hero-pattern.png')",
           }}
         />
 
