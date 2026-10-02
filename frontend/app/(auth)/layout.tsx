@@ -33,7 +33,7 @@ export default function AuthLayout({
       </div>
 
       {/* Main Form Centerpiece */}
-      <div className="w-full max-w-md mx-auto my-8">
+      <div className="w-full max-w-4xl mx-auto my-auto py-6">
         {children}
       </div>
 
