@@ -126,7 +126,7 @@ const INITIAL_TASKS: TaskItem[] = [
     columnId: "in_progress",
     code: "8",
     tag: "Graphic Design",
-    tagColor: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200/80",
+    tagColor: "bg-blue-50 text-[#2563eb] border-blue-200/80",
     title: "New BrandBook",
     description: "Develop a comprehensive BrandBook that defines and documents the visual and verbal identity of the brand. This guide will serve as a reference for all internal teams and external partners.",
     progress: 30,
@@ -476,7 +476,7 @@ export default function ChronoTaskDashboard() {
                 <CheckCircle2 className="h-3.5 w-3.5 text-zinc-400" />
                 Priority
               </span>
-              <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 font-bold border border-rose-200/70">
+              <span className="px-2 py-0.5 rounded bg-blue-50 text-[#2563eb] font-bold border border-blue-200/70">
                 {selectedTask.priority}
               </span>
             </div>
@@ -486,7 +486,7 @@ export default function ChronoTaskDashboard() {
                 <Sparkles className="h-3.5 w-3.5 text-zinc-400" />
                 Status
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-fuchsia-50 text-fuchsia-700 font-semibold border border-fuchsia-200/70 text-[11px]">
+              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-[#2563eb] font-semibold border border-blue-200/70 text-[11px]">
                 {selectedTask.tag}
               </span>
             </div>
@@ -573,7 +573,7 @@ export default function ChronoTaskDashboard() {
                   key={i}
                   className="flex items-center gap-2.5 p-2.5 rounded-xl border border-zinc-200/80 bg-white hover:bg-zinc-50/80 transition-colors shadow-2xs"
                 >
-                  <div className="h-8 w-8 rounded-lg bg-rose-50 border border-rose-200/70 text-rose-600 flex items-center justify-center font-bold text-[9px]">
+                  <div className="h-8 w-8 rounded-lg bg-blue-50 border border-blue-200/70 text-[#2563eb] flex items-center justify-center font-bold text-[9px]">
                     PDF
                   </div>
                   <div>

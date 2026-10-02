@@ -88,7 +88,7 @@ export default function ContentPage() {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
           <input
-            className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+            className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
             placeholder="Search content…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -223,7 +223,7 @@ export default function ContentPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Message Content *</label>
             <textarea
-              className="w-full h-40 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-40 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="Write your WhatsApp message here…&#10;&#10;Use {{customer.name}}, {{product_name}}, {{price}} as variables."
               value={form.content}
               onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))}
@@ -235,7 +235,7 @@ export default function ContentPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Status</label>
             <select
-              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
               value={form.status}
               onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))}
             >

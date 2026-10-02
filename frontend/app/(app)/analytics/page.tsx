@@ -47,7 +47,7 @@ export default function AnalyticsPage() {
   const kpis = stats ? [
     { label: "Messages Received",  value: formatNumber(stats.messages_received),  Icon: MessageSquare, color: "text-zinc-500" },
     { label: "Messages Sent",      value: formatNumber(stats.messages_sent),       Icon: Send,          color: "text-zinc-500" },
-    { label: "AI Resolution Rate", value: `${stats.ai_resolution_rate}%`,          Icon: Bot,           color: "text-rose-500" },
+    { label: "AI Resolution Rate", value: `${stats.ai_resolution_rate}%`,          Icon: Bot,           color: "text-[#2563eb]" },
     { label: "Total Leads",        value: formatNumber(stats.total_leads),          Icon: Users,         color: "text-violet-500" },
     { label: "Won Value",          value: formatCurrency(stats.won_value),          Icon: TrendingUp,    color: "text-emerald-500" },
     { label: "Automation Runs",    value: formatNumber(stats.automation_runs),      Icon: Zap,           color: "text-amber-500" },
@@ -134,8 +134,8 @@ export default function AnalyticsPage() {
                         <stop offset="95%" stopColor="#71717a" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="gSent" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#e11d48" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#e11d48" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.2} />
+                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -149,7 +149,7 @@ export default function AnalyticsPage() {
                     <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 10, fill: "#94a3b8" }} />
                     <Tooltip {...TOOLTIP_STYLE} />
                     <Area type="monotone" dataKey="received" name="Received" stroke="#71717a" strokeWidth={2} fill="url(#gReceived)" />
-                    <Area type="monotone" dataKey="sent" name="Sent" stroke="#e11d48" strokeWidth={2} fill="url(#gSent)" />
+                    <Area type="monotone" dataKey="sent" name="Sent" stroke="#2563eb" strokeWidth={2} fill="url(#gSent)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>

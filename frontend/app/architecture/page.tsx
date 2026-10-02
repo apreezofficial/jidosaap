@@ -19,7 +19,7 @@ export default function ArchitecturePage() {
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 space-y-16">
       <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-[#2563eb] text-xs font-semibold border border-blue-200">
           <Sparkles className="h-3.5 w-3.5" />
           <span>Multi-Tenant Subdomain Topology</span>
         </div>
@@ -61,11 +61,11 @@ export default function ArchitecturePage() {
 
             {/* Step 2: Trigger / Bridge */}
             <div className="rounded-xl bg-zinc-900 border border-zinc-800 p-4 flex flex-col items-center text-center space-y-2">
-              <div className="h-10 w-10 rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center">
                 <Server className="h-5 w-5" />
               </div>
               <div className="text-xs font-semibold text-zinc-200">Bridge Trigger</div>
-              <div className="text-[11px] text-zinc-400">penna.dev / 7 AM cron / group webhook</div>
+              <div className="text-[11px] text-zinc-400">Webhook / CRM event / Inbound WhatsApp</div>
             </div>
 
             {/* Step 3: Automation Logic */}
@@ -100,7 +100,7 @@ export default function ArchitecturePage() {
 
       <div className="text-center pt-4">
         <Link href="/request-integration">
-          <Button size="lg" className="bg-rose-600 hover:bg-rose-500 text-white font-semibold gap-2">
+          <Button size="lg" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold gap-2">
             <span>Claim Your Subdomain &amp; Setup Account</span>
             <ArrowRight className="h-4 w-4" />
           </Button>

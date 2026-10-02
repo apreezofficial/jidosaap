@@ -82,8 +82,8 @@ export default function AutomationsPage() {
       <div className="bg-gradient-to-r from-zinc-900 to-zinc-950 rounded-2xl p-5 text-white border border-zinc-800 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
-            <span className="text-xs font-bold uppercase tracking-wider text-rose-400">Star Workflow Blueprints</span>
+            <span className="h-2 w-2 rounded-full bg-[#2563eb] animate-pulse"></span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#2563eb]">Featured Workflow Blueprints</span>
           </div>
           <span className="text-[11px] text-zinc-400 font-mono">Instant Setup</span>
         </div>
@@ -93,19 +93,19 @@ export default function AutomationsPage() {
             type="button"
             onClick={() => {
               setForm({
-                name: "Precious · penna.dev Newsletter Status Bridge",
-                description: "Receives penna.dev publish webhook and posts issue summary to WhatsApp Status and broadcasts",
-                trigger_type: "webhook",
+                name: "24/7 Smart AI Lead Auto-Responder",
+                description: "Qualifies prospects instantly, delivers rate cards, and schedules consultation calls on autopilot.",
+                trigger_type: "incoming_message",
               });
               setShowCreate(true);
             }}
             className="p-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
           >
-            <div className="text-xs font-bold text-indigo-400 group-hover:text-indigo-300">
-              Precious: Newsletter Bridge
+            <div className="text-xs font-bold text-blue-400 group-hover:text-blue-300">
+              24/7 Smart Auto-Responder
             </div>
             <p className="text-[11px] text-zinc-400 mt-1">
-              Trigger: Webhook ➔ Transformer ➔ WhatsApp Status Post
+              Trigger: Inbound Message ➔ AI Qualifier ➔ Calendar Booking
             </p>
           </button>
 
@@ -113,19 +113,19 @@ export default function AutomationsPage() {
             type="button"
             onClick={() => {
               setForm({
-                name: "Shola · 07:00 AM Daily Graphic Auto-Drop",
-                description: "Pulls queued visual portfolio pieces from studio and broadcasts to WhatsApp at 7:00 AM sharp",
+                name: "Daily Scheduled Drops & Broadcasts",
+                description: "Broadcasts curated media, graphics, and updates to VIP WhatsApp groups on schedule.",
                 trigger_type: "schedule",
               });
               setShowCreate(true);
             }}
             className="p-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
           >
-            <div className="text-xs font-bold text-amber-400 group-hover:text-amber-300">
-              Shola: 7 AM Daily Drop
+            <div className="text-xs font-bold text-cyan-400 group-hover:text-cyan-300">
+              Daily Scheduled Drops
             </div>
             <p className="text-[11px] text-zinc-400 mt-1">
-              Trigger: Cron 07:00 AM ➔ Media Loader ➔ Status & Broadcast
+              Trigger: Daily Cron ➔ Media Asset ➔ WhatsApp Status &amp; Broadcast
             </p>
           </button>
 
@@ -133,8 +133,8 @@ export default function AutomationsPage() {
             type="button"
             onClick={() => {
               setForm({
-                name: "Michael · Group Spam Link Sentinel & Strike Exit",
-                description: "Inspects incoming group messages, issues strikes for unauthorized links, and auto-kicks spammers",
+                name: "Group Buddy · Anti-Spam Shield & Moderation",
+                description: "Inspects incoming group messages, deletes unauthorized phishing links, and auto-kicks repeat offenders.",
                 trigger_type: "incoming_message",
               });
               setShowCreate(true);
@@ -142,10 +142,10 @@ export default function AutomationsPage() {
             className="p-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
           >
             <div className="text-xs font-bold text-emerald-400 group-hover:text-emerald-300">
-              Michael: Group Spam Shield
+              Group Buddy Spam Shield
             </div>
             <p className="text-[11px] text-zinc-400 mt-1">
-              Trigger: Incoming Message ➔ Link Filter ➔ Strike / Kick
+              Trigger: Inbound Group Message ➔ Link Safety Guard ➔ Moderation Action
             </p>
           </button>
         </div>
@@ -155,7 +155,7 @@ export default function AutomationsPage() {
       <div className="relative max-w-sm">
         <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
         <input
-          className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+          className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
           placeholder="Search automations…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -194,9 +194,9 @@ export default function AutomationsPage() {
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className={cn(
                     "h-10 w-10 rounded-xl flex items-center justify-center shrink-0",
-                    auto.status === "active" ? "bg-rose-50" : "bg-zinc-100"
+                    auto.status === "active" ? "bg-blue-50" : "bg-zinc-100"
                   )}>
-                    <Zap className={cn("h-5 w-5", auto.status === "active" ? "text-rose-500" : "text-zinc-400")} />
+                    <Zap className={cn("h-5 w-5", auto.status === "active" ? "text-[#2563eb]" : "text-zinc-400")} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
@@ -289,7 +289,7 @@ export default function AutomationsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Description</label>
             <textarea
-              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="What does this automation do?"
               value={form.description}
               onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
@@ -298,7 +298,7 @@ export default function AutomationsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Trigger</label>
             <select
-              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
               value={form.trigger_type}
               onChange={(e) => setForm((f) => ({ ...f, trigger_type: e.target.value }))}
             >

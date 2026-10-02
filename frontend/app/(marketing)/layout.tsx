@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function MarketingLayout({
   children,
@@ -9,47 +8,49 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-[#f4f4f7] selection:bg-[#2563eb] selection:text-white antialiased font-sans">
-      {/* Top Main Navigation */}
-      <header className="w-full max-w-[1380px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-        {/* Brand Logo with 4-dot Grid */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="grid grid-cols-2 gap-1 w-5 h-5 items-center justify-center">
-            <span className="w-2 h-2 rounded-full bg-[#0284c7]"></span>
-            <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-            <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-            <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+      {/* Top Fixed Main Navigation */}
+      <header className="sticky top-0 z-50 w-full bg-[#f4f4f7]/85 backdrop-blur-md border-b border-zinc-200/70 shadow-2xs transition-all">
+        <div className="max-w-[1380px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
+          {/* Brand Logo with 4-dot Grid in Royal Blue */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="grid grid-cols-2 gap-1 w-5 h-5 items-center justify-center">
+              <span className="w-2 h-2 rounded-full bg-[#2563eb]"></span>
+              <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+              <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+              <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
+            </div>
+            <span className="font-bold text-lg tracking-tight text-zinc-950 font-sans">
+              JidoSapp
+            </span>
+          </Link>
+
+          {/* Center Nav Links */}
+          <nav className="hidden md:flex items-center gap-8 text-xs lg:text-sm font-medium text-zinc-600">
+            <Link href="/solutions" className="hover:text-[#2563eb] transition-colors">
+              Solutions
+            </Link>
+            <Link href="/features" className="hover:text-[#2563eb] transition-colors">
+              Features
+            </Link>
+            <Link href="/solutions/subdomains" className="hover:text-[#2563eb] transition-colors">
+              Subdomains
+            </Link>
+            <Link href="/pricing" className="hover:text-[#2563eb] transition-colors">
+              Pricing
+            </Link>
+          </nav>
+
+          {/* Right CTA Links */}
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="text-xs lg:text-sm font-medium text-zinc-600 hover:text-zinc-950 transition-colors">
+              Sign in
+            </Link>
+            <Link href="/request-integration">
+              <button className="h-9 px-4 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-xs transition-all active:scale-[0.98]">
+                Request Demo
+              </button>
+            </Link>
           </div>
-          <span className="font-bold text-lg tracking-tight text-zinc-950 font-sans">
-            JidoSapp
-          </span>
-        </Link>
-
-        {/* Center Nav Links */}
-        <nav className="hidden md:flex items-center gap-8 text-xs lg:text-sm font-medium text-zinc-600">
-          <Link href="/solutions" className="hover:text-zinc-950 transition-colors">
-            Solutions
-          </Link>
-          <Link href="/features" className="hover:text-zinc-950 transition-colors">
-            Features
-          </Link>
-          <Link href="/solutions/subdomains" className="hover:text-zinc-950 transition-colors">
-            Subdomains
-          </Link>
-          <Link href="/pricing" className="hover:text-zinc-950 transition-colors">
-            Pricing
-          </Link>
-        </nav>
-
-        {/* Right CTA Links */}
-        <div className="flex items-center gap-4">
-          <Link href="/login" className="text-xs lg:text-sm font-medium text-zinc-600 hover:text-zinc-950 transition-colors">
-            Sign in
-          </Link>
-          <Link href="/request-integration">
-            <button className="h-9 px-4 rounded-xl border border-zinc-300/80 bg-white hover:bg-zinc-50 text-xs font-semibold text-zinc-800 shadow-2xs transition-all">
-              Request Demo
-            </button>
-          </Link>
         </div>
       </header>
 
@@ -62,7 +63,7 @@ export default function MarketingLayout({
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-zinc-100">
             <div className="flex items-center gap-3">
               <div className="grid grid-cols-2 gap-1 w-5 h-5">
-                <span className="w-2 h-2 rounded-full bg-[#0284c7]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#2563eb]"></span>
                 <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
                 <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
                 <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
@@ -78,22 +79,22 @@ export default function MarketingLayout({
             </div>
 
             <div className="flex flex-wrap gap-6 text-xs text-zinc-600 font-medium">
-              <Link href="/solutions/group-shield" className="hover:text-zinc-950 transition-colors">
+              <Link href="/solutions/group-shield" className="hover:text-[#2563eb] transition-colors">
                 Group Buddy
               </Link>
-              <Link href="/solutions/auto-responder" className="hover:text-zinc-950 transition-colors">
+              <Link href="/solutions/auto-responder" className="hover:text-[#2563eb] transition-colors">
                 24/7 Auto-Responder
               </Link>
-              <Link href="/solutions/newsletter-bridge" className="hover:text-zinc-950 transition-colors">
+              <Link href="/solutions/newsletter-bridge" className="hover:text-[#2563eb] transition-colors">
                 Status Bridge
               </Link>
-              <Link href="/solutions/scheduled-drops" className="hover:text-zinc-950 transition-colors">
+              <Link href="/solutions/scheduled-drops" className="hover:text-[#2563eb] transition-colors">
                 Scheduled Drops
               </Link>
-              <Link href="/solutions/subdomains" className="hover:text-zinc-950 transition-colors">
+              <Link href="/solutions/subdomains" className="hover:text-[#2563eb] transition-colors">
                 Claim Subdomain
               </Link>
-              <Link href="/pricing" className="hover:text-zinc-950 transition-colors">
+              <Link href="/pricing" className="hover:text-[#2563eb] transition-colors">
                 Pricing
               </Link>
             </div>

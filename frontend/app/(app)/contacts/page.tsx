@@ -94,7 +94,7 @@ export default function ContactsPage() {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
           <input
-            className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+            className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
             placeholder="Search contacts…"
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
@@ -185,7 +185,7 @@ export default function ContactsPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <a href={`tel:${c.phone}`} className="text-zinc-600 hover:text-rose-600 text-xs flex items-center gap-1">
+                      <a href={`tel:${c.phone}`} className="text-zinc-600 hover:text-[#2563eb] text-xs flex items-center gap-1">
                         <Phone className="h-3 w-3" />
                         {c.phone}
                       </a>
@@ -321,7 +321,7 @@ export default function ContactsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Notes</label>
             <textarea
-              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="Optional notes…"
               value={form.notes}
               onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}

@@ -86,7 +86,7 @@ function DocumentsList({ kbId }: { kbId: string }) {
       ) : (
         <button
           onClick={() => setAddingDoc(true)}
-          className="flex items-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 font-medium pt-1"
+          className="flex items-center gap-1.5 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium pt-1"
         >
           <Plus className="h-3.5 w-3.5" />
           Add Document
@@ -235,7 +235,7 @@ export default function KnowledgePage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Description</label>
             <textarea
-              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="What kind of information is in this knowledge base?"
               value={form.description}
               onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
@@ -244,7 +244,7 @@ export default function KnowledgePage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Assign to Agent (optional)</label>
             <select
-              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
               value={form.agent_id}
               onChange={(e) => setForm((f) => ({ ...f, agent_id: e.target.value }))}
             >

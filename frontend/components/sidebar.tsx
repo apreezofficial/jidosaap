@@ -41,9 +41,9 @@ export function Sidebar() {
 
   const workspaceChannels = [
     { name: "Meta WhatsApp API", color: "bg-emerald-500", href: "/integrations/whatsapp" },
-    { name: "Marketing Team", color: "bg-rose-500", href: "/content" },
+    { name: "Marketing Team", color: "bg-[#2563eb]", href: "/content" },
     { name: "Product Launch", color: "bg-amber-500", href: "/templates" },
-    { name: "Team Brainstorm", color: "bg-blue-500", href: "/crm/leads" },
+    { name: "Team Brainstorm", color: "bg-[#00b4d8]", href: "/crm/leads" },
   ];
 
   return (
@@ -224,7 +224,7 @@ export function Sidebar() {
               <div className="pt-1 mt-1 border-t border-zinc-100">
                 <button
                   onClick={logout}
-                  className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center gap-2 text-rose-600 hover:bg-rose-50 transition-colors"
+                  className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center gap-2 text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="h-3.5 w-3.5" />
                   <span>Log out</span>

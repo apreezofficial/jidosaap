@@ -182,7 +182,7 @@ export default function CalendarPage() {
                   <div className="flex items-center justify-between mb-1.5">
                     <span className={cn(
                       "h-6 w-6 rounded-full text-xs font-medium flex items-center justify-center",
-                      today && "bg-rose-600 text-white",
+                      today && "bg-[#2563eb] text-white",
                       !today && isCurrentMonth && "text-zinc-700",
                       !today && !isCurrentMonth && "text-zinc-300"
                     )}>

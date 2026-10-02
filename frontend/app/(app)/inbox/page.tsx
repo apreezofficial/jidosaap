@@ -20,7 +20,7 @@ const STATUS_COLORS = {
 } as const;
 
 const HANDLER_ICONS = {
-  ai: <Bot className="h-3 w-3 text-rose-500" />,
+  ai: <Bot className="h-3 w-3 text-[#2563eb]" />,
   human: <User className="h-3 w-3 text-blue-500" />,
   hybrid: <UserCheck className="h-3 w-3 text-amber-500" />,
 };
@@ -131,7 +131,7 @@ export default function InboxPage() {
                 onClick={() => setSelectedId(conv.id)}
                 className={cn(
                   "w-full text-left p-4 hover:bg-zinc-50 transition-colors",
-                  selectedId === conv.id && "bg-rose-50/60 border-r-2 border-rose-500"
+                  selectedId === conv.id && "bg-blue-50/60 border-r-2 border-[#2563eb]"
                 )}
               >
                 <div className="flex gap-3">
@@ -151,7 +151,7 @@ export default function InboxPage() {
                         {conv.last_message_content || conv.contact_phone}
                       </p>
                       {conv.unread_count > 0 && (
-                        <span className="ml-1 flex items-center justify-center h-4 w-4 rounded-full bg-rose-500 text-white text-[9px] font-bold shrink-0">
+                        <span className="ml-1 flex items-center justify-center h-4 w-4 rounded-full bg-[#2563eb] text-white text-[9px] font-bold shrink-0">
                           {conv.unread_count}
                         </span>
                       )}
@@ -217,22 +217,22 @@ export default function InboxPage() {
           <div className={cn(
             "px-4 py-1.5 text-[11px] font-medium flex items-center gap-1.5",
             conversation.handler_mode === "ai"
-              ? "bg-rose-50 text-rose-700 border-b border-rose-100"
+              ? "bg-blue-50 text-[#2563eb] border-b border-blue-100"
               : conversation.handler_mode === "human"
               ? "bg-blue-50 text-blue-700 border-b border-blue-100"
               : "bg-amber-50 text-amber-700 border-b border-amber-100"
           )}>
             {HANDLER_ICONS[conversation.handler_mode]}
-            {conversation.handler_mode === "ai" && "🤖 AI is handling this conversation"}
-            {conversation.handler_mode === "human" && "👤 Human agent is handling this conversation"}
-            {conversation.handler_mode === "hybrid" && "🔀 Hybrid mode — AI + human collaboration"}
+            {conversation.handler_mode === "ai" && "AI is handling this conversation"}
+            {conversation.handler_mode === "human" && "Human agent is handling this conversation"}
+            {conversation.handler_mode === "hybrid" && "Hybrid mode — AI and human collaboration"}
           </div>
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/40">
             {msgLoading ? (
               <div className="flex justify-center py-8">
-                <div className="h-6 w-6 rounded-full border-2 border-rose-500 border-t-transparent animate-spin" />
+                <div className="h-6 w-6 rounded-full border-2 border-[#2563eb] border-t-transparent animate-spin" />
               </div>
             ) : messages.length === 0 ? (
               <div className="text-center py-8">
@@ -256,7 +256,7 @@ export default function InboxPage() {
                   <div className={cn(
                     "max-w-xs lg:max-w-md rounded-2xl px-3.5 py-2.5 shadow-sm",
                     msg.direction === "outbound"
-                      ? "bg-rose-600 text-white rounded-tr-sm"
+                      ? "bg-[#2563eb] text-white rounded-tr-sm"
                       : msg.type === "note"
                       ? "bg-amber-50 text-amber-900 border border-amber-200 rounded-tl-sm"
                       : "bg-white text-zinc-900 border border-zinc-100 rounded-tl-sm"
@@ -267,12 +267,12 @@ export default function InboxPage() {
                     <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                     <div className={cn(
                       "flex items-center justify-end gap-1 mt-1",
-                      msg.direction === "outbound" ? "text-rose-200" : "text-zinc-400"
+                      msg.direction === "outbound" ? "text-blue-100" : "text-zinc-400"
                     )}>
                       <span className="text-[9px]">{formatRelativeTime(msg.created_at)}</span>
                       {msg.direction === "outbound" && (
                         <span className="text-[9px]">
-                          {msg.status === "read" ? "✓✓" : msg.status === "delivered" ? "✓✓" : msg.status === "sent" ? "✓" : msg.status === "failed" ? "✗" : "⏳"}
+                          {msg.status === "read" ? "Delivered" : msg.status === "delivered" ? "Delivered" : msg.status === "sent" ? "Sent" : msg.status === "failed" ? "Failed" : "Queued"}
                         </span>
                       )}
                     </div>
@@ -286,13 +286,13 @@ export default function InboxPage() {
           <div className="p-4 border-t border-zinc-100 bg-white">
             {conversation.handler_mode === "ai" && (
               <div className="mb-2 flex items-center gap-2 text-xs text-zinc-500">
-                <Bot className="h-3.5 w-3.5 text-rose-500" />
+                <Bot className="h-3.5 w-3.5 text-[#2563eb]" />
                 <span>AI is handling this. Switch to Human to reply manually.</span>
               </div>
             )}
             <div className="flex gap-2">
               <textarea
-                className="flex-1 resize-none rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 min-h-[40px] max-h-32"
+                className="flex-1 resize-none rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] min-h-[40px] max-h-32"
                 placeholder={conversation.handler_mode === "ai" ? "AI is handling this conversation…" : "Type a message…"}
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}

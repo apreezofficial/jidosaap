@@ -12,7 +12,7 @@ import { Plus, FileText, Copy, Trash2, Tag, ChevronRight, CheckCircle2 } from "l
 import { api } from "@/lib/api";
 
 const CATEGORY_COLORS: Record<string, string> = {
-  marketing:   "bg-rose-50 text-rose-700 border-rose-200",
+  marketing:   "bg-blue-50 text-[#2563eb] border-blue-200",
   utility:     "bg-blue-50 text-blue-700 border-blue-200",
   transactional:"bg-violet-50 text-violet-700 border-violet-200",
   support:     "bg-amber-50 text-amber-700 border-amber-200",
@@ -74,8 +74,8 @@ export default function TemplatesPage() {
       <div className="bg-gradient-to-r from-zinc-900 to-zinc-950 rounded-2xl p-5 text-white border border-zinc-800 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
-            <span className="text-xs font-bold uppercase tracking-wider text-rose-400">Featured Narrative Blueprints</span>
+            <span className="h-2 w-2 rounded-full bg-[#2563eb] animate-pulse"></span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#2563eb]">Featured WhatsApp Blueprints</span>
           </div>
           <span className="text-[11px] text-zinc-400 font-mono">1-Tap Preset Loaders</span>
         </div>
@@ -85,23 +85,23 @@ export default function TemplatesPage() {
             type="button"
             onClick={() => {
               setForm({
-                name: "Precious · penna.dev Status Bridge",
+                name: "24/7 AI Lead Qualification & Rate Card",
                 category: "marketing",
-                header: "📰 New Newsletter Issue · Penna",
-                body: "Fresh drop on penna.dev: User Experience: the gateway to the users heart\n\nRead the full piece on Tears of an ex developer: https://www.penna.dev/apcodesphere/8078b477-011e-4b6b-bcf1-30414d28faf7",
-                footer: "Shared via JidoSapp Bridge",
+                header: "New Inbound Inquiry Response",
+                body: "Hello {{contact_name}}, thank you for reaching out. Here is our overview deck and current pricing: {{pricing_url}}\n\nWould you like to schedule a 15-minute consultation?",
+                footer: "Powered by JidoSapp Auto-Responder",
                 language: "en",
-                variables: "issue_title, issue_url",
+                variables: "contact_name, pricing_url",
               });
               setShowCreate(true);
             }}
             className="p-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
           >
-            <div className="text-xs font-bold text-indigo-400 group-hover:text-indigo-300">
-              Precious's Newsletter Bridge
+            <div className="text-xs font-bold text-blue-400 group-hover:text-blue-300">
+              AI Lead Response &amp; Rate Card
             </div>
             <p className="text-[11px] text-zinc-400 mt-0.5">
-              Formats penna.dev articles for 1-tap WhatsApp Status & broadcasts.
+              Instant welcome, portfolio link, and consultation booking.
             </p>
           </button>
 
@@ -109,10 +109,10 @@ export default function TemplatesPage() {
             type="button"
             onClick={() => {
               setForm({
-                name: "Shola · 7:00 AM Daily Graphic Drop",
+                name: "Daily Scheduled Portfolio & Drop Broadcast",
                 category: "marketing",
-                header: "🎨 Daily Design Drop · 07:00 AM",
-                body: "Today's featured concept: {{project_name}}.\n\nCrafted for high-growth founders. Reply directly to book our next sprint!",
+                header: "Daily Creative Drop · Morning Brief",
+                body: "Today's featured concept: {{project_name}}.\n\nCrafted for high-growth teams. Reply directly to reserve your slot for this week's sprint!",
                 footer: "Consistency powered by JidoSapp",
                 language: "en",
                 variables: "project_name",
@@ -121,8 +121,8 @@ export default function TemplatesPage() {
             }}
             className="p-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
           >
-            <div className="text-xs font-bold text-amber-400 group-hover:text-amber-300">
-              Shola's 7 AM Design Drop
+            <div className="text-xs font-bold text-cyan-400 group-hover:text-cyan-300">
+              Daily Drop &amp; Portfolio Broadcast
             </div>
             <p className="text-[11px] text-zinc-400 mt-0.5">
               Client-attracting morning portfolio broadcast template.
@@ -133,9 +133,9 @@ export default function TemplatesPage() {
             type="button"
             onClick={() => {
               setForm({
-                name: "Michael · Group Anti-Spam Warning",
+                name: "Group Buddy Anti-Spam Warning Notice",
                 category: "utility",
-                header: "🛡️ Community Guardian Alert",
+                header: "Community Guardian Alert",
                 body: "Warning [Strike {{strike_count}}/2]: @{{user_name}}, promotional or unauthorized links are prohibited in this group. Repeat offenses result in immediate exit.",
                 footer: "Protected by JidoSapp Sentinel",
                 language: "en",
@@ -146,7 +146,7 @@ export default function TemplatesPage() {
             className="p-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-left transition-all group"
           >
             <div className="text-xs font-bold text-emerald-400 group-hover:text-emerald-300">
-              Michael's Group Spam Shield
+              Group Buddy Anti-Spam Notice
             </div>
             <p className="text-[11px] text-zinc-400 mt-0.5">
               Real-time strike warning notice for group spam links.
@@ -259,7 +259,7 @@ export default function TemplatesPage() {
             <div className="space-y-1">
               <label className="block text-xs font-medium text-zinc-700">Category</label>
               <select
-                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
                 value={form.category}
                 onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
               >
@@ -271,7 +271,7 @@ export default function TemplatesPage() {
             <div className="space-y-1">
               <label className="block text-xs font-medium text-zinc-700">Language</label>
               <select
-                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
                 value={form.language}
                 onChange={(e) => setForm((f) => ({ ...f, language: e.target.value }))}
               >
@@ -290,8 +290,8 @@ export default function TemplatesPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Message Body *</label>
             <textarea
-              className="w-full h-32 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 font-mono"
-              placeholder={"🔥 {{product_name}} is now available!\n\nPrice: {{price}}\nStock: {{stock}} remaining\n\nMessage us to order."}
+              className="w-full h-32 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] font-mono"
+              placeholder={"{{product_name}} is now available!\n\nPrice: {{price}}\nStock: {{stock}} remaining\n\nMessage us to order."}
               value={form.body}
               onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
             />

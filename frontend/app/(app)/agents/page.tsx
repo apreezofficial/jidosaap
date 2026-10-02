@@ -116,9 +116,9 @@ export default function AgentsPage() {
                 <div className="flex items-start gap-3">
                   <div className={cn(
                     "h-10 w-10 rounded-xl flex items-center justify-center",
-                    agent.status === "active" ? "bg-rose-50" : "bg-zinc-100"
+                    agent.status === "active" ? "bg-blue-50" : "bg-zinc-100"
                   )}>
-                    <Bot className={cn("h-5 w-5", agent.status === "active" ? "text-rose-500" : "text-zinc-400")} />
+                    <Bot className={cn("h-5 w-5", agent.status === "active" ? "text-[#2563eb]" : "text-zinc-400")} />
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-zinc-900">{agent.name}</h3>
@@ -186,7 +186,7 @@ export default function AgentsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Description</label>
             <input
-              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="What does this agent do?"
               value={form.description}
               onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
@@ -196,7 +196,7 @@ export default function AgentsPage() {
             <div className="space-y-1">
               <label className="block text-xs font-medium text-zinc-700">Tone</label>
               <select
-                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
                 value={form.tone}
                 onChange={(e) => setForm((f) => ({ ...f, tone: e.target.value }))}
               >
@@ -208,7 +208,7 @@ export default function AgentsPage() {
             <div className="space-y-1">
               <label className="block text-xs font-medium text-zinc-700">Language</label>
               <select
-                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+                className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] bg-white"
                 value={form.language}
                 onChange={(e) => setForm((f) => ({ ...f, language: e.target.value }))}
               >
@@ -221,7 +221,7 @@ export default function AgentsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Business Information</label>
             <textarea
-              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-20 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="Describe your business, products, services…"
               value={form.business_info}
               onChange={(e) => setForm((f) => ({ ...f, business_info: e.target.value }))}
@@ -230,7 +230,7 @@ export default function AgentsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Agent Instructions</label>
             <textarea
-              className="w-full h-24 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full h-24 resize-none rounded-md border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
               placeholder="Specific instructions for how the agent should behave…"
               value={form.instructions}
               onChange={(e) => setForm((f) => ({ ...f, instructions: e.target.value }))}
@@ -250,7 +250,7 @@ export default function AgentsPage() {
                     type="checkbox"
                     checked={form.tools.includes(tool.id)}
                     onChange={() => toggleTool(tool.id)}
-                    className="rounded text-rose-600"
+                    className="rounded text-[#2563eb] focus:ring-[#2563eb]"
                   />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-zinc-900">{tool.label}</p>

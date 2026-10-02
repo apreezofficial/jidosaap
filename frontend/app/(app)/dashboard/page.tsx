@@ -89,7 +89,7 @@ export default function ChronoTaskDashboardHome() {
   const assignedTasks = [
     {
       code: "8",
-      codeColor: "bg-rose-500",
+      codeColor: "bg-[#2563eb]",
       title: "New ideas for campaign",
       progress: 60,
       avatars: [
@@ -268,7 +268,7 @@ export default function ChronoTaskDashboardHome() {
                 setIsTimerRunning(false);
                 setSeconds(0);
               }}
-              className="h-10 w-10 rounded-full bg-[#ff5252] text-white shadow-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
+              className="h-10 w-10 rounded-full bg-zinc-900 text-white shadow-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
               title="Stop and Reset"
             >
               <Square className="h-4 w-4 fill-white" />
@@ -496,7 +496,7 @@ export default function ChronoTaskDashboardHome() {
                     <div
                       className={cn(
                         "h-full rounded-full transition-all",
-                        t.progress >= 100 ? "bg-rose-500" : "bg-sky-500"
+                        t.progress >= 100 ? "bg-[#2563eb]" : "bg-sky-500"
                       )}
                       style={{ width: `${Math.min(t.progress, 100)}%` }}
                     />
