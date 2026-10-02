@@ -228,8 +228,12 @@ final class WorkspaceService
         }
 
         $reserved = [
-            'www', 'api', 'app', 'admin', 'auth', 'billing', 'mail', 'smtp',
-            'support', 'dashboard', 'status', 'bot', 'system', 'root', 'static', 'cdn'
+            'www', 'api', 'app', 'apps', 'admin', 'administrator', 'auth', 'billing',
+            'mail', 'smtp', 'support', 'dashboard', 'status', 'bot', 'bots', 'system',
+            'root', 'static', 'cdn', 'jidosaap', 'jido', 'meta', 'whatsapp', 'dev',
+            'staging', 'test', 'portal', 'login', 'register', 'demo', 'help', 'docs',
+            'null', 'undefined', 'secure', 'account', 'user', 'users', 'group', 'groups',
+            'webhook', 'webhooks', 'server', 'ssl'
         ];
 
         if (in_array($slug, $reserved, true)) {

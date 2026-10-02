@@ -27,11 +27,17 @@ export default function SubdomainsArchitecturePage() {
       return;
     }
     setStatus("checking");
-    setTimeout(() => {
-      const reserved = ["admin", "api", "root", "app", "www"];
+      const reserved = [
+        "admin", "administrator", "api", "app", "apps", "auth", "billing", "bot", "bots",
+        "cdn", "dashboard", "dev", "developer", "developers", "docs", "help", "jido",
+        "jidosaap", "login", "mail", "meta", "null", "portal", "register", "root",
+        "secure", "server", "smtp", "ssl", "staging", "static", "status", "support",
+        "system", "test", "testing", "undefined", "user", "users", "web", "webhook",
+        "webhooks", "whatsapp", "www"
+      ];
       if (reserved.includes(clean)) {
         setStatus("taken");
-        setMsg(`${clean}.jidosaap.xyz is reserved.`);
+        setMsg(`"${clean}.jidosaap.xyz" is a reserved system subdomain.`);
       } else {
         setStatus("available");
         setMsg(`Available! Your instance will run on ${clean}.jidosaap.xyz`);

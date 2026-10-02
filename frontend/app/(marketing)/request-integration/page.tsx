@@ -7,8 +7,6 @@ import {
   Globe,
   CheckCircle2,
   AlertCircle,
-  Newspaper,
-  Calendar,
   ShieldCheck,
   Bot,
   Zap,
@@ -21,39 +19,34 @@ import {
 } from "lucide-react";
 import { api } from "@/lib/api";
 
+const RESERVED_SUBDOMAINS = [
+  "admin", "administrator", "api", "app", "apps", "auth", "billing", "bot", "bots",
+  "cdn", "dashboard", "dev", "developer", "developers", "docs", "help", "jido",
+  "jidosaap", "login", "mail", "meta", "null", "portal", "register", "root",
+  "secure", "server", "smtp", "ssl", "staging", "static", "status", "support",
+  "system", "test", "testing", "undefined", "user", "users", "web", "webhook",
+  "webhooks", "whatsapp", "www"
+];
+
 const USE_CASES = [
   {
-    id: "newsletter_bridge",
-    title: "Newsletter Status Bridge (Precious)",
-    desc: "1-Tap publish bridge from penna.dev, Substack, or RSS directly to WhatsApp Status with zero manual copying.",
-    icon: Newspaper,
-    accent: "bg-indigo-50 text-indigo-600 border-indigo-200/80",
-  },
-  {
-    id: "graphic_scheduler",
-    title: "7:00 AM Daily Scheduled Drops (Shola)",
-    desc: "Consistent morning auto-posting of design portfolios & graphics to drive continuous client retainers.",
-    icon: Calendar,
-    accent: "bg-amber-50 text-amber-600 border-amber-200/80",
-  },
-  {
-    id: "group_spam_guardian",
-    title: "Community Anti-Spam Shield (Michael)",
-    desc: "24/7 group sentinel that deletes phishing links, issues warning strikes, and auto-kicks repeat offenders.",
+    id: "group_buddy",
+    title: "Group Buddy (Community Anti-Spam & Moderation)",
+    desc: "24/7 intelligent group sentinel that detects and deletes spam/phishing links, issues warning strikes, and auto-kicks repeat offenders to keep community chats clean.",
     icon: ShieldCheck,
     accent: "bg-emerald-50 text-emerald-600 border-emerald-200/80",
   },
   {
     id: "auto_responder",
-    title: "24/7 Smart AI Auto-Responder",
-    desc: "Zero-latency lead qualification, automated rate card delivery, and instant Calendly / Cal.com meeting booking.",
+    title: "24/7 Smart AI Auto-Responder (Support & Inquiries)",
+    desc: "Zero-latency customer support and lead qualification. Automatically answers customer FAQs, delivers rate cards, and books calendar meetings around the clock.",
     icon: Bot,
     accent: "bg-blue-50 text-blue-600 border-blue-200/80",
   },
   {
     id: "custom",
-    title: "Custom Enterprise Workflow",
-    desc: "Bespoke CRM connectors, Stripe billing triggers, or multi-agent pipelines tailored to your operations.",
+    title: "Custom Automation / Bespoke Workflow",
+    desc: "Tell us what you want to automate. Describe your custom WhatsApp flow, CRM connector, or multi-agent pipeline in the request notes below.",
     icon: Zap,
     accent: "bg-purple-50 text-purple-600 border-purple-200/80",
   },
@@ -67,7 +60,11 @@ function RequestIntegrationForm() {
   const [phone, setPhone] = useState("");
   const [brandName, setBrandName] = useState("");
   const [subdomain, setSubdomain] = useState(searchParams.get("subdomain") || "");
-  const [selectedUseCase, setSelectedUseCase] = useState(searchParams.get("use_case") || "newsletter_bridge");
+  const [selectedUseCase, setSelectedUseCase] = useState(
+    searchParams.get("use_case") === "group_buddy" || searchParams.get("use_case") === "auto_responder"
+      ? searchParams.get("use_case")!
+      : "group_buddy"
+  );
   const [deploymentType, setDeploymentType] = useState<"managed" | "self_host">("managed");
   const [notes, setNotes] = useState("");
 
@@ -88,7 +85,9 @@ function RequestIntegrationForm() {
     }
     const uc = searchParams.get("use_case");
     if (uc) {
-      setSelectedUseCase(uc);
+      if (uc === "group_buddy" || uc === "auto_responder" || uc === "custom") {
+        setSelectedUseCase(uc);
+      }
     }
   }, [searchParams]);
 
@@ -97,6 +96,14 @@ function RequestIntegrationForm() {
     if (!clean || clean.length < 3) {
       setSubdomainAvailable(null);
       setSubdomainError(clean ? "Subdomain must be at least 3 characters" : null);
+      return;
+    }
+
+    // Instant Client-Side Reserved Subdomains Check
+    if (RESERVED_SUBDOMAINS.includes(clean)) {
+      setCheckingSubdomain(false);
+      setSubdomainAvailable(false);
+      setSubdomainError(`"${clean}.jidosaap.xyz" is a reserved system subdomain and cannot be claimed.`);
       return;
     }
 
@@ -109,7 +116,7 @@ function RequestIntegrationForm() {
       if (res.success && res.data) {
         setSubdomainAvailable(res.data.available);
         if (!res.data.available) {
-          setSubdomainError(res.data.reason || "Subdomain is already taken");
+          setSubdomainError(res.data.reason || "Subdomain is already claimed");
         } else {
           setSubdomainError(null);
         }
@@ -132,8 +139,20 @@ function RequestIntegrationForm() {
     e.preventDefault();
     setError(null);
 
-    if (!subdomain || subdomain.length < 3) {
+    const clean = subdomain.toLowerCase().trim().replace(/[^a-z0-9-]/g, "");
+
+    if (!clean || clean.length < 3) {
       setError("Please specify a valid subdomain (at least 3 characters).");
+      return;
+    }
+
+    if (RESERVED_SUBDOMAINS.includes(clean)) {
+      setError(`"${clean}.jidosaap.xyz" is a reserved system subdomain and cannot be claimed.`);
+      return;
+    }
+
+    if (selectedUseCase === "custom" && !notes.trim()) {
+      setError("Please briefly describe your custom automation requirements in the notes field.");
       return;
     }
 
@@ -145,7 +164,7 @@ function RequestIntegrationForm() {
         email,
         phone_number: phone,
         brand_name: brandName || fullName,
-        subdomain,
+        subdomain: clean,
         use_case: selectedUseCase,
         notes: deploymentType === "self_host" ? `[Self-Host Request] ${notes}` : notes,
       };
@@ -201,7 +220,11 @@ function RequestIntegrationForm() {
             <div>
               <span className="text-zinc-400 block mb-0.5">Selected Use Case</span>
               <span className="font-semibold text-emerald-600 capitalize">
-                {resultData.use_case.replace(/_/g, " ")}
+                {resultData.use_case === "group_buddy"
+                  ? "Group Buddy"
+                  : resultData.use_case === "auto_responder"
+                  ? "24/7 Smart Auto-Responder"
+                  : "Custom Workflow"}
               </span>
             </div>
             <div>
@@ -219,7 +242,7 @@ function RequestIntegrationForm() {
           </Link>
           <Link href="/solutions">
             <button className="h-11 px-6 rounded-xl bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-700 font-medium text-xs transition-all">
-              Explore All Solutions
+              Explore Solutions
             </button>
           </Link>
         </div>
@@ -253,12 +276,16 @@ function RequestIntegrationForm() {
       {/* Main Request Form */}
       <form onSubmit={handleSubmit} className="bg-white border border-zinc-200/90 rounded-[28px] sm:rounded-[36px] p-6 sm:p-10 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.04)] space-y-8">
         
-        {/* Step 1: Select Primary Flow */}
+        {/* Step 1: Select Primary Flow (Group Buddy vs Auto-Responder vs Custom) */}
         <div className="space-y-3">
-          <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
-            1. Select Primary Automation Workflow
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
+              1. Select Primary Automation Workflow
+            </label>
+            <span className="text-[11px] text-zinc-400">Choose a primary or specify custom</span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3">
             {USE_CASES.map((uc) => {
               const Icon = uc.icon;
               const isSelected = selectedUseCase === uc.id;
@@ -266,27 +293,25 @@ function RequestIntegrationForm() {
                 <div
                   key={uc.id}
                   onClick={() => setSelectedUseCase(uc.id)}
-                  className={`cursor-pointer rounded-2xl border p-4 transition-all text-left relative flex flex-col justify-between ${
+                  className={`cursor-pointer rounded-2xl border p-4.5 transition-all text-left relative flex items-start gap-4 ${
                     isSelected
                       ? "border-[#2563eb] bg-blue-50/30 ring-1 ring-[#2563eb] shadow-2xs"
                       : "border-zinc-200/80 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
                   }`}
                 >
-                  <div className="space-y-2">
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center border shrink-0 ${uc.accent}`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1 space-y-0.5">
                     <div className="flex items-center justify-between">
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center border ${uc.accent}`}>
-                        <Icon className="h-4 w-4" />
-                      </div>
+                      <div className="text-xs font-bold text-zinc-900 leading-snug">{uc.title}</div>
                       {isSelected && (
-                        <div className="w-5 h-5 rounded-full bg-[#2563eb] text-white flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-[#2563eb] text-white flex items-center justify-center shrink-0">
                           <Check className="h-3 w-3 stroke-[3]" />
                         </div>
                       )}
                     </div>
-                    <div>
-                      <div className="text-xs font-bold text-zinc-900 leading-snug">{uc.title}</div>
-                      <p className="text-[11px] text-zinc-500 mt-1 leading-relaxed">{uc.desc}</p>
-                    </div>
+                    <p className="text-[11px] text-zinc-500 leading-relaxed">{uc.desc}</p>
                   </div>
                 </div>
               );
@@ -336,11 +361,15 @@ function RequestIntegrationForm() {
           </div>
         </div>
 
-        {/* Step 3: Choose Subdomain */}
+        {/* Step 3: Choose Subdomain with Strict Reserved Word Blocking */}
         <div className="space-y-3 pt-2 border-t border-zinc-100">
-          <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
-            3. Choose Your Subdomain on jidosaap.xyz
-          </label>
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
+              3. Choose Your Subdomain on jidosaap.xyz
+            </label>
+            <span className="text-[11px] text-zinc-400 font-mono">*.jidosaap.xyz</span>
+          </div>
+
           <div className="relative">
             <div className="flex items-center rounded-xl border border-zinc-200/90 bg-zinc-50/60 focus-within:border-[#2563eb] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#2563eb]/20 transition-all overflow-hidden">
               <span className="text-xs font-mono text-zinc-400 pl-4 pr-1 select-none">https://</span>
@@ -348,7 +377,7 @@ function RequestIntegrationForm() {
                 type="text"
                 value={subdomain}
                 onChange={(e) => handleSubdomainChange(e.target.value)}
-                placeholder="precious, shola, or yourbrand"
+                placeholder="yourbrand, studio, or community"
                 required
                 className="flex-1 h-12 bg-transparent text-xs sm:text-sm font-semibold text-zinc-900 focus:outline-none font-mono"
               />
@@ -371,13 +400,13 @@ function RequestIntegrationForm() {
           )}
           {subdomainError && (
             <div className="text-xs text-rose-600 font-medium flex items-center gap-1.5">
-              <AlertCircle className="h-4 w-4" />
+              <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{subdomainError}</span>
             </div>
           )}
         </div>
 
-        {/* Step 4: Contact Details */}
+        {/* Step 4: Contact Details (Generic, Professional Placeholders - Zero mention of penna.dev) */}
         <div className="space-y-4 pt-2 border-t border-zinc-100">
           <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 font-mono">
             4. Your Contact &amp; WhatsApp Information
@@ -389,7 +418,7 @@ function RequestIntegrationForm() {
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Precious Okon"
+                placeholder="Alex Johnson"
                 required
                 className="w-full h-11 px-3.5 rounded-xl border border-zinc-200/90 text-xs sm:text-sm focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20"
               />
@@ -401,7 +430,7 @@ function RequestIntegrationForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="precious@penna.dev"
+                placeholder="alex@company.com"
                 required
                 className="w-full h-11 px-3.5 rounded-xl border border-zinc-200/90 text-xs sm:text-sm focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20"
               />
@@ -425,7 +454,7 @@ function RequestIntegrationForm() {
                 type="text"
                 value={brandName}
                 onChange={(e) => setBrandName(e.target.value)}
-                placeholder="Penna.dev or Shola Studio"
+                placeholder="Your Brand or Company Name"
                 required
                 className="w-full h-11 px-3.5 rounded-xl border border-zinc-200/90 text-xs sm:text-sm focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20"
               />
@@ -433,15 +462,30 @@ function RequestIntegrationForm() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-700">
-              Specific Requirements or Notes (Optional)
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-zinc-700">
+                {selectedUseCase === "custom"
+                  ? "Describe Your Custom Workflow Requirements"
+                  : "Specific Requirements or Notes (Optional)"}
+              </label>
+              {selectedUseCase === "custom" && (
+                <span className="text-[11px] text-[#2563eb] font-semibold">Required for custom</span>
+              )}
+            </div>
             <textarea
               rows={3}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Tell us about your audience size, custom webhooks, or existing tools..."
-              className="w-full p-3.5 rounded-xl border border-zinc-200/90 text-xs sm:text-sm focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20"
+              placeholder={
+                selectedUseCase === "custom"
+                  ? "Describe the WhatsApp automation you need (e.g. trigger message on Stripe payment, sync group members to Notion, custom CRM webhooks)..."
+                  : "Describe your community size, expected message volume, or any custom integrations..."
+              }
+              className={`w-full p-3.5 rounded-xl border text-xs sm:text-sm focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 ${
+                selectedUseCase === "custom"
+                  ? "border-[#2563eb] bg-blue-50/10"
+                  : "border-zinc-200/90"
+              }`}
             />
           </div>
         </div>
