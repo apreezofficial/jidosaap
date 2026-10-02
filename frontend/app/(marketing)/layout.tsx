@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { JidoSappLogo } from "@/components/ui/logo";
 
 export default function MarketingLayout({
   children,
@@ -11,18 +12,8 @@ export default function MarketingLayout({
       {/* Top Fixed Main Navigation */}
       <header className="sticky top-0 z-50 w-full bg-[#f4f4f7]/85 backdrop-blur-md border-b border-zinc-200/70 shadow-2xs transition-all">
         <div className="max-w-[1380px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
-          {/* Brand Logo with 4-dot Grid in Royal Blue */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="grid grid-cols-2 gap-1 w-5 h-5 items-center justify-center">
-              <span className="w-2 h-2 rounded-full bg-[#2563eb]"></span>
-              <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-              <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-              <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-            </div>
-            <span className="font-bold text-lg tracking-tight text-zinc-950 font-sans">
-              JidoSapp
-            </span>
-          </Link>
+          {/* Brand Logo with Official JidoSapp Icon */}
+          <JidoSappLogo href="/" size="md" />
 
           {/* Center Nav Links */}
           <nav className="hidden md:flex items-center gap-8 text-xs lg:text-sm font-medium text-zinc-600">
@@ -62,17 +53,9 @@ export default function MarketingLayout({
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-zinc-100">
             <div className="flex items-center gap-3">
-              <div className="grid grid-cols-2 gap-1 w-5 h-5">
-                <span className="w-2 h-2 rounded-full bg-[#2563eb]"></span>
-                <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-                <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-                <span className="w-2 h-2 rounded-full bg-zinc-900"></span>
-              </div>
-              <div>
-                <span className="font-bold text-sm text-zinc-900 block">
-                  JidoSapp
-                </span>
-                <span className="text-xs text-zinc-500">
+              <JidoSappLogo size="sm" />
+              <div className="pl-3 border-l border-zinc-200">
+                <span className="text-xs text-zinc-500 block">
                   Your WhatsApp can do more than you think.
                 </span>
               </div>

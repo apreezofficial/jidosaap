@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
+import { JidoSappLogo } from "@/components/ui/logo";
 import {
   X,
   Mail,
@@ -25,7 +26,6 @@ export default function BlueMoxfitaskLoginPage() {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
-
     try {
       const res = await login(email, password);
       if (res.success) {
@@ -54,10 +54,8 @@ export default function BlueMoxfitaskLoginPage() {
       {/* Left Column: Mascot & Illustration Card in JidoSapp Royal Blue Theme */}
       <div className="w-full md:w-1/2 rounded-[28px] bg-gradient-to-br from-blue-50/90 via-[#eef4ff] to-[#e0edff] border border-blue-100/90 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[380px] sm:min-h-[470px] select-none">
         {/* Brand Logo at top */}
-        <div className="relative z-10 flex items-center gap-1.5">
-          <span className="font-extrabold text-xl tracking-tight text-zinc-950 font-sans">
-            JidoSapp<span className="text-[#2563eb]">.</span>
-          </span>
+        <div className="relative z-10 flex items-center">
+          <JidoSappLogo size="md" />
         </div>
 
         {/* Floating Sheet of Paper / Analytics Report in Blue/Cyan Theme */}

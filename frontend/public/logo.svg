@@ -1,0 +1,40 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="jido-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#00b4d8" />
+    </linearGradient>
+    <linearGradient id="jido-spark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e0f2fe" />
+    </linearGradient>
+    <filter id="jido-shadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2563eb" flood-opacity="0.28" />
+    </filter>
+  </defs>
+
+  <!-- Base Smooth Squircle with Royal Blue to Cyan Gradient -->
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#jido-bg)" filter="url(#jido-shadow)" />
+
+  <!-- Subtle Inner Glass Accent Border -->
+  <rect x="4.5" y="4.5" width="55" height="55" rx="15.5" stroke="white" stroke-opacity="0.25" stroke-width="1" />
+
+  <!-- Interlocking Message & Automation Geometry: Modern Curved Loop & Pulse -->
+  <!-- Left/Upper Pulse Loop -->
+  <path
+    d="M20 28C20 22.4772 24.4772 18 30 18H34C39.5228 18 44 22.4772 44 28C44 33.5228 39.5228 38 34 38H24L18 44V28H20Z"
+    fill="white"
+    fill-opacity="0.18"
+  />
+
+  <!-- Foreground Dynamic Automation "J-Sapp" Symbol -->
+  <!-- Main Streamline -->
+  <path
+    d="M24 22C24 20.8954 24.8954 20 26 20H38C39.1046 20 40 20.8954 40 22C40 23.1046 39.1046 24 38 24H33V35C33 38.3137 30.3137 41 27 41C23.6863 41 21 38.3137 21 35C21 33.8954 21.8954 33 23 33C24.1046 33 25 33.8954 25 35C25 36.1046 25.8954 37 27 37C28.1046 37 29 36.1046 29 35V24H26C24.8954 24 24 23.1046 24 22Z"
+    fill="url(#jido-spark)"
+  />
+
+  <!-- Active AI / Automation Synchronizer Node -->
+  <circle cx="37" cy="33" r="4.5" fill="#38bdf8" stroke="white" stroke-width="2" />
+  <circle cx="37" cy="33" r="1.5" fill="white" />
+</svg>

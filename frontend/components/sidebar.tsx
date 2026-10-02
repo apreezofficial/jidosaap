@@ -24,6 +24,7 @@ import {
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { JidoSappLogo } from "@/components/ui/logo";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -48,23 +49,9 @@ export function Sidebar() {
 
   return (
     <aside className="w-64 border-r border-zinc-200/80 bg-white flex flex-col h-screen select-none shrink-0 font-sans">
-      {/* Brand Header: 6-dot logo + ChronoTask-style title */}
+      {/* Brand Header: Official JidoSapp Logo */}
       <div className="h-16 flex items-center justify-between px-6">
-        <Link href="/dashboard" className="flex items-center gap-2.5 group">
-          <div className="flex items-center gap-1">
-            <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-zinc-900 text-white">
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb]" />
-            </div>
-          </div>
-          <div>
-            <span className="font-bold text-base tracking-tight text-zinc-950">JidoSapp</span>
-          </div>
-        </Link>
+        <JidoSappLogo href="/dashboard" size="md" />
       </div>
 
       {/* Quick "+ Create" Action Button */}
