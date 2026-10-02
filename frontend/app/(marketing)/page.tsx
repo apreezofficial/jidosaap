@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   Sparkles,
-  ShieldCheck,
   CheckCircle2,
   Clock,
   Send,
@@ -16,18 +15,15 @@ import {
   Palette,
   ShieldAlert,
   Bot,
-  Copy,
   Check,
-  ExternalLink,
-  MessageSquare,
+  RotateCcw,
+  Play,
   Flame,
   Users,
-  ChevronRight,
-  TrendingUp,
+  MessageSquare,
   AlertTriangle,
-  UserX,
-  Play,
-  RotateCcw,
+  Clock3,
+  ExternalLink,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -38,10 +34,9 @@ export default function LandingPage() {
 
   // Interactive Demo 1: Precious (penna.dev newsletter bridge)
   const [preciousPublished, setPreciousPublished] = useState(false);
-  const [preciousViews, setPreciousViews] = useState(240);
+  const [preciousViews, setPreciousViews] = useState(384);
 
   // Interactive Demo 2: Shola (7 AM Graphic Designer Drop)
-  const [sholaScheduled, setSholaScheduled] = useState(true);
   const [sholaInquiryCount, setSholaInquiryCount] = useState(6);
   const [sholaTriggered, setSholaTriggered] = useState(false);
 
@@ -51,6 +46,13 @@ export default function LandingPage() {
     { id: 1, text: "Sarah: Has anyone reviewed the new React 19 documentation?", type: "normal" },
     { id: 2, text: "David: Yes! Server actions are much simpler now.", type: "normal" },
   ]);
+
+  // Interactive Demo 4: Auto-Responder
+  const [autoChatLog, setAutoChatLog] = useState<Array<{ sender: "user" | "bot"; text: string; time: string }>>([
+    { sender: "user", text: "Hey! What are your rates for a 3-month brand design retainer?", time: "02:14 AM" },
+    { sender: "bot", text: "Hi there! 👋 Thanks for reaching out. Our design retainers start at $1,800/mo including unlimited revisions. Would you like to view our portfolio or book a 15-min discovery call?", time: "02:14 AM" },
+  ]);
+  const [testUserMsg, setTestUserMsg] = useState("");
 
   const handleCheckSubdomain = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,12 +72,12 @@ export default function LandingPage() {
         setCheckStatus("available");
         setCheckMessage(`Available! Your dedicated instance will live at ${clean}.jidosaap.xyz`);
       }
-    }, 400);
+    }, 350);
   };
 
   const handlePreciousPublish = () => {
     setPreciousPublished(true);
-    setPreciousViews((prev) => prev + 18);
+    setPreciousViews((prev) => prev + 24);
   };
 
   const handleSholaTriggerDrop = () => {
@@ -110,158 +112,277 @@ export default function LandingPage() {
     ]);
   };
 
+  const handleSendAutoChat = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!testUserMsg.trim()) return;
+
+    const userText = testUserMsg;
+    setTestUserMsg("");
+    const nowTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    setAutoChatLog((prev) => [...prev, { sender: "user", text: userText, time: nowTime }]);
+
+    setTimeout(() => {
+      let reply = "Got it! Our automated assistant has recorded your request and notified the team. You'll receive a full response shortly.";
+      if (userText.toLowerCase().includes("pricing") || userText.toLowerCase().includes("rate")) {
+        reply = "Our plans start at $15/mo for individuals up to $99/mo for enterprise setups. All include a dedicated *.jidosaap.xyz subdomain!";
+      } else if (userText.toLowerCase().includes("call") || userText.toLowerCase().includes("book")) {
+        reply = "You can book directly on our calendar here: cal.com/jidosaap-demo. Looking forward to speaking!";
+      }
+      setAutoChatLog((prev) => [...prev, { sender: "bot", text: reply, time: nowTime }]);
+    }, 600);
+  };
+
   return (
-    <div className="space-y-28 pb-24 overflow-hidden">
-      {/* ─── Hero Section ────────────────────────────────────────── */}
-      <section className="pt-16 lg:pt-24 px-6 lg:px-12 max-w-7xl mx-auto text-center space-y-8 relative">
-        {/* Glow backdrop */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-rose-500/10 via-amber-500/10 to-emerald-500/10 blur-3xl -z-10 pointer-events-none rounded-full" />
+    <div className="space-y-24 pb-24">
+      {/* ─── HERO SECTION (EXACT STRUCTURE & SIZING FROM INSPIRATION) ─── */}
+      <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 pt-2">
+        <div className="relative w-full rounded-[28px] sm:rounded-[36px] border border-zinc-200/90 bg-[#fafafa] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden min-h-[640px] sm:min-h-[700px] lg:min-h-[750px] flex flex-col items-center justify-center text-center px-6 py-20 lg:py-28">
+          
+          {/* Subtle Dot Grid Background (Identical to Inspiration) */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-60"
+            style={{
+              backgroundImage: "radial-gradient(#d4d4d8 1.1px, transparent 1.1px)",
+              backgroundSize: "22px 22px",
+            }}
+          />
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200/80 shadow-xs">
-          <Sparkles className="h-3.5 w-3.5 text-rose-600 animate-spin" style={{ animationDuration: "6s" }} />
-          <span>Next-Gen WhatsApp Multi-Tenant Automation</span>
-        </div>
-
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-zinc-950 max-w-4xl mx-auto leading-[1.08]">
-          Your WhatsApp can do <span className="bg-gradient-to-r from-rose-600 via-rose-500 to-amber-600 bg-clip-text text-transparent">more than you think</span>.
-        </h1>
-
-        <p className="text-base sm:text-xl text-zinc-600 max-w-2xl mx-auto font-normal leading-relaxed">
-          Stop manually pasting newsletter updates, struggling with daily morning posting consistency, or losing active groups to spam links. JidoSapp powers your WhatsApp with automated bridges, schedules, and guardians on your own custom subdomain.
-        </p>
-
-        {/* Live Subdomain Claim Bar */}
-        <div className="pt-2 max-w-xl mx-auto">
-          <form onSubmit={handleCheckSubdomain} className="bg-white border-2 border-zinc-900 rounded-2xl p-1.5 shadow-xl flex flex-col sm:flex-row items-center gap-2">
-            <div className="flex-1 flex items-center px-3 w-full">
-              <span className="text-xs font-semibold text-zinc-400 mr-1">https://</span>
-              <input
-                type="text"
-                placeholder="yourbrand"
-                value={subdomainQuery}
-                onChange={(e) => {
-                  setSubdomainQuery(e.target.value);
-                  setCheckStatus("idle");
-                }}
-                className="w-full text-sm font-semibold text-zinc-900 placeholder:text-zinc-300 focus:outline-none"
-              />
-              <span className="text-xs font-bold text-rose-600 font-mono bg-rose-50 px-2 py-0.5 rounded">.jidosaap.xyz</span>
+          {/* ── TOP-LEFT WIDGET: Post-It Sticky Note (Precious Use Case) ── */}
+          <div className="hidden md:block absolute top-8 lg:top-12 left-8 lg:left-14 -rotate-3 z-10 transition-transform hover:-rotate-1 duration-300">
+            <div className="w-60 lg:w-64 bg-[#fef08a] border border-amber-300/60 shadow-[0_16px_36px_rgba(0,0,0,0.07)] rounded-sm p-4 text-left relative">
+              {/* Red Push Pin */}
+              <div className="w-3.5 h-3.5 rounded-full bg-red-500 shadow-md mx-auto -mt-2 mb-2 border border-red-600/40 relative">
+                <span className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/60"></span>
+              </div>
+              <p className="text-[12px] font-medium text-zinc-800 leading-snug font-sans">
+                Precious bridges his penna.dev newsletter straight to WhatsApp Status with a single tap. Zero friction.
+              </p>
             </div>
-            <Button type="submit" size="sm" className="w-full sm:w-auto px-6 h-10 bg-zinc-950 hover:bg-zinc-800 text-white font-medium shrink-0">
-              Claim Subdomain
-            </Button>
-          </form>
-
-          {checkStatus !== "idle" && (
-            <div className={`mt-3 text-xs flex items-center justify-center gap-1.5 font-medium ${checkStatus === "available" ? "text-emerald-600" : checkStatus === "checking" ? "text-zinc-500" : "text-rose-600"}`}>
-              {checkStatus === "checking" && <span>Checking availability on jidosaap.xyz…</span>}
-              {checkStatus === "available" && (
-                <>
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                  <span>{checkMessage}</span>
-                  <Link href={`/request-integration?subdomain=${subdomainQuery}`} className="ml-2 font-bold underline text-emerald-700">
-                    Set Up Now &rarr;
-                  </Link>
-                </>
-              )}
-              {checkStatus === "taken" && (
-                <>
-                  <AlertTriangle className="h-4 w-4 text-rose-600" />
-                  <span>{checkMessage}</span>
-                </>
-              )}
+            {/* Floating Checkmark Squircle Button Below Note */}
+            <div className="absolute -bottom-8 -right-3 rotate-6 w-14 h-14 rounded-2xl bg-white shadow-[0_12px_28px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shadow-xs">
+                <Check className="h-5 w-5 stroke-[2.5]" />
+              </div>
             </div>
-          )}
-
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-3 text-[11px] text-zinc-500">
-            <span>Popular claims:</span>
-            <button type="button" onClick={() => { setSubdomainQuery("precious"); setCheckStatus("available"); setCheckMessage("Available for reservation!"); }} className="hover:text-zinc-900 underline font-mono">precious.jidosaap.xyz</button>
-            <button type="button" onClick={() => { setSubdomainQuery("shola"); setCheckStatus("available"); setCheckMessage("Available for reservation!"); }} className="hover:text-zinc-900 underline font-mono">shola.jidosaap.xyz</button>
-            <button type="button" onClick={() => { setSubdomainQuery("michael"); setCheckStatus("available"); setCheckMessage("Available for reservation!"); }} className="hover:text-zinc-900 underline font-mono">michael.jidosaap.xyz</button>
           </div>
-        </div>
 
-        {/* Top Use Case Teasers */}
-        <div className="pt-6 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto text-left">
-          <a href="#use-case-precious" className="p-4 rounded-xl border border-zinc-200/80 bg-white/70 hover:border-rose-400 hover:shadow-md transition-all group">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
-                <Newspaper className="h-4 w-4" />
-              </span>
-              <span className="text-xs font-bold text-zinc-900">Precious @ penna.dev</span>
+          {/* ── TOP-RIGHT WIDGET: Folder Tab Reminder & Stopwatch (Shola 7 AM Drop) ── */}
+          <div className="hidden md:block absolute top-8 lg:top-12 right-8 lg:right-14 rotate-2 z-10 transition-transform hover:rotate-1 duration-300">
+            <div className="w-60 lg:w-68 bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200/90 shadow-[0_16px_36px_rgba(0,0,0,0.06)] p-4 text-left relative">
+              <div className="flex items-center justify-between text-xs font-bold text-zinc-900 mb-2">
+                <span>Reminders</span>
+                <span className="text-[10px] text-zinc-400 font-normal">Broadcast</span>
+              </div>
+              <div className="text-[12px] font-semibold text-zinc-800">Today's Showcase</div>
+              <p className="text-[11px] text-zinc-500 mt-0.5">Shola's daily portfolio drop</p>
+              
+              <div className="mt-3 flex items-center gap-1.5 bg-blue-50 text-[#2563eb] px-2.5 py-1 rounded-lg text-[11px] font-semibold w-fit">
+                <Clock3 className="h-3.5 w-3.5" />
+                <span>07:00 - 07:05 AM</span>
+              </div>
             </div>
-            <p className="text-xs text-zinc-600">
-              1-Tap Status Bridge from newsletter to WhatsApp Status without manual copy-pasting.
-            </p>
-          </a>
 
-          <a href="#use-case-shola" className="p-4 rounded-xl border border-zinc-200/80 bg-white/70 hover:border-rose-400 hover:shadow-md transition-all group">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="p-1.5 rounded-lg bg-amber-50 text-amber-600">
-                <Palette className="h-4 w-4" />
-              </span>
-              <span className="text-xs font-bold text-zinc-900">Shola The Designer</span>
+            {/* Floating 3D Stopwatch Squircle */}
+            <div className="absolute -top-3 -left-10 -rotate-6 w-14 h-14 rounded-2xl bg-white shadow-[0_12px_28px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-full border-2 border-zinc-900 flex items-center justify-center relative">
+                <span className="w-0.5 h-3 bg-red-500 rounded -mt-2"></span>
+                <span className="absolute top-1 right-2 w-1.5 h-0.5 bg-zinc-900"></span>
+              </div>
             </div>
-            <p className="text-xs text-zinc-600">
-              Daily 7:00 AM sharp portfolio drops that create unshakeable client consistency & trust.
-            </p>
-          </a>
+          </div>
 
-          <a href="#use-case-michael" className="p-4 rounded-xl border border-zinc-200/80 bg-white/70 hover:border-rose-400 hover:shadow-md transition-all group">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
-                <ShieldAlert className="h-4 w-4" />
-              </span>
-              <span className="text-xs font-bold text-zinc-900">Michael's Community</span>
+          {/* ── BOTTOM-LEFT WIDGET: Tasks & Progress Bars (Auto-Responder) ── */}
+          <div className="hidden md:block absolute bottom-8 lg:bottom-12 left-8 lg:left-14 -rotate-1 z-10 transition-transform hover:rotate-0 duration-300">
+            <div className="w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200/90 shadow-[0_16px_36px_rgba(0,0,0,0.06)] p-4 text-left space-y-3">
+              <div className="text-xs font-bold text-zinc-900">Today's tasks</div>
+              
+              {/* Task 1 */}
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+                    <span className="font-medium text-zinc-800 truncate max-w-[130px]">Client inquiries</span>
+                  </div>
+                  <span className="text-[10px] text-zinc-400 font-mono">60%</span>
+                </div>
+                <div className="w-full bg-zinc-100 h-1.5 rounded-full overflow-hidden">
+                  <div className="bg-[#0284c7] h-full rounded-full w-[60%]"></div>
+                </div>
+              </div>
+
+              {/* Task 2 */}
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span className="font-medium text-zinc-800 truncate max-w-[130px]">Auto-replied &lt; 2s</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-600 font-bold font-mono">100%</span>
+                </div>
+                <div className="w-full bg-zinc-100 h-1.5 rounded-full overflow-hidden">
+                  <div className="bg-emerald-500 h-full rounded-full w-[100%]"></div>
+                </div>
+              </div>
             </div>
-            <p className="text-xs text-zinc-600">
-              Intelligent group guardian: filters spam links, sets warning strikes, and auto-exits scammers.
+          </div>
+
+          {/* ── BOTTOM-RIGHT WIDGET: Integrations & Guardians (Michael Use Case) ── */}
+          <div className="hidden md:block absolute bottom-8 lg:bottom-12 right-8 lg:right-14 rotate-1 z-10 transition-transform hover:rotate-0 duration-300">
+            <div className="w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200/90 shadow-[0_16px_36px_rgba(0,0,0,0.06)] p-4 text-left space-y-3">
+              <div className="flex items-center justify-between text-xs font-bold text-zinc-900">
+                <span>100+ Integrations</span>
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              </div>
+              
+              {/* App Icon Squircles Row */}
+              <div className="flex items-center gap-2 pt-1">
+                <div className="w-10 h-10 rounded-xl bg-white border border-zinc-200/90 shadow-sm flex items-center justify-center">
+                  <span className="font-bold text-xs text-indigo-600">P</span>
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200/80 shadow-sm flex items-center justify-center">
+                  <span className="font-bold text-xs text-emerald-600">WA</span>
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200/80 shadow-sm flex items-center justify-center">
+                  <span className="font-bold text-xs text-blue-600">API</span>
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-900 shadow-sm flex items-center justify-center text-white font-serif text-xs">
+                  自
+                </div>
+              </div>
+
+              <div className="text-[10px] text-zinc-400 font-mono">
+                Michael's Group Shield Active
+              </div>
+            </div>
+          </div>
+
+          {/* ── CENTER HERO CONTENT ── */}
+          <div className="relative z-20 max-w-3xl mx-auto space-y-5">
+            {/* Center Floating App Icon (Exact 4-dot Badge from Inspiration) */}
+            <div className="w-16 h-16 rounded-[22px] bg-white border border-zinc-100 shadow-[0_12px_32px_rgba(0,0,0,0.08)] flex items-center justify-center mx-auto mb-6 hover:scale-105 transition-transform duration-300">
+              <div className="grid grid-cols-2 gap-1.5 w-6 h-6 items-center justify-center">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0284c7]"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-900"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-900"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-900"></span>
+              </div>
+            </div>
+
+            {/* Giant 2-Line Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-extrabold tracking-[-0.035em] text-zinc-950 leading-[1.06]">
+              Your WhatsApp can do
+              <span className="block text-[#94a3b8] font-extrabold mt-1 sm:mt-2">
+                more than you think
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-sm sm:text-base lg:text-[17px] text-[#475569] font-normal max-w-xl mx-auto leading-relaxed pt-1">
+              Efficiently automate status drops, 7 AM designer broadcasts, spam filters &amp; 24/7 auto-responders.
             </p>
-          </a>
+
+            {/* Blue Pill CTA Button */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link href="/request-integration">
+                <button className="h-12 px-8 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium text-sm shadow-[0_8px_20px_rgba(37,99,235,0.28)] hover:shadow-[0_12px_24px_rgba(37,99,235,0.36)] transition-all hover:-translate-y-0.5">
+                  Get free demo
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ─── The 3 Star Real-World Use Cases ────────────────────────── */}
+      {/* ─── LIVE SUBDOMAIN CLAIM BAR (*.jidosaap.xyz) ────────────────── */}
+      <section id="subdomains" className="max-w-2xl mx-auto px-6 text-center space-y-4">
+        <div className="text-xs font-bold uppercase tracking-wider text-[#0284c7]">
+          Every Client Gets Their Own Dedicated Subdomain
+        </div>
+
+        <form onSubmit={handleCheckSubdomain} className="bg-white border-2 border-zinc-900 rounded-2xl p-1.5 shadow-xl flex flex-col sm:flex-row items-center gap-2">
+          <div className="flex-1 flex items-center px-3 w-full">
+            <span className="text-xs font-semibold text-zinc-400 mr-1">https://</span>
+            <input
+              type="text"
+              placeholder="precious, shola, michael, or yourbrand"
+              value={subdomainQuery}
+              onChange={(e) => {
+                setSubdomainQuery(e.target.value);
+                setCheckStatus("idle");
+              }}
+              className="w-full text-sm font-semibold text-zinc-900 placeholder:text-zinc-300 focus:outline-none"
+            />
+            <span className="text-xs font-bold text-[#0284c7] font-mono bg-sky-50 px-2 py-0.5 rounded">.jidosaap.xyz</span>
+          </div>
+          <Button type="submit" size="sm" className="w-full sm:w-auto px-6 h-10 bg-zinc-950 hover:bg-zinc-800 text-white font-medium shrink-0">
+            Claim Subdomain
+          </Button>
+        </form>
+
+        {checkStatus !== "idle" && (
+          <div className={`text-xs flex items-center justify-center gap-1.5 font-medium ${checkStatus === "available" ? "text-emerald-600" : checkStatus === "checking" ? "text-zinc-500" : "text-rose-600"}`}>
+            {checkStatus === "checking" && <span>Checking availability on jidosaap.xyz…</span>}
+            {checkStatus === "available" && (
+              <>
+                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                <span>{checkMessage}</span>
+                <Link href={`/request-integration?subdomain=${subdomainQuery}`} className="ml-2 font-bold underline text-emerald-700">
+                  Provision Account &rarr;
+                </Link>
+              </>
+            )}
+            {checkStatus === "taken" && (
+              <>
+                <AlertTriangle className="h-4 w-4 text-rose-600" />
+                <span>{checkMessage}</span>
+              </>
+            )}
+          </div>
+        )}
+      </section>
+
+      {/* ─── THE 4 STAR REAL-WORLD USE CASES & SIMULATORS ─────────────── */}
       <section id="use-cases" className="max-w-7xl mx-auto px-6 lg:px-12 space-y-24">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <div className="text-xs font-bold uppercase tracking-wider text-rose-600">Built For Real Humans & Businesses</div>
+          <div className="text-xs font-bold uppercase tracking-wider text-[#2563eb]">Proven In The Real World</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
-            Three Stories. Three Superpowers.
+            Four Stories. Four WhatsApp Superpowers.
           </h2>
           <p className="text-sm text-zinc-600">
-            See how real creators, designers, and group admins eliminate manual chores and turn WhatsApp into an automated powerhouse.
+            Interact with live simulators of real creators, designers, group admins, and 24/7 auto-responders.
           </p>
         </div>
 
         {/* ── USE CASE 1: PRECIOUS @ PENNA.DEV ── */}
-        <div id="use-case-precious" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-gradient-to-br from-indigo-50/40 via-white to-white p-8 lg:p-12 shadow-sm">
+        <div id="use-case-precious" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100/80 text-indigo-700 text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">
                 <Newspaper className="h-3.5 w-3.5" />
                 <span>Use Case #1 · Newsletter-to-Status Bridge</span>
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-                Precious publishes at <span className="text-indigo-600">penna.dev</span>. With 1 tap, it’s live on WhatsApp Status.
+                Precious publishes at <span className="text-indigo-600">penna.dev</span>. With 1 tap, it’s on WhatsApp Status.
               </h3>
 
               <p className="text-sm text-zinc-600 leading-relaxed">
-                Precious runs a high-engagement tech newsletter on penna.dev. Writing great content is hard enough; he hated switching between tabs, copying links, formatting snippets, and manually posting to WhatsApp Status.
+                Precious writes tech essays on penna.dev. Writing is hard enough; he hated switching between tabs, copying links, and typing out WhatsApp Status updates manually.
               </p>
 
               <div className="space-y-3 text-xs text-zinc-700">
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Zero Manual Context Switching:</strong> Hit “Publish” or tap the WhatsApp bridge button inside penna.dev.</span>
+                  <span><strong>Zero Manual Tab Switching:</strong> Hit publish in penna.dev or tap the Jido bridge button.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Automatic Status Formatting:</strong> JidoSapp automatically creates the visual story card and adds the tracked read link.</span>
+                  <span><strong>Automatic Status Formatting:</strong> JidoSapp generates the story card and includes the tracked read link.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Dedicated Subdomain:</strong> Runs on his isolated webhook instance at <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-indigo-600 font-semibold">precious.jidosaap.xyz</code>.</span>
+                  <span><strong>Dedicated Subdomain:</strong> Isolated at <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-indigo-600 font-semibold">precious.jidosaap.xyz</code>.</span>
                 </div>
               </div>
 
@@ -280,24 +401,24 @@ export default function LandingPage() {
               <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">live demo: penna.dev ➔ jidosaap webhook bridge</span>
+                  <span className="text-xs font-mono text-zinc-300">penna.dev ➔ jidosaap webhook bridge</span>
                 </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">subdomain: precious.jidosaap.xyz</span>
+                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">precious.jidosaap.xyz</span>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                {/* Penna.dev Mock Article Card */}
+                {/* Penna.dev Real Article Card */}
                 <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-[11px] text-zinc-400">
                       <span>penna.dev/apcodesphere</span>
-                      <span className="text-emerald-400 font-medium">Published on Penna</span>
+                      <span className="text-emerald-400 font-medium">Published</span>
                     </div>
                     <div className="text-sm font-bold text-zinc-100 leading-snug">
                       User Experience: the gateway to the users heart
                     </div>
                     <p className="text-xs text-zinc-400 line-clamp-2">
-                      Tears of an ex developer — exploring why thoughtful craft, empathy, and intuitive flows unlock true customer devotion.
+                      Tears of an ex developer — exploring how thoughtful craft, empathy, and intuitive flows unlock true customer devotion.
                     </p>
                   </div>
 
@@ -334,8 +455,8 @@ export default function LandingPage() {
 
                   <div className="py-4 space-y-2 text-center">
                     {preciousPublished ? (
-                      <div className="space-y-2 animate-in fade-in zoom-in-95 duration-300">
-                        <div className="bg-indigo-950/80 border border-indigo-500/40 rounded-lg p-3 text-left space-y-1">
+                      <div className="space-y-2 animate-in fade-in zoom-in-95 duration-300 text-left">
+                        <div className="bg-indigo-950/80 border border-indigo-500/40 rounded-lg p-3 space-y-1">
                           <div className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">New Newsletter Issue · Penna.dev</div>
                           <div className="text-xs font-bold text-white leading-snug">
                             User Experience: the gateway to the users heart
@@ -346,10 +467,10 @@ export default function LandingPage() {
                             rel="noopener noreferrer"
                             className="text-[11px] text-zinc-300 hover:text-white underline font-mono block truncate"
                           >
-                            penna.dev/apcodesphere/8078b477-011e-4b6b-bcf1-30414d28faf7
+                            penna.dev/apcodesphere/8078b477...
                           </a>
                         </div>
-                        <div className="text-[11px] text-emerald-400 font-mono">
+                        <div className="text-[11px] text-emerald-400 font-mono text-center">
                           🔥 Live on WhatsApp Status · {preciousViews} views
                         </div>
                       </div>
@@ -370,20 +491,19 @@ export default function LandingPage() {
         </div>
 
         {/* ── USE CASE 2: SHOLA THE GRAPHIC DESIGNER ── */}
-        <div id="use-case-shola" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-gradient-to-br from-amber-50/40 via-white to-white p-8 lg:p-12 shadow-sm">
+        <div id="use-case-shola" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
-            {/* Interactive Live Playground: Shola */}
+            {/* Simulator Left */}
             <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
               <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">live demo: 7:00 am cron queue &amp; lead tracker</span>
+                  <span className="text-xs font-mono text-zinc-300">7:00 am cron queue &amp; lead tracker</span>
                 </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">subdomain: shola.jidosaap.xyz</span>
+                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">shola.jidosaap.xyz</span>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                {/* 7 AM Scheduler Card */}
                 <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="text-amber-400 font-semibold flex items-center gap-1">
@@ -410,12 +530,11 @@ export default function LandingPage() {
                   </Button>
                 </div>
 
-                {/* WhatsApp Inbound Inquiries Feed */}
                 <div className="bg-zinc-900/90 border border-zinc-800 rounded-xl p-4 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-[11px] border-b border-zinc-800 pb-2 mb-3">
                       <span className="font-semibold text-zinc-300">Incoming Client DMs</span>
-                      <span className="bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded text-[10px] font-bold">
+                      <span className="bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded text-[10px] font-bold">
                         {sholaInquiryCount} new inquiries
                       </span>
                     </div>
@@ -452,8 +571,9 @@ export default function LandingPage() {
               </div>
             </div>
 
+            {/* Story Right */}
             <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 text-amber-800 text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold">
                 <Palette className="h-3.5 w-3.5" />
                 <span>Use Case #2 · Consistency Engine for Freelancers</span>
               </div>
@@ -463,21 +583,21 @@ export default function LandingPage() {
               </h3>
 
               <p className="text-sm text-zinc-600 leading-relaxed">
-                Clients buy from the designers they see every day. Shola struggled with waking up early and remembering to post daily portfolio designs. With JidoSapp, he queues a month of designs in advance and goes to sleep peacefully.
+                Clients hire the designers they see every single day. Shola struggled with waking up early and remembering to post daily portfolio designs. With JidoSapp, he queues a month in advance and lets consistency work for him.
               </p>
 
               <div className="space-y-3 text-xs text-zinc-700">
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Automatic 7:00 AM Cron Posting:</strong> Broadcasts daily visual graphics to status &amp; broadcast lists like clockwork.</span>
+                  <span><strong>Automatic 7:00 AM Cron Posting:</strong> Broadcasts daily visual graphics to status &amp; VIP broadcast lists.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Consistency Drives Client Conversion:</strong> Leads perceive relentless professionalism, generating steady high-ticket project DMs.</span>
+                  <span><strong>Consistency Converts:</strong> Clients see relentless professionalism, driving high-ticket retainer inquiries.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Dedicated Subdomain:</strong> Hosted at <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-amber-700 font-semibold">shola.jidosaap.xyz</code> with full content calendar.</span>
+                  <span><strong>Dedicated Subdomain:</strong> Hosted at <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-amber-700 font-semibold">shola.jidosaap.xyz</code>.</span>
                 </div>
               </div>
 
@@ -494,10 +614,10 @@ export default function LandingPage() {
         </div>
 
         {/* ── USE CASE 3: MICHAEL'S GROUP SPAM GUARDIAN ── */}
-        <div id="use-case-michael" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-gradient-to-br from-emerald-50/40 via-white to-white p-8 lg:p-12 shadow-sm">
+        <div id="use-case-michael" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold">
                 <ShieldAlert className="h-3.5 w-3.5" />
                 <span>Use Case #3 · 24/7 Group Guardian &amp; Strike System</span>
               </div>
@@ -507,21 +627,21 @@ export default function LandingPage() {
               </h3>
 
               <p className="text-sm text-zinc-600 leading-relaxed">
-                As usual with high-traffic groups, spammers constantly invade with scam links, telegram invites, and crypto schemes. Michael couldn’t monitor the group 24/7. JidoSapp acts as an automated security shield.
+                Spammers constantly invade community groups with scam crypto links and telegram invites. Michael couldn’t monitor the group 24/7. JidoSapp inspects messages, issues strike flags, and kicks scammers automatically.
               </p>
 
               <div className="space-y-3 text-xs text-zinc-700">
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Real-Time Link &amp; Pattern Inspector:</strong> Banned domains, invite links, and crypto buzzwords are detected instantly.</span>
+                  <span><strong>Real-Time Link &amp; Pattern Inspector:</strong> Banned domains and scam invite links are trapped immediately.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Strike Warnings &amp; Instant Eviction:</strong> Sends automated warning flags on strike 1 and auto-exits the spammer on strike 2.</span>
+                  <span><strong>Strike Warnings &amp; Auto-Exit:</strong> Automated warnings on strike 1; immediate removal from the group on strike 2.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Dedicated Subdomain:</strong> Managed on <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-emerald-700 font-semibold">michael.jidosaap.xyz</code> with group audit logs.</span>
+                  <span><strong>Dedicated Subdomain:</strong> Managed on <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-emerald-700 font-semibold">michael.jidosaap.xyz</code>.</span>
                 </div>
               </div>
 
@@ -540,9 +660,9 @@ export default function LandingPage() {
               <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span className="text-xs font-mono text-zinc-300">live demo: group spam sentinel &amp; strike engine</span>
+                  <span className="text-xs font-mono text-zinc-300">group spam sentinel &amp; strike engine</span>
                 </div>
-                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">subdomain: michael.jidosaap.xyz</span>
+                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">michael.jidosaap.xyz</span>
               </div>
 
               <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
@@ -593,91 +713,124 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
+
+        {/* ── USE CASE 4: 24/7 AUTO-RESPONDER & SMART LEAD CAPTURE ── */}
+        <div id="use-case-auto-responder" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            {/* Live Chat Simulator Left */}
+            <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
+              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+                  <span className="text-xs font-mono text-zinc-300">24/7 smart auto-responder · zero latency</span>
+                </div>
+                <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">auto-replied in 0.8s</span>
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
+                  <div className="flex items-center gap-2 font-bold text-zinc-200">
+                    <Bot className="h-4 w-4 text-blue-400" />
+                    <span>Business WhatsApp Bot (Live Simulation)</span>
+                  </div>
+                  <span className="text-emerald-400 font-mono text-[10px]">Online 24/7</span>
+                </div>
+
+                {/* Chat Feed */}
+                <div className="h-56 overflow-y-auto space-y-3 pr-2 text-xs">
+                  {autoChatLog.map((msg, idx) => (
+                    <div
+                      key={idx}
+                      className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"}`}
+                    >
+                      <div
+                        className={`max-w-[85%] rounded-2xl p-3 text-left ${
+                          msg.sender === "user"
+                            ? "bg-[#2563eb] text-white rounded-br-none"
+                            : "bg-zinc-800 border border-zinc-700/80 text-zinc-200 rounded-bl-none"
+                        }`}
+                      >
+                        {msg.text}
+                      </div>
+                      <span className="text-[9px] text-zinc-500 mt-1 px-1">{msg.time}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Input box */}
+                <form onSubmit={handleSendAutoChat} className="pt-2 border-t border-zinc-800 flex items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="Type 'pricing', 'book call', or anything..."
+                    value={testUserMsg}
+                    onChange={(e) => setTestUserMsg(e.target.value)}
+                    className="flex-1 bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                  />
+                  <Button type="submit" size="sm" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs h-8 px-4">
+                    Send
+                  </Button>
+                </form>
+              </div>
+            </div>
+
+            {/* Story Right */}
+            <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">
+                <Bot className="h-3.5 w-3.5" />
+                <span>Use Case #4 · 24/7 Auto-Responder &amp; CRM</span>
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+                Never leave a client on "read". <span className="text-[#2563eb]">Auto-respond in seconds</span> at 2:00 AM.
+              </h3>
+
+              <p className="text-sm text-zinc-600 leading-relaxed">
+                When prospects reach out after business hours or while you're focused, delay means lost revenue. JidoSapp answers inquiries instantly with intelligent menus, pricing, catalog links, and captures leads directly into your CRM.
+              </p>
+
+              <div className="space-y-3 text-xs text-zinc-700">
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Zero-Latency Replies:</strong> Instant replies 24/7 without keeping prospects waiting.</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Automatic CRM Capture:</strong> Extracts client intent, budget, and tags qualified leads into Kanban pipelines.</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Smart Human Escalation:</strong> Escalates to your team when human intervention or closure is required.</span>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Link href="/request-integration?use_case=custom">
+                  <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white gap-2 text-xs h-10 px-5">
+                    <span>Setup 24/7 Auto-Responder</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ─── Dedicated Subdomain Architecture (*.jidosaap.xyz) ───────── */}
-      <section id="subdomains" className="max-w-7xl mx-auto px-6 lg:px-12 space-y-16">
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 text-zinc-800 text-xs font-semibold">
-            <Globe className="h-3.5 w-3.5 text-zinc-600" />
-            <span>Dedicated Multi-Tenant Infrastructure</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
-            Every Client Gets Their Own Subdomain &amp; Isolated WhatsApp Instance
-          </h2>
-          <p className="text-sm text-zinc-600">
-            No shared queues. No messy collisions. When you contact or request integration, we configure your dedicated subdomain on <code className="font-bold text-rose-600">jidosaap.xyz</code> with full Meta Cloud API isolation.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white border border-zinc-200 rounded-2xl p-6 space-y-4 hover:border-zinc-900 transition-all shadow-xs">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg">
-                precious.jidosaap.xyz
-              </span>
-              <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <h3 className="text-base font-bold text-zinc-950">Newsletter Publisher Instance</h3>
-            <p className="text-xs text-zinc-500 leading-relaxed">
-              Equipped with penna.dev webhook listeners, instant Status push connectors, and VIP subscriber broadcast queues.
-            </p>
-            <div className="text-[11px] text-zinc-400 font-mono pt-2 border-t border-zinc-100">
-              Provider: Meta Cloud API · Isolated DB
-            </div>
-          </div>
-
-          <div className="bg-white border border-zinc-200 rounded-2xl p-6 space-y-4 hover:border-zinc-900 transition-all shadow-xs">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg">
-                shola.jidosaap.xyz
-              </span>
-              <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <h3 className="text-base font-bold text-zinc-950">Freelancer Studio &amp; Scheduler</h3>
-            <p className="text-xs text-zinc-500 leading-relaxed">
-              Equipped with 7:00 AM daily cron worker, portfolio image CDN storage, and automatic client lead qualification.
-            </p>
-            <div className="text-[11px] text-zinc-400 font-mono pt-2 border-t border-zinc-100">
-              Provider: Meta Cloud API · Cron Engine
-            </div>
-          </div>
-
-          <div className="bg-white border border-zinc-200 rounded-2xl p-6 space-y-4 hover:border-zinc-900 transition-all shadow-xs">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">
-                michael.jidosaap.xyz
-              </span>
-              <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <h3 className="text-base font-bold text-zinc-950">Community Group Sentinel</h3>
-            <p className="text-xs text-zinc-500 leading-relaxed">
-              Equipped with real-time spam link scanner, strike counter tables, and auto-exit execution hooks for multiple groups.
-            </p>
-            <div className="text-[11px] text-zinc-400 font-mono pt-2 border-t border-zinc-100">
-              Provider: Meta Cloud API · Spam Guard
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Ready to Launch CTA ────────────────────────────────────── */}
+      {/* ─── READY TO LAUNCH CTA ────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-6">
         <div className="rounded-3xl bg-zinc-950 p-10 sm:p-16 text-center text-white space-y-8 relative overflow-hidden border border-zinc-800">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
-          
           <div className="space-y-4 max-w-2xl mx-auto relative">
             <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
               Ready to give your WhatsApp superpowers?
             </h2>
             <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-              Tell us your brand or name. We set up your custom subdomain on <code className="text-white font-mono font-bold">jidosaap.xyz</code> and configure your dedicated WhatsApp account.
+              Claim your custom subdomain on <code className="text-white font-mono font-bold">jidosaap.xyz</code> and let us configure your dedicated WhatsApp Business Cloud API instance.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative">
             <Link href="/request-integration">
-              <Button size="lg" className="h-12 px-8 bg-rose-600 hover:bg-rose-500 text-white font-semibold gap-2 shadow-lg shadow-rose-600/20">
+              <Button size="lg" className="h-12 px-8 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold gap-2 shadow-lg shadow-blue-600/20">
                 <span>Request Your Integration &amp; Subdomain</span>
                 <ArrowRight className="h-4 w-4" />
               </Button>
