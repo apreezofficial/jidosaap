@@ -26,8 +26,8 @@ export function HeroSection() {
           }}
         />
 
-        {/* ── TOP-LEFT FLOATING PANEL: Partially Entering from Edge (Physical Floating Paper Feel) ── */}
-        <div className="hidden md:block absolute -top-1 lg:top-8 -left-4 lg:-left-2 xl:left-6 -rotate-2 z-10 transition-transform hover:-rotate-1 duration-300">
+        {/* ── TOP-LEFT FLOATING PANEL: Smooth Spring Entrance & Organic Float ── */}
+        <div className="hidden md:block absolute -top-1 lg:top-8 -left-4 lg:-left-2 xl:left-6 z-10 animate-edge-tl hover:scale-105 transition-transform duration-300">
           <div className="w-64 lg:w-70 bg-[#fef9c3] border border-amber-300/50 shadow-[0_16px_36px_rgba(0,0,0,0.05),0_2px_6px_rgba(0,0,0,0.02)] rounded-[18px] p-4 text-left relative">
             {/* Small Push-Pin Detail */}
             <div className="w-3.5 h-3.5 rounded-full bg-red-500 shadow-sm mx-auto -mt-2.5 mb-2 border border-white/80 relative">
@@ -43,16 +43,16 @@ export function HeroSection() {
               Instant responses to client inquiries, rates delivery &amp; meeting booking—even while you sleep.
             </p>
           </div>
-          {/* Floating Subtle Checkmark Squircle */}
-          <div className="absolute -bottom-6 -right-2 rotate-6 w-12 h-12 rounded-[16px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-zinc-100 flex items-center justify-center">
-            <div className="w-7 h-7 rounded-xl bg-[#2563eb] text-white flex items-center justify-center">
+          {/* Floating Subtle Checkmark Squircle with continuous playful bounce */}
+          <div className="absolute -bottom-6 -right-2 w-12 h-12 rounded-[16px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-zinc-100 flex items-center justify-center animate-squircle-bob">
+            <div className="w-7 h-7 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shadow-xs">
               <Check className="h-4 w-4 stroke-[2.5]" />
             </div>
           </div>
         </div>
 
-        {/* ── TOP-RIGHT FLOATING PANEL: Partially Entering from Edge ── */}
-        <div className="hidden md:block absolute -top-1 lg:top-8 -right-4 lg:-right-2 xl:right-6 rotate-2 z-10 transition-transform hover:rotate-1 duration-300">
+        {/* ── TOP-RIGHT FLOATING PANEL: Smooth Spring Entrance & Organic Float ── */}
+        <div className="hidden md:block absolute -top-1 lg:top-8 -right-4 lg:-right-2 xl:right-6 z-10 animate-edge-tr hover:scale-105 transition-transform duration-300">
           <div className="w-64 lg:w-70 bg-white/95 backdrop-blur-sm rounded-[22px] border border-zinc-200/70 shadow-[0_16px_36px_rgba(0,0,0,0.04),0_2px_6px_rgba(0,0,0,0.02)] p-4 text-left relative">
             <div className="flex items-center justify-between text-xs font-bold text-zinc-900 mb-1">
               <span>Scheduled Broadcast</span>
@@ -69,22 +69,22 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Floating Subtle Stopwatch Squircle */}
-          <div className="absolute -top-3 -left-8 -rotate-6 w-12 h-12 rounded-[16px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-zinc-100 flex items-center justify-center">
+          {/* Floating Subtle Stopwatch Squircle with continuous playful bounce */}
+          <div className="absolute -top-3 -left-8 w-12 h-12 rounded-[16px] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-zinc-100 flex items-center justify-center animate-stopwatch-bob">
             <div className="w-8 h-8 rounded-full border-2 border-zinc-900 flex items-center justify-center relative">
-              <span className="w-0.5 h-2.5 bg-red-500 rounded -mt-1.5"></span>
+              <span className="w-0.5 h-2.5 bg-red-500 rounded -mt-1.5 animate-pulse"></span>
               <span className="absolute top-1 right-1.5 w-1 h-0.5 bg-zinc-900"></span>
             </div>
           </div>
         </div>
 
-        {/* ── BOTTOM-LEFT FLOATING PANEL: Partially Entering from Bottom Edge ── */}
-        <div className="hidden md:block absolute -bottom-2 lg:bottom-8 -left-4 lg:-left-2 xl:left-6 -rotate-1 z-10 transition-transform hover:rotate-0 duration-300">
+        {/* ── BOTTOM-LEFT FLOATING PANEL: Smooth Spring Entrance & Organic Float ── */}
+        <div className="hidden md:block absolute -bottom-2 lg:bottom-8 -left-4 lg:-left-2 xl:left-6 z-10 animate-edge-bl hover:scale-105 transition-transform duration-300">
           <div className="w-70 lg:w-76 bg-white/95 backdrop-blur-sm rounded-[22px] border border-zinc-200/70 shadow-[0_16px_36px_rgba(0,0,0,0.04),0_2px_6px_rgba(0,0,0,0.02)] p-4 text-left space-y-3">
             <div className="flex items-center justify-between">
               <div className="text-xs font-bold text-zinc-900">Automated Workflows</div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span className="text-[10px] font-medium text-emerald-600">Active</span>
               </div>
             </div>
@@ -133,43 +133,43 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* ── BOTTOM-RIGHT FLOATING PANEL: Partially Entering from Bottom Edge ── */}
-        <div className="hidden md:block absolute -bottom-2 lg:bottom-8 -right-4 lg:-right-2 xl:right-6 rotate-1 z-10 transition-transform hover:rotate-0 duration-300">
+        {/* ── BOTTOM-RIGHT FLOATING PANEL: Smooth Spring Entrance & Organic Float ── */}
+        <div className="hidden md:block absolute -bottom-2 lg:bottom-8 -right-4 lg:-right-2 xl:right-6 z-10 animate-edge-br hover:scale-105 transition-transform duration-300">
           <div className="w-70 lg:w-76 bg-white/95 backdrop-blur-md rounded-[22px] border border-zinc-200/70 shadow-[0_16px_36px_rgba(0,0,0,0.04),0_2px_6px_rgba(0,0,0,0.02)] p-4 text-left space-y-3">
             <div className="flex items-center justify-between text-xs font-bold text-zinc-900">
               <span>20+ Essential Integrations</span>
-              <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             </div>
 
             {/* Clean SVG Brand Badges */}
             <div className="flex items-center gap-2 pt-0.5">
               {/* WhatsApp */}
-              <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 shadow-2xs flex items-center justify-center p-1.5" title="WhatsApp Official API">
+              <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 shadow-2xs flex items-center justify-center p-1.5 hover:scale-110 transition-transform" title="WhatsApp Official API">
                 <WhatsAppLogo className="w-5 h-5" />
               </div>
 
               {/* Proforms */}
-              <div className="w-9 h-9 rounded-xl bg-white border border-zinc-200/80 shadow-2xs flex items-center justify-center p-1.5" title="Proforms">
+              <div className="w-9 h-9 rounded-xl bg-white border border-zinc-200/80 shadow-2xs flex items-center justify-center p-1.5 hover:scale-110 transition-transform" title="Proforms">
                 <ProformsLogo className="w-5 h-5" />
               </div>
 
               {/* Stripe */}
-              <div className="w-9 h-9 rounded-xl bg-violet-50 border border-violet-100 shadow-2xs flex items-center justify-center p-1.5" title="Stripe Billing">
+              <div className="w-9 h-9 rounded-xl bg-violet-50 border border-violet-100 shadow-2xs flex items-center justify-center p-1.5 hover:scale-110 transition-transform" title="Stripe Billing">
                 <StripeLogo className="w-5 h-5" />
               </div>
 
               {/* OpenAI */}
-              <div className="w-9 h-9 rounded-xl bg-zinc-50 border border-zinc-200 shadow-2xs flex items-center justify-center p-1.5" title="OpenAI Intelligence">
+              <div className="w-9 h-9 rounded-xl bg-zinc-50 border border-zinc-200 shadow-2xs flex items-center justify-center p-1.5 hover:scale-110 transition-transform" title="OpenAI Intelligence">
                 <OpenAILogo className="w-5 h-5" />
               </div>
 
               {/* Slack */}
-              <div className="w-9 h-9 rounded-xl bg-zinc-50 border border-zinc-200/80 shadow-2xs flex items-center justify-center p-1.5" title="Slack Webhooks">
+              <div className="w-9 h-9 rounded-xl bg-zinc-50 border border-zinc-200/80 shadow-2xs flex items-center justify-center p-1.5 hover:scale-110 transition-transform" title="Slack Webhooks">
                 <SlackLogo className="w-5 h-5" />
               </div>
 
               {/* +15 Badge */}
-              <div className="w-9 h-9 rounded-xl bg-zinc-100/90 border border-zinc-200/60 shadow-2xs flex items-center justify-center text-xs font-bold text-zinc-500">
+              <div className="w-9 h-9 rounded-xl bg-zinc-100/90 border border-zinc-200/60 shadow-2xs flex items-center justify-center text-xs font-bold text-zinc-500 hover:scale-110 transition-transform">
                 +15
               </div>
             </div>
@@ -182,8 +182,8 @@ export function HeroSection() {
 
         {/* ── CENTER HERO CONTENT: CLEAN, FOCUSED, LOTS OF BREATHING ROOM ── */}
         <div className="relative z-20 max-w-4xl lg:max-w-5xl mx-auto space-y-6">
-          {/* Official JidoSapp Icon Above Headline */}
-          <div className="w-14 h-14 rounded-[20px] bg-white border border-zinc-100 shadow-[0_12px_28px_rgba(0,0,0,0.06),0_2px_6px_rgba(0,0,0,0.03)] flex items-center justify-center mx-auto mb-4 hover:scale-105 transition-transform duration-300 p-2.5">
+          {/* Official JidoSapp Icon with Playful HUD Bounce & Float Physics */}
+          <div className="w-14 h-14 rounded-[20px] bg-white border border-zinc-100 shadow-[0_14px_32px_rgba(37,99,235,0.14),0_2px_6px_rgba(0,0,0,0.03)] flex items-center justify-center mx-auto mb-4 p-2.5 animate-hud-bounce cursor-pointer hover:scale-115 active:scale-95 transition-all">
             <JidoSappIcon className="w-full h-full" />
           </div>
 
