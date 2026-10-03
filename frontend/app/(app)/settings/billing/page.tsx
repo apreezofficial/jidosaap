@@ -83,8 +83,8 @@ export default function BillingPage() {
           </CardHeader>
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-xl bg-rose-50 flex items-center justify-center">
-                <Crown className="h-6 w-6 text-rose-500" />
+              <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center">
+                <Crown className="h-6 w-6 text-[#2563eb]" />
               </div>
               <div>
                 <p className="text-lg font-bold text-zinc-900">{subscription.plan_name || "Free"} Plan</p>
@@ -141,7 +141,7 @@ export default function BillingPage() {
                       <>
                         <div className="mt-2 h-1.5 bg-zinc-200 rounded-full overflow-hidden">
                           <div
-                            className={cn("h-full rounded-full transition-all", pct > 80 ? "bg-red-500" : "bg-rose-500")}
+                            className={cn("h-full rounded-full transition-all", pct > 80 ? "bg-red-500" : "bg-[#2563eb]")}
                             style={{ width: `${pct}%` }}
                           />
                         </div>
@@ -197,13 +197,13 @@ export default function BillingPage() {
                   key={plan.id}
                   className={cn(
                     "relative rounded-xl border p-5 flex flex-col",
-                    isPopular ? "border-rose-400 shadow-md" : "border-zinc-200 bg-white",
-                    isCurrentPlan && "bg-rose-50/30"
+                    isPopular ? "border-[#2563eb] shadow-md" : "border-zinc-200 bg-white",
+                    isCurrentPlan && "bg-blue-50/30"
                   )}
                 >
                   {isPopular && (
                     <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
-                      <span className="bg-rose-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <span className="bg-[#2563eb] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                         POPULAR
                       </span>
                     </div>

@@ -18,8 +18,60 @@ const CATEGORY_COLORS: Record<string, string> = {
   support:     "bg-amber-50 text-amber-700 border-amber-200",
 };
 
+const DEFAULT_TEMPLATES = [
+  {
+    id: "tmpl-1",
+    name: "24/7 AI Lead Qualification & Rate Card",
+    category: "marketing",
+    header: "New Inbound Inquiry Response",
+    body: "Hello {{contact_name}}, thank you for reaching out! Our retainers start at $1,800/mo. Here is our booking link to schedule a 15-minute consultation: {{booking_url}}",
+    footer: "Powered by JidoSapp Auto-Responder",
+    status: "approved",
+    language: "en",
+    variables: ["contact_name", "booking_url"],
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "tmpl-2",
+    name: "7:00 AM Consistency Engine Drop",
+    category: "marketing",
+    header: "Morning Design Drop",
+    body: "Morning drop: {{drop_title}} is now live. Check the full breakdown with tracked link on our isolated subdomain: {{drop_url}}",
+    footer: "Reply STOP to unsubscribe",
+    status: "approved",
+    language: "en",
+    variables: ["drop_title", "drop_url"],
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "tmpl-3",
+    name: "Group Buddy Anti-Spam Warning Notice",
+    category: "utility",
+    header: "Community Guardian Alert",
+    body: "Warning [Strike {{strike_count}}/3]: @{{user_name}}, promotional or unauthorized links are prohibited in this group. Repeat offenses result in immediate exit.",
+    footer: "Protected by JidoSapp Sentinel",
+    status: "approved",
+    language: "en",
+    variables: ["strike_count", "user_name"],
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "tmpl-4",
+    name: "Newsletter Status Bridge Release Card",
+    category: "marketing",
+    header: "New Essay Published",
+    body: "Fresh issue live on penna.dev: {{issue_title}}. Tap to read: {{tracked_url}}",
+    footer: "Bridged via onos.jidosaap.xyz",
+    status: "approved",
+    language: "en",
+    variables: ["issue_title", "tracked_url"],
+    created_at: new Date().toISOString(),
+  },
+];
+
 export default function TemplatesPage() {
-  const { templates, loading, refetch } = useTemplates();
+  const { templates: apiTemplates, loading, refetch } = useTemplates();
+  const templates = apiTemplates.length > 0 ? apiTemplates : DEFAULT_TEMPLATES;
   const [showCreate, setShowCreate] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
   const [form, setForm] = useState({

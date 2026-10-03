@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { usePipeline } from "@/hooks/useCrm";
-import { useContacts } from "@/hooks/useContacts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
@@ -15,726 +13,493 @@ import {
   Edit2,
   Share2,
   FileText,
-  Download,
   Calendar,
   CheckCircle2,
-  Circle,
   Clock,
-  UserPlus,
-  Layers,
   Sparkles,
   Paperclip,
   Check,
   ChevronRight,
-  GripVertical,
+  MessageSquare,
+  Phone,
+  DollarSign,
+  Bot,
+  UserCheck,
+  Send,
+  Zap,
 } from "lucide-react";
-import { api } from "@/lib/api";
+import Link from "next/link";
 
-interface TaskItem {
+interface LeadItem {
   id: string;
-  columnId: "todo" | "in_progress" | "completed";
-  code: string;
-  tag: string;
-  tagColor: string;
-  title: string;
-  description: string;
-  progress: number;
-  previewType?: "buttons" | "cards" | "none";
-  priority: string;
+  columnId: "inquiries" | "qualified" | "call_booked" | "won_retainer";
+  name: string;
+  phone: string;
+  company?: string;
+  avatar: string;
+  inquiry: string;
+  lastReply: string;
+  value: number;
+  currency: string;
+  latency: string;
+  botStatus: "auto_replied" | "human_takeover" | "booked";
+  priority: "High" | "Medium" | "VIP";
   createdDate: string;
-  dueDate: string;
-  assignees: { name: string; avatar: string }[];
-  attachments: { name: string; size: string; type: string }[];
-  subtasks: { id: string; title: string; completed: boolean; note?: string; assignee?: string; date?: string }[];
+  dueDate?: string;
+  transcript: { sender: string; text: string; time: string; isBot?: boolean }[];
+  qualificationChecks: { id: string; title: string; completed: boolean }[];
 }
 
-const INITIAL_TASKS: TaskItem[] = [
+const INITIAL_LEADS: LeadItem[] = [
   {
-    id: "task-1",
-    columnId: "todo",
-    code: "8",
-    tag: "Auto-Responder",
-    tagColor: "bg-blue-50 text-[#2563eb] border-blue-200/80",
-    title: "Auto-Responder Rate Cards",
-    description: "Configure dynamic tier pricing, portfolio PDFs, and Cal.com meeting booking links for incoming client DMs.",
-    progress: 65,
-    previewType: "buttons",
-    priority: "A",
-    createdDate: "Sep 28, 2026 09:30 AM",
-    dueDate: "Oct 04, 2026",
-    assignees: [
-      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
-      { name: "David Chen", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80" },
+    id: "lead-1",
+    columnId: "inquiries",
+    name: "Alex Rivera",
+    phone: "+1 (415) 890-2311",
+    company: "SaaS Scale Studio",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+    inquiry: "Hey! What are your retainer rates for ongoing product design & WhatsApp automation?",
+    lastReply: "Auto-Responder sent $1,800/mo tier + discovery booking link.",
+    value: 1800,
+    currency: "USD",
+    latency: "1.2s",
+    botStatus: "auto_replied",
+    priority: "VIP",
+    createdDate: "Today 02:14 AM",
+    transcript: [
+      { sender: "Alex Rivera", text: "What are your retainer rates for ongoing product design?", time: "02:14 AM" },
+      { sender: "Jido Autonomous Bot", text: "Our retainers start at $1,800/mo. Here is our booking link to claim one of our 2 open sprint slots: cal.com/onos/15min", time: "02:14 AM", isBot: true },
     ],
-    attachments: [
-      { name: "Rate Sheet Q4.pdf", size: "1.25 MB", type: "PDF" },
-    ],
-    subtasks: [
-      { id: "st-1", title: "Map pricing tiers to keyword triggers", completed: true },
-      { id: "st-2", title: "Embed Cal.com 15-min discovery link", completed: true },
-      { id: "st-3", title: "Test automated fallback prompt (<2s reply)", completed: false },
+    qualificationChecks: [
+      { id: "qc-1", title: "Budget >= $1,800/mo", completed: true },
+      { id: "qc-2", title: "Cal.com discovery link delivered", completed: true },
+      { id: "qc-3", title: "Follow-up automated reminder if unbooked after 4h", completed: false },
     ],
   },
   {
-    id: "task-2",
-    columnId: "todo",
-    code: "6",
-    tag: "Group Shield",
-    tagColor: "bg-amber-50 text-amber-700 border-amber-200/80",
-    title: "Anti-Spam Group Shield",
-    description: "Enforce telegram link restrictions, crypto scam filters, and 3-strike mute rule across 4 community groups.",
-    progress: 60,
-    priority: "B",
-    createdDate: "Sep 29, 2026 02:15 PM",
-    dueDate: "Oct 05, 2026",
-    assignees: [
-      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
-      { name: "Alex Johnson", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80" },
+    id: "lead-2",
+    columnId: "inquiries",
+    name: "Elena Rostova",
+    phone: "+44 7911 123456",
+    company: "Crypto Builders DAO",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+    inquiry: "We have 4 community groups with 8,000 members plagued by spam. Can Group Shield handle this volume?",
+    lastReply: "Auto-Responder confirmed multi-tenant group scale & sent whitelist spec sheet.",
+    value: 3500,
+    currency: "USD",
+    latency: "1.4s",
+    botStatus: "auto_replied",
+    priority: "High",
+    createdDate: "Today 05:40 AM",
+    transcript: [
+      { sender: "Elena", text: "Can Group Shield handle 8,000 members across 4 groups?", time: "05:40 AM" },
+      { sender: "Jido Autonomous Bot", text: "Yes! Group Shield handles unlimited members with sub-second link purges and anti-phishing regex. Here's our Enterprise plan preview.", time: "05:40 AM", isBot: true },
     ],
-    attachments: [
-      { name: "Spam Pattern Rules v2.txt", size: "128 KB", type: "TXT" },
-    ],
-    subtasks: [
-      { id: "st-4", title: "Block unauthorized t.me/ invitations", completed: true },
-      { id: "st-5", title: "Configure auto-warning reply banner", completed: false },
-    ],
-  },
-  {
-    id: "task-3",
-    columnId: "todo",
-    code: "3",
-    tag: "Webhook Bridge",
-    tagColor: "bg-emerald-50 text-emerald-700 border-emerald-200/80",
-    title: "Sync penna.dev status issue #48",
-    description: "Verify bi-directional webhook sync between penna.dev documentation engine and WhatsApp status broadcasts.",
-    progress: 35,
-    priority: "C",
-    createdDate: "Sep 29, 2026 11:00 AM",
-    dueDate: "Oct 06, 2026",
-    assignees: [
-      { name: "David Chen", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80" },
-      { name: "Michael Reed", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80" },
-    ],
-    attachments: [],
-    subtasks: [
-      { id: "st-6", title: "Validate webhook signing secret", completed: true },
-      { id: "st-7", title: "Catch dropped events and auto-retry", completed: false },
+    qualificationChecks: [
+      { id: "qc-4", title: "Group admin permissions verified", completed: true },
+      { id: "qc-5", title: "Custom strike rules outlined", completed: false },
     ],
   },
   {
-    id: "task-4",
-    columnId: "in_progress",
-    code: "8",
-    tag: "Broadcast Engine",
-    tagColor: "bg-blue-50 text-[#2563eb] border-blue-200/80",
-    title: "Status Drop: UI Case Study",
-    description: "Deploy 7:00 AM high-resolution visual status showcase & portfolio breakdown to 1,240 opted-in client numbers.",
-    progress: 60,
-    priority: "B",
-    createdDate: "Sep 30, 2026 12:45 PM",
-    dueDate: "Oct 03, 2026",
-    assignees: [
-      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
+    id: "lead-3",
+    columnId: "qualified",
+    name: "Precious O.",
+    phone: "+234 810 992 0184",
+    company: "Essayist & Tech Founder",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+    inquiry: "Need the 1-Tap newsletter to WhatsApp Status bridge connected to my subdomain.",
+    lastReply: "Qualified: Confirmed penna.dev webhook active. Ready for subdomain activation.",
+    value: 2200,
+    currency: "USD",
+    latency: "1.8s",
+    botStatus: "auto_replied",
+    priority: "VIP",
+    createdDate: "Yesterday",
+    transcript: [
+      { sender: "Precious O.", text: "Want to publish directly from penna.dev to WhatsApp Status without copy-pasting.", time: "Sep 29" },
+      { sender: "Jido Autonomous Bot", text: "Isolated subdomain provisioned at precious.jidosaap.xyz. Ready to sync story cards.", time: "Sep 29", isBot: true },
     ],
-    attachments: [
-      { name: "Case Study Assets.zip", size: "8.45 MB", type: "ZIP" },
-      { name: "Recipient List (1240).csv", size: "340 KB", type: "CSV" },
-    ],
-    subtasks: [
-      {
-        id: "st-8",
-        title: "Format visual preview cards for WhatsApp",
-        completed: true,
-        note: "Ensure image dimensions fit 1:1 mobile feed and load instantly over 3G/4G connections.",
-        assignee: "Onos E.",
-        date: "Oct 01, 2026",
-      },
-      { id: "st-9", title: "Schedule cron trigger for 07:00 AM sharp", completed: true },
-      { id: "st-10", title: "Verify opt-out STOP reply command hook", completed: false },
+    qualificationChecks: [
+      { id: "qc-6", title: "Subdomain SSL active", completed: true },
+      { id: "qc-7", title: "Story card template approved", completed: true },
+      { id: "qc-8", title: "Monthly retainer agreement sent", completed: true },
     ],
   },
   {
-    id: "task-5",
-    columnId: "in_progress",
-    code: "7",
-    tag: "CRM Pipeline",
-    tagColor: "bg-sky-50 text-sky-700 border-sky-200/80",
-    title: "Review client automated inquiry transcripts",
-    description: "Audit AI conversational logs from last 48 hours. Flag custom enterprise quotes for direct human takeover.",
-    progress: 55,
-    previewType: "cards",
-    priority: "A",
-    createdDate: "Oct 01, 2026 04:00 PM",
-    dueDate: "Oct 04, 2026",
-    assignees: [
-      { name: "Alex Johnson", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80" },
-      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
+    id: "lead-4",
+    columnId: "call_booked",
+    name: "Marcus Vance",
+    phone: "+1 (312) 555-0199",
+    company: "Apex Capital Partners",
+    avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=120&auto=format&fit=crop&q=80",
+    inquiry: "Booked 15-min discovery call via WhatsApp bot for tomorrow 2:00 PM.",
+    lastReply: "Cal.com automated confirmation sent with Google Meet link.",
+    value: 5000,
+    currency: "USD",
+    latency: "Instant",
+    botStatus: "booked",
+    priority: "VIP",
+    createdDate: "Oct 01",
+    dueDate: "Tomorrow, 2:00 PM",
+    transcript: [
+      { sender: "Marcus", text: "Looking for an agency retainer for WhatsApp broadcast marketing.", time: "Oct 01" },
+      { sender: "Jido Autonomous Bot", text: "Confirmed! Your call is set for tomorrow at 2:00 PM EST.", time: "Oct 01", isBot: true },
     ],
-    attachments: [
-      { name: "Chat Transcripts Oct 01.json", size: "1.12 MB", type: "JSON" },
+    qualificationChecks: [
+      { id: "qc-9", title: "Calendar invite synced", completed: true },
+      { id: "qc-10", title: "Briefing deck generated", completed: true },
     ],
-    subtasks: [
-      { id: "st-11", title: "Check 14 high-budget leads", completed: true },
-      { id: "st-12", title: "Route Stripe invoicing links", completed: false },
+  },
+  {
+    id: "lead-5",
+    columnId: "won_retainer",
+    name: "Shola Visuals",
+    phone: "+234 802 334 9102",
+    company: "Brand Identity Studio",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+    inquiry: "Active $1,800/mo retainer client running 7:00 AM daily morning drops.",
+    lastReply: "Retainer active. 1,240 subscribers receiving morning design showcases.",
+    value: 1800,
+    currency: "USD",
+    latency: "1.1s",
+    botStatus: "auto_replied",
+    priority: "VIP",
+    createdDate: "Sep 20",
+    transcript: [
+      { sender: "Shola", text: "The 7:00 AM drops brought 4 new client inquiries this morning!", time: "Sep 20" },
+      { sender: "Onos E.", text: "Awesome! Consistency engine is doing its work.", time: "Sep 20" },
+    ],
+    qualificationChecks: [
+      { id: "qc-11", title: "Monthly invoice on auto-pay", completed: true },
+      { id: "qc-12", title: "7 AM cron drops running daily", completed: true },
     ],
   },
 ];
 
-export default function ChronoTaskDashboard() {
-  const { pipeline, loading, moveLead, refetch } = usePipeline();
-  const { contacts } = useContacts({ limit: 100 });
+const COLUMNS = [
+  { id: "inquiries", title: "New Inquiries (WhatsApp DM)", count: 2, color: "bg-blue-500" },
+  { id: "qualified", title: "Auto-Replied & Qualified", count: 1, color: "bg-cyan-500" },
+  { id: "call_booked", title: "Discovery Call Booked", count: 1, color: "bg-amber-500" },
+  { id: "won_retainer", title: "Active Retainers Closed", count: 1, color: "bg-emerald-500" },
+] as const;
 
-  const [activeTab, setActiveTab] = useState<"List" | "Board" | "Calendar" | "Files">("Board");
-  const [tasks, setTasks] = useState<TaskItem[]>(INITIAL_TASKS);
-  const [selectedTaskId, setSelectedTaskId] = useState<string>("task-4"); // default open BrandBook as in screenshot
-  const [activeDrawerTab, setActiveDrawerTab] = useState<"subtasks" | "comments" | "activities">("subtasks");
+export default function WhatsAppLeadsPipeline() {
+  const [leads, setLeads] = useState<LeadItem[]>(INITIAL_LEADS);
+  const [selectedLead, setSelectedLead] = useState<LeadItem | null>(null);
+  const [activeTab, setActiveTab] = useState<"transcript" | "checks">("transcript");
+  const [newCheckText, setNewCheckText] = useState("");
 
-  const [showCreate, setShowCreate] = useState(false);
-  const [form, setForm] = useState({ title: "", contact_id: "", value: "", stage: "new" });
-  const [saving, setSaving] = useState(false);
+  const totalPipelineValue = leads.reduce((acc, l) => acc + l.value, 0);
 
-  const selectedTask = tasks.find((t) => t.id === selectedTaskId);
-
-  // Toggle subtask checkbox
-  const toggleSubtask = (taskId: string, subtaskId: string) => {
-    setTasks((prev) =>
-      prev.map((t) => {
-        if (t.id !== taskId) return t;
-        const updatedSubtasks = t.subtasks.map((st) =>
-          st.id === subtaskId ? { ...st, completed: !st.completed } : st
-        );
-        const completedCount = updatedSubtasks.filter((s) => s.completed).length;
-        const newProgress = Math.round((completedCount / updatedSubtasks.length) * 100);
-        return { ...t, subtasks: updatedSubtasks, progress: newProgress };
-      })
+  const moveLead = (leadId: string, targetCol: LeadItem["columnId"]) => {
+    setLeads((prev) =>
+      prev.map((l) => (l.id === leadId ? { ...l, columnId: targetCol } : l))
     );
-  };
-
-  const handleCreate = async () => {
-    if (!form.title) return;
-    setSaving(true);
-    const newTask: TaskItem = {
-      id: `task-${Date.now()}`,
-      columnId: "todo",
-      code: "1",
-      tag: "WhatsApp Lead",
-      tagColor: "bg-blue-50 text-blue-700 border-blue-200/80",
-      title: form.title,
-      description: "Auto-synced WhatsApp pipeline task.",
-      progress: 0,
-      priority: "B",
-      createdDate: "Today",
-      dueDate: "Next week",
-      assignees: [{ name: "Operator", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80" }],
-      attachments: [],
-      subtasks: [
-        { id: `st-${Date.now()}-1`, title: "Qualify inquiry via AI auto-responder", completed: false },
-        { id: `st-${Date.now()}-2`, title: "Dispatch WhatsApp booking link", completed: false },
-      ],
-    };
-    setTasks((prev) => [newTask, ...prev]);
-    if (form.contact_id) {
-      await api.post("/crm/leads", { ...form, value: Number(form.value) || 0, source: "whatsapp" });
-      refetch();
+    if (selectedLead && selectedLead.id === leadId) {
+      setSelectedLead((prev) => (prev ? { ...prev, columnId: targetCol } : null));
     }
-    setSaving(false);
-    setShowCreate(false);
-    setForm({ title: "", contact_id: "", value: "", stage: "new" });
   };
 
-  const columns: { id: "todo" | "in_progress" | "completed"; title: string; count: number }[] = [
-    { id: "todo", title: "To do", count: tasks.filter((t) => t.columnId === "todo").length },
-    { id: "in_progress", title: "In progress", count: tasks.filter((t) => t.columnId === "in_progress").length },
-    { id: "completed", title: "Completed", count: tasks.filter((t) => t.columnId === "completed").length },
-  ];
+  const toggleCheck = (checkId: string) => {
+    if (!selectedLead) return;
+    const updatedChecks = selectedLead.qualificationChecks.map((c) =>
+      c.id === checkId ? { ...c, completed: !c.completed } : c
+    );
+    const updated = { ...selectedLead, qualificationChecks: updatedChecks };
+    setSelectedLead(updated);
+    setLeads((prev) => prev.map((l) => (l.id === updated.id ? updated : l)));
+  };
+
+  const addCheck = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCheckText.trim() || !selectedLead) return;
+    const newCheck = { id: `qc-${Date.now()}`, title: newCheckText.trim(), completed: false };
+    const updatedChecks = [...selectedLead.qualificationChecks, newCheck];
+    const updated = { ...selectedLead, qualificationChecks: updatedChecks };
+    setSelectedLead(updated);
+    setLeads((prev) => prev.map((l) => (l.id === updated.id ? updated : l)));
+    setNewCheckText("");
+  };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 max-w-[1600px] mx-auto min-h-[calc(100vh-6rem)]">
-      {/* Main Board Container */}
-      <div className="flex-1 space-y-6 min-w-0">
-        {/* Top Header & View Tabs */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">
-              My tasks
-            </h1>
-            <Button
-              size="sm"
-              onClick={() => setShowCreate(true)}
-              className="gap-1.5 text-xs rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium shadow-xs"
-            >
-              <Plus className="h-3.5 w-3.5" />
-              <span>Add task</span>
-            </Button>
+    <div className="max-w-[1400px] mx-auto space-y-6 pb-12 select-none font-sans">
+      {/* ── TOP HEADER ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200/80 pb-6">
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>WhatsApp Inquiries Auto-Captured</span>
+            </span>
+            <span className="px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-100 text-[#2563eb] text-xs font-semibold">
+              Pipeline: ${totalPipelineValue.toLocaleString()}/mo
+            </span>
           </div>
-
-          {/* ChronoTask Tabs */}
-          <div className="flex items-center gap-6 border-b border-zinc-200/80 text-xs font-medium text-zinc-500 pb-2">
-            {(["List", "Board", "Calendar", "Files"] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={cn(
-                  "relative py-1 transition-colors hover:text-zinc-900",
-                  activeTab === tab
-                    ? "text-[#2563eb] font-semibold"
-                    : "text-zinc-500"
-                )}
-              >
-                <span>{tab}</span>
-                {activeTab === tab && (
-                  <span className="absolute bottom-[-9px] left-0 right-0 h-0.5 bg-[#2563eb] rounded-full" />
-                )}
-              </button>
-            ))}
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950">
+            WhatsApp High-Intent Lead Pipeline
+          </h1>
+          <p className="text-xs text-zinc-500 mt-0.5">
+            Every client inquiring on WhatsApp is automatically scored, sent your rate cards, and funneled into discovery calls.
+          </p>
         </div>
 
-        {/* Board Columns Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-start">
-          {columns.map((col) => {
-            const colTasks = tasks.filter((t) => t.columnId === col.id);
-            return (
-              <div key={col.id} className="space-y-4">
-                {/* Column Header */}
-                <div className="flex items-center justify-between px-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-zinc-900">{col.title}</span>
-                    <span className="px-1.5 py-0.5 rounded-full bg-zinc-200/60 text-zinc-600 text-[10px] font-semibold">
-                      {colTasks.length}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1 text-zinc-400">
-                    <button
-                      onClick={() => setShowCreate(true)}
-                      className="p-1 hover:text-zinc-700 transition-colors"
-                    >
-                      <Plus className="h-3.5 w-3.5" />
-                    </button>
-                    <button className="p-1 hover:text-zinc-700 transition-colors">
-                      <MoreVertical className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Column Cards */}
-                <div className="space-y-3.5">
-                  {colTasks.map((task) => {
-                    const isSelected = selectedTaskId === task.id;
-                    return (
-                      <div
-                        key={task.id}
-                        onClick={() => setSelectedTaskId(task.id)}
-                        className={cn(
-                          "rounded-2xl border bg-white p-4 shadow-2xs hover:shadow-sm transition-all cursor-pointer space-y-3 group",
-                          isSelected
-                            ? "border-[#2563eb] ring-2 ring-[#2563eb]/10"
-                            : "border-zinc-200/80 hover:border-zinc-300"
-                        )}
-                      >
-                        {/* Tag Pill with Numeric Code */}
-                        <div className="flex items-center gap-1.5">
-                          <span className={cn("px-2 py-0.5 rounded-md text-[10px] font-semibold border flex items-center gap-1", task.tagColor)}>
-                            <span className="font-bold">{task.code}</span>
-                            <span>{task.tag}</span>
-                          </span>
-                        </div>
-
-                        {/* Title & Description */}
-                        <div>
-                          <h4 className="text-sm font-semibold text-zinc-950 group-hover:text-[#2563eb] transition-colors leading-snug">
-                            {task.title}
-                          </h4>
-                          <p className="text-xs text-zinc-500 mt-1 line-clamp-2 leading-relaxed">
-                            {task.description}
-                          </p>
-                        </div>
-
-                        {/* Optional Visual Thumbnail Preview */}
-                        {task.previewType === "buttons" && (
-                          <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 flex items-center justify-center gap-2">
-                            <span className="h-6 px-3 rounded-lg bg-zinc-900 text-white text-[9px] font-medium flex items-center shadow-xs">
-                              Button
-                            </span>
-                            <span className="h-6 w-6 rounded-lg bg-amber-400 flex items-center justify-center text-white text-[9px] font-bold">
-                              ★
-                            </span>
-                            <span className="h-6 w-6 rounded-lg bg-emerald-500 flex items-center justify-center text-white text-[9px]">
-                              ✓
-                            </span>
-                            <span className="h-6 w-6 rounded-lg bg-sky-500 flex items-center justify-center text-white text-[9px]">
-                              ✉
-                            </span>
-                          </div>
-                        )}
-                        {task.previewType === "cards" && (
-                          <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 flex items-center justify-center">
-                            <div className="h-10 w-28 rounded-lg bg-white border border-zinc-200 shadow-2xs flex flex-col justify-center px-2 space-y-1">
-                              <div className="h-1.5 w-12 bg-zinc-200 rounded" />
-                              <div className="h-1 w-20 bg-zinc-100 rounded" />
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Card Footer: Stacked Avatars + Progress Ring */}
-                        <div className="flex items-center justify-between pt-1">
-                          <div className="flex -space-x-1.5 overflow-hidden">
-                            {task.assignees.map((a, i) => (
-                              <img
-                                key={i}
-                                src={a.avatar}
-                                alt={a.name}
-                                className="h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                              />
-                            ))}
-                          </div>
-
-                          {/* Circular Progress Gauge */}
-                          <div className="flex items-center gap-1.5">
-                            <div className="relative h-5 w-5 flex items-center justify-center">
-                              <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
-                                <circle
-                                  cx="18"
-                                  cy="18"
-                                  r="14"
-                                  fill="none"
-                                  className="stroke-zinc-100"
-                                  strokeWidth="3.5"
-                                />
-                                <circle
-                                  cx="18"
-                                  cy="18"
-                                  r="14"
-                                  fill="none"
-                                  className="stroke-sky-500"
-                                  strokeWidth="3.5"
-                                  strokeDasharray="88"
-                                  strokeDashoffset={88 - (88 * task.progress) / 100}
-                                  strokeLinecap="round"
-                                />
-                              </svg>
-                            </div>
-                            <span className="text-[10px] font-semibold text-zinc-500 font-mono">
-                              {task.progress}%
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Add Task Button at Bottom */}
-                  <button
-                    onClick={() => setShowCreate(true)}
-                    className="w-full py-2.5 rounded-xl border border-dashed border-zinc-200 hover:border-zinc-300 text-xs font-semibold text-zinc-500 hover:text-zinc-800 flex items-center justify-center gap-1.5 transition-all bg-white/40 hover:bg-white"
-                  >
-                    <Plus className="h-3.5 w-3.5" />
-                    <span>Add task</span>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+        <div className="flex items-center gap-2.5">
+          <Link
+            href="/inbox"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-semibold transition-colors"
+          >
+            <MessageSquare className="h-3.5 w-3.5" />
+            <span>Live Chats</span>
+          </Link>
+          <Link
+            href="/automations"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-xs transition-colors"
+          >
+            <Bot className="h-3.5 w-3.5" />
+            <span>Rate Card Rules</span>
+          </Link>
         </div>
       </div>
 
-      {/* Right ChronoTask Slide-Out Inspector Drawer */}
-      {selectedTask && (
-        <div className="w-full lg:w-[450px] shrink-0 rounded-[28px] border border-zinc-200/80 bg-white p-6 shadow-sm space-y-6 self-start">
-          {/* Top Actions: Close, Edit, Share, More */}
-          <div className="flex items-center justify-between text-zinc-400">
-            <button
-              onClick={() => setSelectedTaskId("")}
-              className="p-1 hover:text-zinc-800 transition-colors"
-            >
-              <X className="h-4 w-4" />
-            </button>
-            <div className="flex items-center gap-2">
-              <button className="p-1 hover:text-zinc-800 transition-colors">
-                <Edit2 className="h-4 w-4" />
-              </button>
-              <button className="p-1 hover:text-zinc-800 transition-colors">
-                <Share2 className="h-4 w-4" />
-              </button>
-              <button className="p-1 hover:text-zinc-800 transition-colors">
-                <MoreVertical className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
+      {/* ── 4-COLUMN KANBAN PIPELINE ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
+        {COLUMNS.map((col) => {
+          const colLeads = leads.filter((l) => l.columnId === col.id);
+          const colTotal = colLeads.reduce((acc, l) => acc + l.value, 0);
 
-          {/* Heading */}
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-zinc-950">
-              {selectedTask.title}
-            </h2>
-          </div>
-
-          {/* Key-Value Properties Grid */}
-          <div className="space-y-3 text-xs">
-            <div className="flex items-center justify-between py-1 border-b border-zinc-50">
-              <span className="text-zinc-400 flex items-center gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5 text-zinc-400" />
-                Priority
-              </span>
-              <span className="px-2 py-0.5 rounded bg-blue-50 text-[#2563eb] font-bold border border-blue-200/70">
-                {selectedTask.priority}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between py-1 border-b border-zinc-50">
-              <span className="text-zinc-400 flex items-center gap-2">
-                <Sparkles className="h-3.5 w-3.5 text-zinc-400" />
-                Status
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-[#2563eb] font-semibold border border-blue-200/70 text-[11px]">
-                {selectedTask.tag}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between py-1 border-b border-zinc-50">
-              <span className="text-zinc-400 flex items-center gap-2">
-                <Calendar className="h-3.5 w-3.5 text-zinc-400" />
-                Created date
-              </span>
-              <span className="font-medium text-zinc-700">{selectedTask.createdDate}</span>
-            </div>
-
-            <div className="flex items-center justify-between py-1 border-b border-zinc-50">
-              <span className="text-zinc-400 flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5 text-zinc-400" />
-                Due date
-              </span>
-              <span className="font-medium text-zinc-700">{selectedTask.dueDate}</span>
-            </div>
-
-            <div className="flex items-center justify-between py-1 border-b border-zinc-50">
-              <span className="text-zinc-400 flex items-center gap-2">
-                <Circle className="h-3.5 w-3.5 text-zinc-400" />
-                Progress
-              </span>
-              <div className="flex items-center gap-3 w-40">
-                <div className="flex-1 h-2 rounded-full bg-zinc-100 overflow-hidden">
-                  <div
-                    className="h-full bg-sky-500 rounded-full transition-all"
-                    style={{ width: `${selectedTask.progress}%` }}
-                  />
+          return (
+            <div key={col.id} className="rounded-2xl bg-zinc-100/70 border border-zinc-200/80 p-4 space-y-4">
+              {/* Column Header */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className={cn("w-2 h-2 rounded-full", col.color)} />
+                  <h3 className="text-xs font-bold text-zinc-900 truncate">{col.title}</h3>
                 </div>
-                <span className="font-semibold text-zinc-700 text-[11px] font-mono">
-                  {selectedTask.progress}%
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white text-zinc-700 font-bold border border-zinc-200">
+                    {colLeads.length}
+                  </span>
+                  <span className="text-[10px] font-mono text-zinc-500 font-semibold">
+                    ${colTotal.toLocaleString()}
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <div className="flex items-center justify-between py-1">
-              <span className="text-zinc-400 flex items-center gap-2">
-                <UserPlus className="h-3.5 w-3.5 text-zinc-400" />
-                Assignees
-              </span>
-              <div className="flex items-center gap-2">
-                {selectedTask.assignees.map((a, i) => (
-                  <div key={i} className="flex items-center gap-1.5">
-                    <img
-                      src={a.avatar}
-                      alt={a.name}
-                      className="h-5 w-5 rounded-full object-cover"
-                    />
-                    <span className="text-zinc-800 font-medium">{a.name}</span>
+              {/* Column Cards */}
+              <div className="space-y-3">
+                {colLeads.map((lead) => (
+                  <div
+                    key={lead.id}
+                    onClick={() => setSelectedLead(lead)}
+                    className="p-4 rounded-xl bg-white border border-zinc-200/90 shadow-2xs hover:shadow-xs hover:border-[#2563eb]/40 cursor-pointer transition-all space-y-3 group"
+                  >
+                    {/* Top Row: Avatar + Name + Phone + Value */}
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-center gap-2.5">
+                        <img
+                          src={lead.avatar}
+                          alt={lead.name}
+                          className="h-8 w-8 rounded-full object-cover ring-1 ring-zinc-200"
+                        />
+                        <div>
+                          <p className="text-xs font-bold text-zinc-950 group-hover:text-[#2563eb] transition-colors">
+                            {lead.name}
+                          </p>
+                          <p className="text-[10px] text-zinc-400 font-mono">{lead.phone}</p>
+                        </div>
+                      </div>
+
+                      <span className="text-xs font-bold font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100 shrink-0">
+                        ${lead.value}/mo
+                      </span>
+                    </div>
+
+                    {/* Inquiry quote */}
+                    <div className="p-2.5 rounded-lg bg-zinc-50 text-[11px] text-zinc-600 border border-zinc-100 line-clamp-2 leading-relaxed">
+                      &ldquo;{lead.inquiry}&rdquo;
+                    </div>
+
+                    {/* Footer: Latency + Status Pill */}
+                    <div className="flex items-center justify-between pt-1 border-t border-zinc-100 text-[10px]">
+                      <div className="flex items-center gap-1 text-zinc-500 font-mono">
+                        <Zap className="h-3 w-3 text-amber-500" />
+                        <span>{lead.latency} auto-reply</span>
+                      </div>
+                      <span className={cn(
+                        "px-2 py-0.5 rounded-full font-semibold font-mono",
+                        lead.botStatus === "auto_replied" && "bg-blue-50 text-[#2563eb]",
+                        lead.botStatus === "booked" && "bg-emerald-50 text-emerald-700",
+                        lead.botStatus === "human_takeover" && "bg-purple-50 text-purple-700"
+                      )}>
+                        {lead.botStatus === "auto_replied" ? "Bot Qualified" : lead.botStatus === "booked" ? "Call Set" : "Human"}
+                      </span>
+                    </div>
                   </div>
                 ))}
-                <button className="flex items-center gap-1 px-2 py-0.5 rounded-lg border border-zinc-200 text-zinc-600 hover:bg-zinc-50 text-[11px] font-medium">
-                  <Plus className="h-3 w-3" />
-                  <span>Invite</span>
-                </button>
+
+                {colLeads.length === 0 && (
+                  <div className="p-6 text-center border-2 border-dashed border-zinc-200 rounded-xl">
+                    <p className="text-xs text-zinc-400">No leads in this stage</p>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
+          );
+        })}
+      </div>
 
-          {/* Description Box */}
-          <div className="p-3.5 rounded-2xl bg-zinc-50/70 border border-zinc-100 text-xs text-zinc-600 leading-relaxed">
-            {selectedTask.description}
-          </div>
-
-          {/* Attachments Section */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between text-xs font-semibold text-zinc-900">
-              <div className="flex items-center gap-1.5 text-zinc-500">
-                <Paperclip className="h-3.5 w-3.5" />
-                <span>Attachments</span>
-              </div>
-              <button className="text-[11px] font-medium text-[#2563eb] hover:underline flex items-center gap-1">
-                <Download className="h-3 w-3" />
-                <span>Download All</span>
-              </button>
-            </div>
-
-            <div className="flex flex-wrap gap-2.5">
-              {selectedTask.attachments.map((att, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl border border-zinc-200/80 bg-white hover:bg-zinc-50/80 transition-colors shadow-2xs"
-                >
-                  <div className="h-8 w-8 rounded-lg bg-blue-50 border border-blue-200/70 text-[#2563eb] flex items-center justify-center font-bold text-[9px]">
-                    PDF
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-zinc-900 leading-tight">{att.name}</p>
-                    <p className="text-[10px] text-zinc-400 mt-0.5">{att.type} • {att.size}</p>
-                  </div>
+      {/* ── LEAD DETAIL MODAL (WhatsApp Conversation & Qualification) ── */}
+      {selectedLead && (
+        <Modal
+          open={!!selectedLead}
+          onClose={() => setSelectedLead(null)}
+          title={
+            <div className="flex items-center gap-3">
+              <img
+                src={selectedLead.avatar}
+                alt={selectedLead.name}
+                className="h-10 w-10 rounded-full object-cover ring-2 ring-zinc-200"
+              />
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-bold text-zinc-950">{selectedLead.name}</h3>
+                  <span className="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
+                    ${selectedLead.value}/mo
+                  </span>
                 </div>
-              ))}
-              <button className="h-13 w-13 rounded-xl border border-dashed border-zinc-200 hover:border-zinc-300 flex items-center justify-center text-zinc-400 hover:text-zinc-600 transition-colors">
-                <Plus className="h-4 w-4" />
-              </button>
+                <p className="text-xs text-zinc-400 font-mono">{selectedLead.phone} • {selectedLead.company}</p>
+              </div>
             </div>
-          </div>
-
-          {/* Subtasks Tabs */}
-          <div className="space-y-4 pt-2 border-t border-zinc-100">
-            <div className="flex items-center gap-4 text-xs font-medium text-zinc-400 border-b border-zinc-100 pb-2">
-              <button
-                onClick={() => setActiveDrawerTab("subtasks")}
-                className={cn(
-                  "hover:text-zinc-900 transition-colors flex items-center gap-1.5",
-                  activeDrawerTab === "subtasks" && "text-[#2563eb] font-semibold"
-                )}
-              >
-                <span>Subtasks</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-blue-50 text-[#2563eb] text-[10px] font-bold">
-                  {selectedTask.subtasks.length}
-                </span>
-              </button>
-              <button
-                onClick={() => setActiveDrawerTab("comments")}
-                className={cn(
-                  "hover:text-zinc-900 transition-colors flex items-center gap-1.5",
-                  activeDrawerTab === "comments" && "text-[#2563eb] font-semibold"
-                )}
-              >
-                <span>Comments</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-zinc-100 text-zinc-600 text-[10px]">
-                  2
-                </span>
-              </button>
-              <button
-                onClick={() => setActiveDrawerTab("activities")}
-                className={cn(
-                  "hover:text-zinc-900 transition-colors",
-                  activeDrawerTab === "activities" && "text-[#2563eb] font-semibold"
-                )}
-              >
-                Activities
-              </button>
-            </div>
-
-            {/* Checklist */}
-            <div className="space-y-3">
-              {selectedTask.subtasks.map((st) => (
-                <div key={st.id} className="space-y-2">
-                  <div
-                    onClick={() => toggleSubtask(selectedTask.id, st.id)}
-                    className="flex items-start gap-2.5 cursor-pointer group"
+          }
+          className="max-w-2xl"
+        >
+          <div className="space-y-6 pt-2">
+            {/* Quick Stage Mover */}
+            <div className="p-3 bg-zinc-50 rounded-xl border border-zinc-200/80 flex flex-wrap items-center justify-between gap-2">
+              <span className="text-xs font-semibold text-zinc-600">Pipeline Stage:</span>
+              <div className="flex flex-wrap gap-1.5">
+                {COLUMNS.map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => moveLead(selectedLead.id, c.id)}
+                    className={cn(
+                      "px-2.5 py-1 rounded-lg text-xs font-semibold transition-all",
+                      selectedLead.columnId === c.id
+                        ? "bg-[#2563eb] text-white shadow-2xs"
+                        : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100"
+                    )}
                   >
-                    <div
-                      className={cn(
-                        "mt-0.5 h-4 w-4 rounded border flex items-center justify-center transition-colors shrink-0",
-                        st.completed
-                          ? "bg-[#2563eb] border-[#2563eb] text-white"
-                          : "border-zinc-300 group-hover:border-zinc-400 bg-white"
-                      )}
-                    >
-                      {st.completed && <Check className="h-3 w-3 stroke-[3]" />}
-                    </div>
-                    <span
-                      className={cn(
-                        "text-xs font-medium leading-tight",
-                        st.completed
-                          ? "text-zinc-400 line-through"
-                          : "text-zinc-800 group-hover:text-zinc-950"
-                      )}
-                    >
-                      {st.title}
-                    </span>
-                  </div>
-
-                  {/* Nested Card Note (if present) */}
-                  {st.note && (
-                    <div className="ml-6 p-3 rounded-xl bg-zinc-50 border border-zinc-100 text-[11px] text-zinc-600 space-y-2">
-                      <p className="leading-relaxed">{st.note}</p>
-                      <div className="flex items-center justify-between pt-1 border-t border-zinc-200/50">
-                        <div className="flex items-center gap-1.5">
-                          <img
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80"
-                            alt="Amanda"
-                            className="h-4 w-4 rounded-full object-cover"
-                          />
-                          <span className="text-zinc-700 font-medium">{st.assignee}</span>
-                        </div>
-                        <span className="text-zinc-400">{st.date}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+                    {c.title.split(" ")[0]}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
 
-      {/* Create Lead/Task Modal */}
-      <Modal
-        isOpen={showCreate}
-        onClose={() => setShowCreate(false)}
-        title="New Task or Lead"
-        description="Add a task to your board or WhatsApp pipeline"
-        maxWidth="md"
-      >
-        <div className="space-y-4">
-          <Input
-            label="Task Title *"
-            placeholder="e.g. Graphic BrandBook & WhatsApp Drop"
-            value={form.title}
-            onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
-          />
-          <div className="space-y-1">
-            <label className="block text-xs font-medium text-zinc-700">Link WhatsApp Contact</label>
-            <select
-              className="w-full h-10 rounded-xl border border-zinc-200 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb] bg-white"
-              value={form.contact_id}
-              onChange={(e) => setForm((f) => ({ ...f, contact_id: e.target.value }))}
-            >
-              <option value="">Select a contact (optional)…</option>
-              {contacts.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name} — {c.phone}
-                </option>
-              ))}
-            </select>
+            {/* Tabs */}
+            <div className="flex items-center gap-4 border-b border-zinc-100 pb-2 text-xs font-semibold">
+              <button
+                onClick={() => setActiveTab("transcript")}
+                className={cn(
+                  "pb-1 transition-colors flex items-center gap-1.5",
+                  activeTab === "transcript" ? "text-[#2563eb] border-b-2 border-[#2563eb]" : "text-zinc-400 hover:text-zinc-700"
+                )}
+              >
+                <MessageSquare className="h-3.5 w-3.5" />
+                <span>WhatsApp Transcript</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("checks")}
+                className={cn(
+                  "pb-1 transition-colors flex items-center gap-1.5",
+                  activeTab === "checks" ? "text-[#2563eb] border-b-2 border-[#2563eb]" : "text-zinc-400 hover:text-zinc-700"
+                )}
+              >
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                <span>Qualification Checklist ({selectedLead.qualificationChecks.filter(c => c.completed).length}/{selectedLead.qualificationChecks.length})</span>
+              </button>
+            </div>
+
+            {/* Tab 1: Transcript */}
+            {activeTab === "transcript" && (
+              <div className="space-y-3">
+                <div className="p-4 rounded-xl bg-zinc-950 text-white space-y-3 max-h-64 overflow-y-auto font-sans">
+                  {selectedLead.transcript.map((msg, idx) => (
+                    <div
+                      key={idx}
+                      className={cn(
+                        "p-3 rounded-xl text-xs max-w-[85%]",
+                        msg.isBot
+                          ? "bg-[#2563eb] text-white ml-auto"
+                          : "bg-zinc-800 text-zinc-100"
+                      )}
+                    >
+                      <div className="flex items-center justify-between gap-2 mb-1 text-[10px] opacity-80">
+                        <span className="font-bold">{msg.sender}</span>
+                        <span>{msg.time}</span>
+                      </div>
+                      <p className="leading-relaxed">{msg.text}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between pt-2">
+                  <span className="text-[11px] text-zinc-400">
+                    ⚡ Auto-replied with sub-2s latency via Meta Cloud API
+                  </span>
+                  <Link
+                    href="/inbox"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#2563eb] hover:underline"
+                  >
+                    <span>Open in WhatsApp Inbox</span>
+                    <ChevronRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Tab 2: Qualification Checklist */}
+            {activeTab === "checks" && (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  {selectedLead.qualificationChecks.map((check) => (
+                    <div
+                      key={check.id}
+                      onClick={() => toggleCheck(check.id)}
+                      className="flex items-center gap-3 p-2.5 rounded-xl border border-zinc-100 hover:bg-zinc-50 cursor-pointer transition-colors"
+                    >
+                      <div className={cn(
+                        "h-4 w-4 rounded-md border flex items-center justify-center shrink-0 transition-colors",
+                        check.completed ? "bg-[#2563eb] border-[#2563eb] text-white" : "border-zinc-300 bg-white"
+                      )}>
+                        {check.completed && <Check className="h-3 w-3 stroke-[3]" />}
+                      </div>
+                      <span className={cn(
+                        "text-xs font-medium",
+                        check.completed ? "text-zinc-400 line-through" : "text-zinc-800"
+                      )}>
+                        {check.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Add new check */}
+                <form onSubmit={addCheck} className="flex gap-2">
+                  <Input
+                    placeholder="+ Add qualification requirement..."
+                    value={newCheckText}
+                    onChange={(e) => setNewCheckText(e.target.value)}
+                    className="text-xs h-9"
+                  />
+                  <Button type="submit" size="sm" className="h-9 px-4 text-xs bg-[#2563eb] hover:bg-[#1d4ed8]">
+                    Add
+                  </Button>
+                </form>
+              </div>
+            )}
           </div>
-          <Input
-            label="Pipeline Value ($)"
-            type="number"
-            placeholder="0"
-            value={form.value}
-            onChange={(e) => setForm((f) => ({ ...f, value: e.target.value }))}
-          />
-          <div className="flex gap-2 pt-2">
-            <Button
-              variant="outline"
-              onClick={() => setShowCreate(false)}
-              className="flex-1 text-xs rounded-xl"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleCreate}
-              isLoading={saving}
-              className="flex-1 text-xs rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white"
-            >
-              Create Task
-            </Button>
-          </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
     </div>
   );
 }

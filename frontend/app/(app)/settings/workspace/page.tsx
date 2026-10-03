@@ -95,7 +95,7 @@ export default function WorkspaceSettingsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Timezone</label>
             <select
-              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:border-[#2563eb] bg-white"
               value={form.timezone}
               onChange={(e) => setForm((f) => ({ ...f, timezone: e.target.value }))}
             >
@@ -111,7 +111,7 @@ export default function WorkspaceSettingsPage() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700">Business Type</label>
             <select
-              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500 bg-white"
+              className="w-full h-9 rounded-md border border-zinc-200 px-3 text-sm focus:outline-none focus:border-[#2563eb] bg-white"
               value={form.business_type}
               onChange={(e) => setForm((f) => ({ ...f, business_type: e.target.value }))}
             >

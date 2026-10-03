@@ -19,7 +19,7 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center p-8 text-center rounded-xl border border-dashed border-zinc-200 bg-white">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose-50 text-rose-600 mb-4 border border-rose-100">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-[#2563eb] mb-4 border border-blue-100">
         <Icon className="h-6 w-6" />
       </div>
       <h3 className="text-base font-semibold text-zinc-900">{title}</h3>

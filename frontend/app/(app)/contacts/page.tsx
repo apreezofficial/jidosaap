@@ -22,6 +22,53 @@ const SOURCE_LABELS: Record<string, string> = {
   crm: "CRM",
 };
 
+const DEFAULT_CONTACTS: any[] = [
+  {
+    id: "c-1",
+    name: "Alex Rivera",
+    phone: "+1 (415) 890-2311",
+    email: "alex@scalestudio.io",
+    company: "SaaS Scale Studio",
+    source: "whatsapp",
+    status: "active",
+    tags: [{ id: "t-1", name: "VIP Retainer ($1,800/mo)", color: "#10b981" }],
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "c-2",
+    name: "Precious O.",
+    phone: "+234 810 992 0184",
+    email: "precious@penna.dev",
+    company: "Penna Essayist",
+    source: "whatsapp",
+    status: "active",
+    tags: [{ id: "t-2", name: "Newsletter Reader", color: "#2563eb" }],
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "c-3",
+    name: "Elena Rostova",
+    phone: "+44 7911 123456",
+    email: "elena@cryptobuilders.xyz",
+    company: "Crypto Builders DAO",
+    source: "whatsapp",
+    status: "active",
+    tags: [{ id: "t-3", name: "Group Shield Admin", color: "#f59e0b" }],
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "c-4",
+    name: "Shola Visuals",
+    phone: "+234 802 334 9102",
+    email: "shola@visuals.design",
+    company: "Brand Identity Studio",
+    source: "whatsapp",
+    status: "active",
+    tags: [{ id: "t-4", name: "7 AM Drops Subscriber", color: "#8b5cf6" }],
+    created_at: new Date().toISOString(),
+  },
+];
+
 export default function ContactsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -32,12 +79,13 @@ export default function ContactsPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { contacts, total, loading, refetch } = useContacts({
+  const { contacts: apiContacts, total, loading, refetch } = useContacts({
     search: search || undefined,
     status: statusFilter || undefined,
     page,
     limit: 20,
   });
+  const contacts = apiContacts.length > 0 ? apiContacts : DEFAULT_CONTACTS;
   const { tags } = useTags();
 
   const totalPages = Math.ceil(total / 20);

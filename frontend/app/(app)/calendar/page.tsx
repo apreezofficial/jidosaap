@@ -45,13 +45,13 @@ export default function CalendarPage() {
     events.filter((e) => isSameDay(new Date(e.next_run_at), d));
 
   return (
-    <div className="space-y-5 max-w-7xl mx-auto">
+    <div className="space-y-5 max-w-7xl mx-auto font-sans select-none">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Content Calendar</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">7:00 AM Drops & Broadcast Schedule</h1>
           <p className="text-xs text-zinc-500 mt-0.5">
-            {events.length} scheduled posts this month
+            Automated morning drops and newsletter status cards queued across WhatsApp.
           </p>
         </div>
         <div className="flex items-center gap-2">

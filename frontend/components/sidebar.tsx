@@ -32,19 +32,20 @@ export function Sidebar() {
   const [wsMenuOpen, setWsMenuOpen] = useState(false);
 
   const generalNav = [
-    { name: "Home", href: "/dashboard", icon: Home },
-    { name: "My Tasks", href: "/crm/leads", icon: CheckSquare, badge: 22 },
-    { name: "Inbox", href: "/inbox", icon: Mail, badge: 15 },
-    { name: "Reporting", href: "/analytics", icon: BarChart2 },
-    { name: "Portfolios", href: "/content", icon: Folder },
-    { name: "Goals", href: "/automations", icon: Target, badge: 8 },
+    { name: "Command Center", href: "/dashboard", icon: Home },
+    { name: "WhatsApp Inbox", href: "/inbox", icon: Mail, badge: 3 },
+    { name: "WhatsApp Leads & CRM", href: "/crm/leads", icon: CheckSquare, badge: 8 },
+    { name: "Status Drops & Broadcasts", href: "/content", icon: Radio, badge: "7 AM" },
+    { name: "Automations & Sentinel", href: "/automations", icon: Zap, badge: 4 },
+    { name: "Analytics & ROI", href: "/analytics", icon: BarChart2 },
   ];
 
   const workspaceChannels = [
-    { name: "Meta WhatsApp API", color: "bg-emerald-500", href: "/integrations/whatsapp" },
-    { name: "Marketing Team", color: "bg-[#2563eb]", href: "/content" },
-    { name: "Product Launch", color: "bg-amber-500", href: "/templates" },
-    { name: "Team Brainstorm", color: "bg-[#00b4d8]", href: "/crm/leads" },
+    { name: "24/7 Auto-Responder", color: "bg-emerald-500", href: "/automations" },
+    { name: "Group Shield Sentinel", color: "bg-amber-500", href: "/automations" },
+    { name: "Newsletter Status Bridge", color: "bg-[#2563eb]", href: "/content" },
+    { name: "7:00 AM Daily Drops", color: "bg-[#00b4d8]", href: "/content" },
+    { name: "Subdomain: onos.jidosaap.xyz", color: "bg-purple-500", href: "/integrations/whatsapp" },
   ];
 
   return (

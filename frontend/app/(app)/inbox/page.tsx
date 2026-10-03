@@ -1,377 +1,511 @@
 "use client";
 
 import React, { useState } from "react";
-import { useConversations, useConversation } from "@/hooks/useConversations";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn, formatRelativeTime, initials } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
-  Search, Bot, User, MessageSquare, CheckCircle2, Clock,
-  Filter, MoreVertical, Send, RefreshCw, UserCheck, AlertCircle,
-  ChevronRight, Phone, Mail, Building2, Inbox,
+  Search,
+  Bot,
+  User,
+  MessageSquare,
+  CheckCircle2,
+  Clock,
+  Filter,
+  MoreVertical,
+  Send,
+  RefreshCw,
+  UserCheck,
+  AlertCircle,
+  Phone,
+  Mail,
+  Building2,
+  Inbox,
+  ShieldCheck,
+  CheckCheck,
+  Paperclip,
+  Sparkles,
+  ExternalLink,
+  ChevronRight,
+  Radio,
 } from "lucide-react";
-import { api } from "@/lib/api";
 
-const STATUS_COLORS = {
-  open: "success",
-  resolved: "secondary",
-  pending: "warning",
-} as const;
+interface Message {
+  id: string;
+  sender: string;
+  text: string;
+  time: string;
+  isOutbound: boolean;
+  isBot?: boolean;
+  latency?: string;
+  status?: "read" | "delivered" | "sent";
+  attachment?: { title: string; link: string; type: string };
+}
 
-const HANDLER_ICONS = {
-  ai: <Bot className="h-3 w-3 text-[#2563eb]" />,
-  human: <User className="h-3 w-3 text-blue-500" />,
-  hybrid: <UserCheck className="h-3 w-3 text-amber-500" />,
-};
+interface ChatContact {
+  id: string;
+  name: string;
+  phone: string;
+  avatar: string;
+  unread: number;
+  lastMessage: string;
+  lastTime: string;
+  tag: string;
+  tagColor: string;
+  mode: "autonomous" | "human";
+  messages: Message[];
+}
 
-export default function InboxPage() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+const INITIAL_CHATS: ChatContact[] = [
+  {
+    id: "chat-1",
+    name: "Alex Rivera",
+    phone: "+1 (415) 890-2311",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+    unread: 0,
+    lastMessage: "Our retainers start at $1,800/mo. Here is our booking link...",
+    lastTime: "02:14 AM",
+    tag: "Retainer Lead ($1,800/mo)",
+    tagColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    mode: "autonomous",
+    messages: [
+      {
+        id: "m-1",
+        sender: "Alex Rivera",
+        text: "Hey! What are your retainer rates for ongoing product design & WhatsApp automation?",
+        time: "02:14 AM",
+        isOutbound: false,
+      },
+      {
+        id: "m-2",
+        sender: "Jido Autonomous Bot",
+        text: "Hey Alex! Our design & automation retainers start at $1,800/mo. We have 2 client sprint slots opening next week. Here is our booking link to pick a 15-min discovery time: https://cal.com/onos/15min",
+        time: "02:14 AM",
+        isOutbound: true,
+        isBot: true,
+        latency: "1.2s",
+        status: "read",
+        attachment: {
+          title: "Cal.com Discovery Call • 15 Minutes",
+          link: "https://cal.com/onos/15min",
+          type: "BOOKING",
+        },
+      },
+      {
+        id: "m-3",
+        sender: "Alex Rivera",
+        text: "Awesome, just booked for Thursday 2 PM. Looking forward!",
+        time: "02:16 AM",
+        isOutbound: false,
+      },
+    ],
+  },
+  {
+    id: "chat-2",
+    name: "Precious O.",
+    phone: "+234 810 992 0184",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+    unread: 1,
+    lastMessage: "Bridged Issue #48 to WhatsApp Status with tracked read link.",
+    lastTime: "06:12 AM",
+    tag: "Newsletter Reader",
+    tagColor: "bg-blue-50 text-[#2563eb] border-blue-200",
+    mode: "autonomous",
+    messages: [
+      {
+        id: "m-4",
+        sender: "Precious O.",
+        text: "Just published a new essay on penna.dev! Can JidoSapp bridge the story card to WhatsApp Status?",
+        time: "06:11 AM",
+        isOutbound: false,
+      },
+      {
+        id: "m-5",
+        sender: "Jido Autonomous Bot",
+        text: 'Bridge completed! 9:16 WhatsApp Status Card generated for "The Architecture of Clean APIs" with tracked link: precious.jidosaap.xyz/read/48',
+        time: "06:12 AM",
+        isOutbound: true,
+        isBot: true,
+        latency: "1.8s",
+        status: "read",
+        attachment: {
+          title: "The Architecture of Clean APIs (penna.dev)",
+          link: "https://precious.jidosaap.xyz/read/48",
+          type: "STATUS_CARD",
+        },
+      },
+    ],
+  },
+  {
+    id: "chat-3",
+    name: "Designers Guild Community",
+    phone: "Group ID: 1203630291",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+    unread: 0,
+    lastMessage: "🛡️ Group Shield purged unauthorized crypto link. Strike 1 issued.",
+    lastTime: "04:30 AM",
+    tag: "Group Shield Protected",
+    tagColor: "bg-amber-50 text-amber-700 border-amber-200",
+    mode: "autonomous",
+    messages: [
+      {
+        id: "m-6",
+        sender: "Unknown User (+1 917...)",
+        text: "Join fast pump signal group t.me/freecrypto1000x guaranteed gains!!",
+        time: "04:30 AM",
+        isOutbound: false,
+      },
+      {
+        id: "m-7",
+        sender: "Jido Group Sentinel",
+        text: "🛡️ [Group Shield] Message deleted. Unauthorized external invite links are prohibited. User muted for 24 hours (Strike 1/3).",
+        time: "04:30 AM",
+        isOutbound: true,
+        isBot: true,
+        latency: "0.8s",
+        status: "read",
+      },
+    ],
+  },
+  {
+    id: "chat-4",
+    name: "Shola Visuals",
+    phone: "+234 802 334 9102",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+    unread: 0,
+    lastMessage: "The 7:00 AM drops brought 4 new client inquiries this morning!",
+    lastTime: "07:30 AM",
+    tag: "7 AM Drops Subscriber",
+    tagColor: "bg-purple-50 text-purple-700 border-purple-200",
+    mode: "human",
+    messages: [
+      {
+        id: "m-8",
+        sender: "Shola Visuals",
+        text: "The 7:00 AM drops brought 4 new client inquiries this morning! Loving the consistency engine.",
+        time: "07:30 AM",
+        isOutbound: false,
+      },
+      {
+        id: "m-9",
+        sender: "Onos E.",
+        text: "That's huge! The morning drops reach clients right when they check WhatsApp over coffee.",
+        time: "07:32 AM",
+        isOutbound: true,
+        status: "read",
+      },
+    ],
+  },
+];
+
+export default function WhatsAppInboxPage() {
+  const [chats, setChats] = useState<ChatContact[]>(INITIAL_CHATS);
+  const [selectedId, setSelectedId] = useState<string>("chat-1");
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<string>("");
-  const [modeFilter, setModeFilter] = useState<string>("");
   const [messageInput, setMessageInput] = useState("");
 
-  const { conversations, loading, refetch } = useConversations({
-    search: search || undefined,
-    status: statusFilter || undefined,
-    handler_mode: modeFilter || undefined,
-  });
+  const selectedChat = chats.find((c) => c.id === selectedId) || chats[0];
 
-  const {
-    conversation,
-    messages,
-    loading: msgLoading,
-    sending,
-    sendMessage,
-    handoff,
-    updateStatus,
-  } = useConversation(selectedId ?? "");
+  const handleSendMessage = (textToSend?: string) => {
+    const text = textToSend || messageInput;
+    if (!text.trim() || !selectedChat) return;
 
-  const handleSend = async () => {
-    if (!messageInput.trim() || !selectedId) return;
-    await sendMessage(messageInput.trim());
-    setMessageInput("");
-    refetch();
+    const newMsg: Message = {
+      id: `msg-${Date.now()}`,
+      sender: "Onos E.",
+      text: text.trim(),
+      time: "Just now",
+      isOutbound: true,
+      status: "sent",
+    };
+
+    setChats((prev) =>
+      prev.map((c) =>
+        c.id === selectedChat.id
+          ? {
+              ...c,
+              lastMessage: text.trim(),
+              lastTime: "Just now",
+              messages: [...c.messages, newMsg],
+            }
+          : c
+      )
+    );
+
+    if (!textToSend) setMessageInput("");
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
+  const toggleMode = (chatId: string) => {
+    setChats((prev) =>
+      prev.map((c) =>
+        c.id === chatId
+          ? { ...c, mode: c.mode === "autonomous" ? "human" : "autonomous" }
+          : c
+      )
+    );
   };
+
+  const filteredChats = chats.filter(
+    (c) =>
+      c.name.toLowerCase().includes(search.toLowerCase()) ||
+      c.phone.includes(search) ||
+      c.lastMessage.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="flex h-full -m-8 overflow-hidden">
-      {/* ─── Conversation List ─────────────────────────── */}
-      <div className="w-80 border-r border-zinc-200 flex flex-col bg-white shrink-0">
+    <div className="flex h-[calc(100vh-8rem)] -m-4 sm:-m-6 lg:-m-8 overflow-hidden bg-white select-none font-sans">
+      {/* ─── LEFT: WhatsApp Contacts List ─── */}
+      <div className="w-80 sm:w-96 border-r border-zinc-200/90 flex flex-col bg-white shrink-0">
         {/* Header */}
         <div className="p-4 border-b border-zinc-100 space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-zinc-900 flex items-center gap-2">
-              <Inbox className="h-4 w-4" />
-              Inbox
-            </h2>
-            <button onClick={() => refetch()} className="p-1 rounded text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100">
-              <RefreshCw className="h-3.5 w-3.5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-extrabold text-zinc-950 flex items-center gap-2">
+                <MessageSquare className="h-5 w-5 text-[#2563eb]" />
+                <span>WhatsApp Inbox</span>
+              </h2>
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                Live API
+              </span>
+            </div>
           </div>
+
           <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-zinc-400" />
+            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-400" />
             <input
-              className="w-full h-8 pl-8 pr-3 text-xs rounded-md border border-zinc-200 focus:outline-none focus:ring-1 focus:ring-rose-500 bg-zinc-50"
-              placeholder="Search conversations…"
+              className="w-full h-9 pl-9 pr-3 text-xs rounded-xl border border-zinc-200 bg-zinc-50 focus:outline-none focus:border-[#2563eb] transition-all"
+              placeholder="Search chats, phone numbers..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="flex gap-1.5">
-            {["", "open", "resolved", "pending"].map((s) => (
-              <button
-                key={s}
-                onClick={() => setStatusFilter(s)}
-                className={cn(
-                  "px-2 py-1 text-[10px] rounded-full font-medium border transition-colors",
-                  statusFilter === s
-                    ? "bg-zinc-900 text-white border-zinc-900"
-                    : "bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50"
-                )}
-              >
-                {s === "" ? "All" : s.charAt(0).toUpperCase() + s.slice(1)}
-              </button>
-            ))}
-          </div>
         </div>
 
-        {/* List */}
+        {/* Contacts Scroll */}
         <div className="flex-1 overflow-y-auto divide-y divide-zinc-100">
-          {loading ? (
-            Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="p-4 animate-pulse">
-                <div className="flex gap-3">
-                  <div className="h-9 w-9 rounded-full bg-zinc-100 shrink-0" />
-                  <div className="flex-1 space-y-2">
-                    <div className="h-3 bg-zinc-100 rounded w-2/3" />
-                    <div className="h-2.5 bg-zinc-100 rounded w-full" />
-                  </div>
+          {filteredChats.map((chat) => (
+            <div
+              key={chat.id}
+              onClick={() => setSelectedId(chat.id)}
+              className={cn(
+                "p-3.5 cursor-pointer transition-all flex items-start gap-3 hover:bg-zinc-50/80",
+                selectedChat.id === chat.id ? "bg-blue-50/40 border-l-4 border-l-[#2563eb]" : ""
+              )}
+            >
+              <img
+                src={chat.avatar}
+                alt={chat.name}
+                className="h-11 w-11 rounded-full object-cover ring-1 ring-zinc-200 shrink-0"
+              />
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-1 mb-0.5">
+                  <p className="text-xs font-bold text-zinc-950 truncate">{chat.name}</p>
+                  <span className="text-[10px] text-zinc-400 font-mono shrink-0">{chat.lastTime}</span>
+                </div>
+
+                <p className="text-[11px] text-zinc-500 font-mono mb-1">{chat.phone}</p>
+
+                <p className="text-xs text-zinc-600 truncate leading-snug">{chat.lastMessage}</p>
+
+                <div className="flex items-center justify-between mt-2">
+                  <span className={cn("text-[9px] font-bold px-2 py-0.5 rounded-full border", chat.tagColor)}>
+                    {chat.tag}
+                  </span>
+
+                  <span className="text-[9px] font-mono text-zinc-400 flex items-center gap-1">
+                    {chat.mode === "autonomous" ? (
+                      <span className="text-emerald-600 font-semibold flex items-center gap-0.5">
+                        <Bot className="h-2.5 w-2.5" /> Bot Active
+                      </span>
+                    ) : (
+                      <span className="text-zinc-500 flex items-center gap-0.5">
+                        <User className="h-2.5 w-2.5" /> Human
+                      </span>
+                    )}
+                  </span>
                 </div>
               </div>
-            ))
-          ) : conversations.length === 0 ? (
-            <div className="p-8 text-center">
-              <MessageSquare className="h-8 w-8 text-zinc-300 mx-auto mb-2" />
-              <p className="text-xs text-zinc-400">No conversations yet</p>
-              <p className="text-[10px] text-zinc-300 mt-1">Messages from WhatsApp will appear here</p>
             </div>
-          ) : (
-            conversations.map((conv) => (
-              <button
-                key={conv.id}
-                onClick={() => setSelectedId(conv.id)}
-                className={cn(
-                  "w-full text-left p-4 hover:bg-zinc-50 transition-colors",
-                  selectedId === conv.id && "bg-blue-50/60 border-r-2 border-[#2563eb]"
-                )}
-              >
-                <div className="flex gap-3">
-                  <div className="h-9 w-9 rounded-full bg-zinc-900 text-white flex items-center justify-center text-xs font-semibold shrink-0">
-                    {initials(conv.contact_name)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-1">
-                      <span className="text-xs font-semibold text-zinc-900 truncate">{conv.contact_name}</span>
-                      <span className="text-[10px] text-zinc-400 shrink-0">
-                        {conv.last_message_at ? formatRelativeTime(conv.last_message_at) : ""}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1 mt-0.5">
-                      {HANDLER_ICONS[conv.handler_mode]}
-                      <p className="text-[11px] text-zinc-500 truncate flex-1">
-                        {conv.last_message_content || conv.contact_phone}
-                      </p>
-                      {conv.unread_count > 0 && (
-                        <span className="ml-1 flex items-center justify-center h-4 w-4 rounded-full bg-[#2563eb] text-white text-[9px] font-bold shrink-0">
-                          {conv.unread_count}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <Badge variant={STATUS_COLORS[conv.status as keyof typeof STATUS_COLORS] || "secondary"}>
-                        {conv.status}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))
-          )}
+          ))}
         </div>
       </div>
 
-      {/* ─── Conversation Thread ────────────────────────── */}
-      {selectedId && conversation ? (
-        <div className="flex-1 flex flex-col min-w-0">
-          {/* Thread header */}
-          <div className="px-6 py-3 border-b border-zinc-100 bg-white flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full bg-zinc-900 text-white flex items-center justify-center text-xs font-semibold">
-                {initials(conversation.contact_name)}
+      {/* ─── RIGHT: WhatsApp Conversation Area ─── */}
+      <div className="flex-1 flex flex-col bg-[#f0f2f5]/40 min-w-0">
+        {/* Chat Header */}
+        <div className="h-16 border-b border-zinc-200/90 bg-white px-6 flex items-center justify-between shrink-0 shadow-2xs">
+          <div className="flex items-center gap-3">
+            <img
+              src={selectedChat.avatar}
+              alt={selectedChat.name}
+              className="h-10 w-10 rounded-full object-cover ring-2 ring-emerald-500/20"
+            />
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-zinc-950">{selectedChat.name}</h3>
+                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-semibold">
+                  Meta Verified
+                </span>
               </div>
-              <div>
-                <p className="text-sm font-semibold text-zinc-900">{conversation.contact_name}</p>
-                <p className="text-xs text-zinc-400">{conversation.contact_phone}</p>
-              </div>
+              <p className="text-[11px] text-zinc-400 font-mono">{selectedChat.phone}</p>
             </div>
-            <div className="flex items-center gap-2">
-              {/* Handler mode toggle */}
-              <div className="flex items-center gap-1 bg-zinc-100 rounded-lg p-1">
-                {(["ai", "human", "hybrid"] as const).map((mode) => (
-                  <button
-                    key={mode}
-                    onClick={() => handoff(mode)}
-                    className={cn(
-                      "px-2 py-1 text-[10px] rounded-md font-medium transition-colors",
-                      conversation.handler_mode === mode
-                        ? "bg-white text-zinc-900 shadow-sm"
-                        : "text-zinc-500 hover:text-zinc-700"
-                    )}
-                  >
-                    {mode === "ai" ? "🤖 AI" : mode === "human" ? "👤 Human" : "🔀 Hybrid"}
-                  </button>
-                ))}
-              </div>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => updateStatus("resolved")}
-                className="text-xs gap-1"
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => toggleMode(selectedChat.id)}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all",
+                selectedChat.mode === "autonomous"
+                  ? "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100"
+                  : "bg-blue-50 text-[#2563eb] border-blue-200 hover:bg-blue-100"
+              )}
+            >
+              {selectedChat.mode === "autonomous" ? (
+                <>
+                  <Bot className="h-3.5 w-3.5" />
+                  <span>Autonomous Bot Mode (1.2s reply)</span>
+                </>
+              ) : (
+                <>
+                  <UserCheck className="h-3.5 w-3.5" />
+                  <span>Human Operator Takeover</span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Messages Stream */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          <div className="text-center my-2">
+            <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-zinc-200/80 text-zinc-600">
+              End-to-End Encrypted via WhatsApp Cloud API • Isolated Subdomain
+            </span>
+          </div>
+
+          {selectedChat.messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={cn("flex flex-col", msg.isOutbound ? "items-end" : "items-start")}
+            >
+              <div
+                className={cn(
+                  "p-3.5 rounded-2xl max-w-[80%] sm:max-w-[70%] shadow-2xs space-y-1.5 relative",
+                  msg.isOutbound
+                    ? "bg-[#2563eb] text-white rounded-tr-xs"
+                    : "bg-white text-zinc-900 border border-zinc-200/80 rounded-tl-xs"
+                )}
               >
-                <CheckCircle2 className="h-3.5 w-3.5" />
-                Resolve
-              </Button>
-            </div>
-          </div>
+                {msg.isBot && (
+                  <div className="flex items-center gap-1.5 text-[10px] text-cyan-200 font-mono font-bold pb-0.5 border-b border-white/10">
+                    <Sparkles className="h-3 w-3" />
+                    <span>Auto-Replied in {msg.latency || "1.2s"}</span>
+                  </div>
+                )}
 
-          {/* Handler indicator */}
-          <div className={cn(
-            "px-4 py-1.5 text-[11px] font-medium flex items-center gap-1.5",
-            conversation.handler_mode === "ai"
-              ? "bg-blue-50 text-[#2563eb] border-b border-blue-100"
-              : conversation.handler_mode === "human"
-              ? "bg-blue-50 text-blue-700 border-b border-blue-100"
-              : "bg-amber-50 text-amber-700 border-b border-amber-100"
-          )}>
-            {HANDLER_ICONS[conversation.handler_mode]}
-            {conversation.handler_mode === "ai" && "AI is handling this conversation"}
-            {conversation.handler_mode === "human" && "Human agent is handling this conversation"}
-            {conversation.handler_mode === "hybrid" && "Hybrid mode — AI and human collaboration"}
-          </div>
+                <p className="text-xs sm:text-sm leading-relaxed">{msg.text}</p>
 
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/40">
-            {msgLoading ? (
-              <div className="flex justify-center py-8">
-                <div className="h-6 w-6 rounded-full border-2 border-[#2563eb] border-t-transparent animate-spin" />
-              </div>
-            ) : messages.length === 0 ? (
-              <div className="text-center py-8">
-                <MessageSquare className="h-8 w-8 text-zinc-300 mx-auto mb-2" />
-                <p className="text-xs text-zinc-400">No messages yet</p>
-              </div>
-            ) : (
-              messages.map((msg) => (
+                {msg.attachment && (
+                  <a
+                    href={msg.attachment.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block p-2.5 rounded-xl bg-black/15 hover:bg-black/25 text-white transition-colors border border-white/20 mt-2"
+                  >
+                    <div className="flex items-center justify-between text-xs font-semibold">
+                      <span>{msg.attachment.title}</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-[10px] opacity-80 font-mono">{msg.attachment.link}</span>
+                  </a>
+                )}
+
                 <div
-                  key={msg.id}
                   className={cn(
-                    "flex",
-                    msg.direction === "outbound" ? "justify-end" : "justify-start"
+                    "flex items-center justify-end gap-1 text-[10px] pt-1",
+                    msg.isOutbound ? "text-blue-100" : "text-zinc-400"
                   )}
                 >
-                  {msg.direction === "inbound" && (
-                    <div className="h-7 w-7 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-semibold text-zinc-600 mr-2 shrink-0 mt-1">
-                      {initials(conversation.contact_name)}
-                    </div>
-                  )}
-                  <div className={cn(
-                    "max-w-xs lg:max-w-md rounded-2xl px-3.5 py-2.5 shadow-sm",
-                    msg.direction === "outbound"
-                      ? "bg-[#2563eb] text-white rounded-tr-sm"
-                      : msg.type === "note"
-                      ? "bg-amber-50 text-amber-900 border border-amber-200 rounded-tl-sm"
-                      : "bg-white text-zinc-900 border border-zinc-100 rounded-tl-sm"
-                  )}>
-                    {msg.type === "note" && (
-                      <p className="text-[9px] font-semibold text-amber-600 uppercase mb-1">Internal Note</p>
-                    )}
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-                    <div className={cn(
-                      "flex items-center justify-end gap-1 mt-1",
-                      msg.direction === "outbound" ? "text-blue-100" : "text-zinc-400"
-                    )}>
-                      <span className="text-[9px]">{formatRelativeTime(msg.created_at)}</span>
-                      {msg.direction === "outbound" && (
-                        <span className="text-[9px]">
-                          {msg.status === "read" ? "Delivered" : msg.status === "delivered" ? "Delivered" : msg.status === "sent" ? "Sent" : msg.status === "failed" ? "Failed" : "Queued"}
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  <span className="font-mono">{msg.time}</span>
+                  {msg.isOutbound && <CheckCheck className="h-3.5 w-3.5 text-cyan-300" />}
                 </div>
-              ))
-            )}
-          </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-          {/* Message input */}
-          <div className="p-4 border-t border-zinc-100 bg-white">
-            {conversation.handler_mode === "ai" && (
-              <div className="mb-2 flex items-center gap-2 text-xs text-zinc-500">
-                <Bot className="h-3.5 w-3.5 text-[#2563eb]" />
-                <span>AI is handling this. Switch to Human to reply manually.</span>
-              </div>
-            )}
-            <div className="flex gap-2">
-              <textarea
-                className="flex-1 resize-none rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#2563eb] min-h-[40px] max-h-32"
-                placeholder={conversation.handler_mode === "ai" ? "AI is handling this conversation…" : "Type a message…"}
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                disabled={conversation.handler_mode === "ai"}
-                rows={1}
-              />
-              <Button
-                onClick={handleSend}
-                isLoading={sending}
-                disabled={!messageInput.trim() || conversation.handler_mode === "ai"}
-                size="icon"
-                className="shrink-0"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+        {/* Quick Canned Responses Bar */}
+        <div className="px-6 py-2 bg-zinc-50 border-t border-zinc-200/80 flex items-center gap-2 overflow-x-auto">
+          <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider shrink-0">
+            Quick 1-Tap:
+          </span>
+          <button
+            onClick={() =>
+              handleSendMessage(
+                "Our retainers start at $1,800/mo. Here is our booking link to claim a slot: cal.com/onos/15min"
+              )
+            }
+            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
+          >
+            💵 Send Retainer Rates ($1,800/mo)
+          </button>
+          <button
+            onClick={() =>
+              handleSendMessage(
+                "Here is our direct booking link for a 15-min discovery call: https://cal.com/onos/15min"
+              )
+            }
+            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
+          >
+            📅 Send Cal.com Link
+          </button>
+          <button
+            onClick={() =>
+              handleSendMessage(
+                "Read our latest essay bridged from penna.dev: https://onos.jidosaap.xyz/read/48"
+              )
+            }
+            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
+          >
+            📰 Send Status Bridge Link
+          </button>
         </div>
-      ) : (
-        <div className="flex-1 flex flex-col items-center justify-center bg-slate-50/40">
-          <div className="text-center">
-            <div className="h-16 w-16 rounded-2xl bg-zinc-100 flex items-center justify-center mx-auto mb-4">
-              <MessageSquare className="h-8 w-8 text-zinc-300" />
-            </div>
-            <h3 className="text-sm font-semibold text-zinc-700 mb-1">Select a conversation</h3>
-            <p className="text-xs text-zinc-400 max-w-xs">
-              Choose a conversation from the left to view messages and respond.
-            </p>
-          </div>
-        </div>
-      )}
 
-      {/* ─── Contact Panel ──────────────────────────────── */}
-      {selectedId && conversation && (
-        <div className="w-64 border-l border-zinc-200 bg-white p-4 overflow-y-auto shrink-0">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Contact</h3>
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="h-10 w-10 rounded-full bg-zinc-900 text-white flex items-center justify-center text-sm font-semibold">
-                {initials(conversation.contact_name)}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-zinc-900">{conversation.contact_name}</p>
-                <Badge variant="secondary">{conversation.contact_status || "active"}</Badge>
-              </div>
-            </div>
-            <div className="space-y-2 pt-1 border-t border-zinc-100">
-              <div className="flex items-center gap-2 text-xs text-zinc-600">
-                <Phone className="h-3.5 w-3.5 text-zinc-400" />
-                <span>{conversation.contact_phone}</span>
-              </div>
-              {conversation.contact_email && (
-                <div className="flex items-center gap-2 text-xs text-zinc-600">
-                  <Mail className="h-3.5 w-3.5 text-zinc-400" />
-                  <span className="truncate">{conversation.contact_email}</span>
-                </div>
-              )}
-              {conversation.contact_company && (
-                <div className="flex items-center gap-2 text-xs text-zinc-600">
-                  <Building2 className="h-3.5 w-3.5 text-zinc-400" />
-                  <span>{conversation.contact_company}</span>
-                </div>
-              )}
-            </div>
-            <div className="pt-2 border-t border-zinc-100 space-y-1.5">
-              <h4 className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Actions</h4>
-              <Button size="sm" variant="outline" className="w-full justify-start text-xs gap-2">
-                <User className="h-3.5 w-3.5" />
-                View Contact
-              </Button>
-              <Button size="sm" variant="outline" className="w-full justify-start text-xs gap-2">
-                <ChevronRight className="h-3.5 w-3.5" />
-                Create Lead
-              </Button>
-            </div>
-          </div>
+        {/* Input Bar */}
+        <div className="p-4 bg-white border-t border-zinc-200/80 flex items-center gap-3">
+          <button
+            title="Attach Media / Rate Card PDF"
+            className="p-2 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 rounded-xl transition-colors"
+          >
+            <Paperclip className="h-4 w-4" />
+          </button>
+
+          <input
+            type="text"
+            value={messageInput}
+            onChange={(e) => setMessageInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSendMessage();
+              }
+            }}
+            placeholder="Type a WhatsApp reply or trigger automation..."
+            className="flex-1 text-xs sm:text-sm bg-zinc-50 border border-zinc-200/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-[#2563eb] transition-all"
+          />
+
+          <button
+            onClick={() => handleSendMessage()}
+            className="h-10 px-4 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white flex items-center justify-center gap-1.5 text-xs font-semibold shadow-xs transition-all active:scale-95"
+          >
+            <span>Send</span>
+            <Send className="h-3.5 w-3.5" />
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 }
