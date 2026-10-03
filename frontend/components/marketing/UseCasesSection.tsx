@@ -20,64 +20,27 @@ import {
 } from "lucide-react";
 
 export function UseCasesSection() {
-  // Interactive Demo 1: Precious (penna.dev newsletter bridge)
-  const [preciousPublished, setPreciousPublished] = useState(false);
-  const [preciousViews, setPreciousViews] = useState(384);
-
-  // Interactive Demo 2: Shola (7 AM Graphic Designer Drop)
-  const [sholaInquiryCount, setSholaInquiryCount] = useState(6);
-  const [sholaTriggered, setSholaTriggered] = useState(false);
-
-  // Interactive Demo 3: Michael (Group Spam Guardian)
-  const [michaelSpamCount, setMichaelSpamCount] = useState(0);
-  const [michaelLog, setMichaelLog] = useState<Array<{ id: number; text: string; type: "normal" | "warning" | "kicked" }>>([
-    { id: 1, text: "Sarah: Has anyone reviewed the new React 19 documentation?", type: "normal" },
-    { id: 2, text: "David: Yes! Server actions are much simpler now.", type: "normal" },
-  ]);
-
-  // Interactive Demo 4: Auto-Responder
+  // Interactive Demo 1: Auto-Responder
   const [autoChatLog, setAutoChatLog] = useState<Array<{ sender: "user" | "bot"; text: string; time: string }>>([
     { sender: "user", text: "Hey! What are your rates for a 3-month brand design retainer?", time: "02:14 AM" },
     { sender: "bot", text: "Hello! Thanks for reaching out. Our design retainers start at $1,800/mo including unlimited revisions. Would you like to view our portfolio or book a 15-min discovery call?", time: "02:14 AM" },
   ]);
   const [testUserMsg, setTestUserMsg] = useState("");
 
-  const handlePreciousPublish = () => {
-    setPreciousPublished(true);
-    setPreciousViews((prev) => prev + 24);
-  };
+  // Interactive Demo 2: Michael (Group Spam Guardian)
+  const [michaelSpamCount, setMichaelSpamCount] = useState(0);
+  const [michaelLog, setMichaelLog] = useState<Array<{ id: number; text: string; type: "normal" | "warning" | "kicked" }>>([
+    { id: 1, text: "Sarah: Has anyone reviewed the new React 19 documentation?", type: "normal" },
+    { id: 2, text: "David: Yes! Server actions are much simpler now.", type: "normal" },
+  ]);
 
-  const handleSholaTriggerDrop = () => {
-    setSholaTriggered(true);
-    setSholaInquiryCount((prev) => prev + 1);
-  };
+  // Interactive Demo 3: Precious (Newsletter-to-Status Bridge)
+  const [preciousPublished, setPreciousPublished] = useState(false);
+  const [preciousViews, setPreciousViews] = useState(384);
 
-  const handleMichaelSimulateSpam = () => {
-    const nextCount = michaelSpamCount + 1;
-    setMichaelSpamCount(nextCount);
-
-    if (nextCount === 1) {
-      setMichaelLog((prev) => [
-        ...prev,
-        { id: Date.now(), text: "CryptoBot99: Claim Free $5000 USDT Now -> http://bit.ly/scam999", type: "warning" },
-        { id: Date.now() + 1, text: "JidoSapp Guardian: [Strike 1/2] Unauthorized link deleted. Warning issued to CryptoBot99.", type: "warning" },
-      ]);
-    } else {
-      setMichaelLog((prev) => [
-        ...prev,
-        { id: Date.now(), text: "CryptoBot99: CLICK BEFORE EXPIRED: t.me/fast_money_scam", type: "kicked" },
-        { id: Date.now() + 1, text: "JidoSapp Guardian: [Strike 2/2 Maximum Reached] Spam deleted. Offender CryptoBot99 has been exited from the group.", type: "kicked" },
-      ]);
-    }
-  };
-
-  const handleMichaelReset = () => {
-    setMichaelSpamCount(0);
-    setMichaelLog([
-      { id: 1, text: "Sarah: Has anyone reviewed the new React 19 documentation?", type: "normal" },
-      { id: 2, text: "David: Yes! Server actions are much simpler now.", type: "normal" },
-    ]);
-  };
+  // Interactive Demo 4: Shola (7 AM Graphic Designer Drop)
+  const [sholaInquiryCount, setSholaInquiryCount] = useState(6);
+  const [sholaTriggered, setSholaTriggered] = useState(false);
 
   const handleSendAutoChat = (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,6 +63,43 @@ export function UseCasesSection() {
     }, 600);
   };
 
+  const handleMichaelSimulateSpam = () => {
+    const nextCount = michaelSpamCount + 1;
+    setMichaelSpamCount(nextCount);
+
+    if (nextCount === 1) {
+      setMichaelLog((prev) => [
+        ...prev,
+        { id: Date.now(), text: "CryptoBot99: Claim Free $5000 USDT Now -> http://bit.ly/scag999", type: "warning" },
+        { id: Date.now() + 1, text: "JidoSapp Guardian: [Strike 1/2] Unauthorized link deleted. Warning issued to CryptoBot99.", type: "warning" },
+      ]);
+    } else {
+      setMichaelLog((prev) => [
+        ...prev,
+        { id: Date.now(), text: "CryptoBot99: CLICK BEFORE EXPIRED: t.me/fast_money_scam", type: "kicked" },
+        { id: Date.now() + 1, text: "JidoSapp Guardian: [Strike 2/2 Maximum Reached] Spam deleted. Offender CryptoBot99 has been exited from the group.", type: "kicked" },
+      ]);
+    }
+  };
+
+  const handleMichaelReset = () => {
+    setMichaelSpamCount(0);
+    setMichaelLog([
+      { id: 1, text: "Sarah: Has anyone reviewed the new React 19 documentation?", type: "normal" },
+      { id: 2, text: "David: Yes! Server actions are much simpler now.", type: "normal" },
+    ]);
+  };
+
+  const handlePreciousPublish = () => {
+    setPreciousPublished(true);
+    setPreciousViews((prev) => prev + 24);
+  };
+
+  const handleSholaTriggerDrop = () => {
+    setSholaTriggered(true);
+    setSholaInquiryCount((prev) => prev + 1);
+  };
+
   return (
     <section id="use-cases" className="max-w-7xl mx-auto px-6 lg:px-12 space-y-24">
       <div className="text-center space-y-3 max-w-2xl mx-auto">
@@ -107,32 +107,227 @@ export function UseCasesSection() {
         <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
           Four Stories. Four WhatsApp Superpowers.
         </h2>
-        <p className="text-sm text-zinc-600">
+        <p className="text-sm text-zinc-600 font-outfit">
           Interact with live simulators of real creators, designers, group admins, and 24/7 auto-responders.
         </p>
       </div>
 
-      {/* ── USE CASE 1: PRECIOUS @ PENNA.DEV ── */}
-      <div id="use-case-precious" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
+      {/* ── FEATURE 1: 24/7 ZERO-LATENCY AUTO-RESPONDER & CRM ── */}
+      <div id="use-case-auto-responder" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">
-              <Newspaper className="h-3.5 w-3.5" />
-              <span>Use Case #1 · Newsletter-to-Status Bridge</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#2563eb] text-xs font-semibold">
+              <Bot className="h-3.5 w-3.5" />
+              <span>Use Case #1 · 24/7 Zero-Latency Auto-Responder</span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-              Precious publishes at <span className="text-indigo-600">penna.dev</span>. With 1 tap, it’s on WhatsApp Status.
+            <h3 className="font-outfit text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+              Never leave a client on &quot;read&quot;. <span className="text-[#2563eb]">Auto-respond in seconds</span> at 2:00 AM.
             </h3>
 
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Precious writes tech essays on penna.dev. Writing is hard enough; he hated switching between tabs, copying links, and typing out WhatsApp Status updates manually.
+            <p className="text-sm text-zinc-600 leading-relaxed font-outfit">
+              When prospects reach out after business hours or while you&apos;re focused, delay means lost revenue. JidoSapp answers inquiries instantly with intelligent menus, pricing, catalog links, and captures leads directly into your CRM.
             </p>
 
             <div className="space-y-3 text-xs text-zinc-700">
               <div className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Zero Manual Tab Switching:</strong> Hit publish in penna.dev or tap the Jido bridge button.</span>
+                <span><strong>Zero-Latency Replies:</strong> Instant replies 24/7 without keeping prospects waiting.</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Automatic CRM Capture:</strong> Extracts client intent, budget, and tags qualified leads into Kanban pipelines.</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Smart Human Escalation:</strong> Escalates to your team when human intervention or closure is required.</span>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <Link href="/request-integration?use_case=custom">
+                <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white gap-2 text-xs h-10 px-5">
+                  <span>Setup 24/7 Auto-Responder</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+                <span className="text-xs font-mono text-zinc-300">24/7 smart auto-responder · zero latency</span>
+              </div>
+              <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">auto-replied in 0.8s</span>
+            </div>
+
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
+              <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
+                <div className="flex items-center gap-2 font-bold text-zinc-200">
+                  <Bot className="h-4 w-4 text-blue-400" />
+                  <span>Business WhatsApp Bot (Live Simulation)</span>
+                </div>
+                <span className="text-emerald-400 font-mono text-[10px]">Online 24/7</span>
+              </div>
+
+              <div className="h-56 overflow-y-auto space-y-3 pr-2 text-xs">
+                {autoChatLog.map((msg, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"}`}
+                  >
+                    <div
+                      className={`max-w-[85%] rounded-2xl p-3 text-left ${
+                        msg.sender === "user"
+                          ? "bg-[#2563eb] text-white rounded-br-none"
+                          : "bg-zinc-800 border border-zinc-700/80 text-zinc-200 rounded-bl-none"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                    <span className="text-[9px] text-zinc-500 mt-1 px-1">{msg.time}</span>
+                  </div>
+                ))}
+              </div>
+
+              <form onSubmit={handleSendAutoChat} className="pt-2 border-t border-zinc-800 flex items-center gap-2">
+                <input
+                  type="text"
+                  placeholder="Type 'pricing', 'book call', or anything..."
+                  value={testUserMsg}
+                  onChange={(e) => setTestUserMsg(e.target.value)}
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 font-outfit"
+                />
+                <Button type="submit" size="sm" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs h-8 px-4 font-outfit">
+                  Send
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── FEATURE 2: GROUP BUDDY / ANTI-SPAM SENTINEL (MICHAEL) ── */}
+      <div id="use-case-michael" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="text-xs font-mono text-zinc-300">group spam sentinel &amp; strike engine</span>
+              </div>
+              <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">michael.jidosaap.xyz</span>
+            </div>
+
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
+              <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
+                <div className="flex items-center gap-2 font-bold text-zinc-200">
+                  <Users className="h-4 w-4 text-emerald-400" />
+                  <span>Frontend Developers Hub (1,480 Members)</span>
+                </div>
+                <button onClick={handleMichaelReset} className="text-zinc-500 hover:text-zinc-300 flex items-center gap-1 text-[11px]">
+                  <RotateCcw className="h-3 w-3" /> Reset Test
+                </button>
+              </div>
+
+              <div className="h-52 overflow-y-auto space-y-2.5 pr-2 font-sans text-xs">
+                {michaelLog.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`p-2.5 rounded-lg border text-left ${
+                      item.type === "normal"
+                        ? "bg-zinc-800/80 border-zinc-700 text-zinc-200"
+                        : item.type === "warning"
+                        ? "bg-amber-950/60 border-amber-600/50 text-amber-200 font-medium"
+                        : "bg-red-950/70 border-red-600/50 text-red-200 font-bold"
+                    }`}
+                  >
+                    {item.text}
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-2 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="text-[11px] text-zinc-400">
+                  Spammer Strikes: <span className="font-bold text-red-400 font-mono">{michaelSpamCount} / 2</span>
+                </div>
+                <Button
+                  onClick={handleMichaelSimulateSpam}
+                  disabled={michaelSpamCount >= 2}
+                  size="sm"
+                  className="w-full sm:w-auto text-xs bg-red-600 hover:bg-red-500 text-white font-semibold gap-1.5"
+                >
+                  <Flame className="h-3.5 w-3.5" />
+                  <span>{michaelSpamCount === 0 ? "Test: Spammer Posts Scam Link" : michaelSpamCount === 1 ? "Test: Spammer Repeats Infraction" : "Spammer Exited by Bot"}</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold">
+              <ShieldAlert className="h-3.5 w-3.5" />
+              <span>Use Case #2 · 24/7 Group Guardian &amp; Strike System</span>
+            </div>
+
+            <h3 className="font-outfit text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+              Michael runs WhatsApp groups. JidoSapp <span className="text-emerald-600">filters spam links, issues strikes, and auto-exits</span> offenders.
+            </h3>
+
+            <p className="text-sm text-zinc-600 leading-relaxed font-outfit">
+              Spammers constantly invade community groups with scam crypto links and telegram invites. Michael couldn&apos;t monitor the group 24/7. JidoSapp inspects messages, issues strike flags, and kicks scammers automatically.
+            </p>
+
+            <div className="space-y-3 text-xs text-zinc-700">
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Real-Time Link &amp; Pattern Inspector:</strong> Banned domains and scam invite links are trapped immediately.</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Strike Warnings &amp; Auto-Exit:</strong> Automated warnings on strike 1; immediate removal from the group on strike 2.</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Dedicated Subdomain:</strong> Managed on <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-emerald-700 font-semibold">michael.jidosaap.xyz</code>.</span>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <Link href="/request-integration?use_case=group_spam_guardian&subdomain=michael">
+                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 text-xs h-10 px-5">
+                  <span>Protect My WhatsApp Group</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── FEATURE 3: 1-TAP NEWSLETTER STATUS BRIDGE (PRECIOUS) ── */}
+      <div id="use-case-precious" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-5 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">
+              <Newspaper className="h-3.5 w-3.5" />
+              <span>Use Case #3 · Newsletter-to-Status Bridge</span>
+            </div>
+
+            <h3 className="font-outfit text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+              Precious publishes his newsletter. With 1 tap, it’s on WhatsApp Status.
+            </h3>
+
+            <p className="text-sm text-zinc-600 leading-relaxed font-outfit">
+              Precious writes tech essays on his newsletter. Writing is hard enough; he hated switching between tabs, copying links, and typing out WhatsApp Status updates manually.
+            </p>
+
+            <div className="space-y-3 text-xs text-zinc-700">
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Zero Manual Tab Switching:</strong> Hit publish in your newsletter editor or tap the Jido bridge button.</span>
               </div>
               <div className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -159,7 +354,7 @@ export function UseCasesSection() {
             <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
               <div className="flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                <span className="text-xs font-mono text-zinc-300">penna.dev ➔ jidosaap webhook bridge</span>
+                <span className="text-xs font-mono text-zinc-300">newsletter ➔ jidosaap webhook bridge</span>
               </div>
               <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">precious.jidosaap.xyz</span>
             </div>
@@ -204,7 +399,7 @@ export function UseCasesSection() {
                 <div className="flex items-center justify-between text-[11px] border-b border-zinc-800/80 pb-2">
                   <div className="flex items-center gap-1.5 text-zinc-300 font-semibold">
                     <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                    <span>Precious's WhatsApp Status</span>
+                    <span>Precious&apos;s WhatsApp Status</span>
                   </div>
                   <span className="text-zinc-500 text-[10px]">{preciousPublished ? "Just now" : "Waiting for publish…"}</span>
                 </div>
@@ -246,7 +441,7 @@ export function UseCasesSection() {
         </div>
       </div>
 
-      {/* ── USE CASE 2: SHOLA THE GRAPHIC DESIGNER ── */}
+      {/* ── FEATURE 4: 7:00 AM SCHEDULED DROPS (SHOLA) ── */}
       <div id="use-case-shola" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
@@ -270,7 +465,7 @@ export function UseCasesSection() {
                 <div className="aspect-video bg-zinc-800 rounded-lg border border-zinc-700 p-3 flex flex-col justify-end relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
                   <div className="relative text-left">
-                    <span className="text-[9px] font-mono bg-rose-600 text-white px-1.5 py-0.5 rounded uppercase font-bold">Today's Showcase</span>
+                    <span className="text-[9px] font-mono bg-[#2563eb] text-white px-1.5 py-0.5 rounded uppercase font-bold">Today&apos;s Showcase</span>
                     <div className="text-xs font-bold text-white mt-0.5">FinTech Mobile UI Rebrand</div>
                   </div>
                 </div>
@@ -301,7 +496,7 @@ export function UseCasesSection() {
                         <span>07:08 AM</span>
                       </div>
                       <p className="text-zinc-300 text-[11px]">
-                        "Hey Shola! Saw your 7 AM status drop. Can you design our pitch deck this week?"
+                        &quot;Hey Shola! Saw your 7 AM status drop. Can you design our pitch deck this week?&quot;
                       </p>
                     </div>
 
@@ -312,7 +507,7 @@ export function UseCasesSection() {
                           <span>Just now</span>
                         </div>
                         <p className="text-zinc-200 text-[11px]">
-                          "Love the daily consistency. Need your rate card for a 3-month retainer!"
+                          &quot;Love the daily consistency. Need your rate card for a 3-month retainer!&quot;
                         </p>
                       </div>
                     )}
@@ -329,14 +524,14 @@ export function UseCasesSection() {
           <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold">
               <Palette className="h-3.5 w-3.5" />
-              <span>Use Case #2 · Consistency Engine for Freelancers</span>
+              <span>Use Case #4 · Consistency Engine for Freelancers</span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+            <h3 className="font-outfit text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
               Shola is a graphic designer. JidoSapp posts daily at <span className="text-amber-600">7:00 AM sharp</span>.
             </h3>
 
-            <p className="text-sm text-zinc-600 leading-relaxed">
+            <p className="text-sm text-zinc-600 leading-relaxed font-outfit">
               Clients hire the designers they see every single day. Shola struggled with waking up early and remembering to post daily portfolio designs. With JidoSapp, he queues a month in advance and lets consistency work for him.
             </p>
 
@@ -359,201 +554,6 @@ export function UseCasesSection() {
               <Link href="/request-integration?use_case=graphic_scheduler&subdomain=shola">
                 <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2 text-xs h-10 px-5">
                   <span>Setup Daily 7 AM Scheduler</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── USE CASE 3: MICHAEL'S GROUP SPAM GUARDIAN ── */}
-      <div id="use-case-michael" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
-        <div className="grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold">
-              <ShieldAlert className="h-3.5 w-3.5" />
-              <span>Use Case #3 · 24/7 Group Guardian &amp; Strike System</span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-              Michael runs WhatsApp groups. JidoSapp <span className="text-emerald-600">filters spam links, issues strikes, and auto-exits</span> offenders.
-            </h3>
-
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Spammers constantly invade community groups with scam crypto links and telegram invites. Michael couldn’t monitor the group 24/7. JidoSapp inspects messages, issues strike flags, and kicks scammers automatically.
-            </p>
-
-            <div className="space-y-3 text-xs text-zinc-700">
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Real-Time Link &amp; Pattern Inspector:</strong> Banned domains and scam invite links are trapped immediately.</span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Strike Warnings &amp; Auto-Exit:</strong> Automated warnings on strike 1; immediate removal from the group on strike 2.</span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Dedicated Subdomain:</strong> Managed on <code className="font-mono bg-zinc-100 px-1 py-0.5 rounded text-emerald-700 font-semibold">michael.jidosaap.xyz</code>.</span>
-              </div>
-            </div>
-
-            <div className="pt-2">
-              <Link href="/request-integration?use_case=group_spam_guardian&subdomain=michael">
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 text-xs h-10 px-5">
-                  <span>Protect My WhatsApp Group</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-xs font-mono text-zinc-300">group spam sentinel &amp; strike engine</span>
-              </div>
-              <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">michael.jidosaap.xyz</span>
-            </div>
-
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
-              <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
-                <div className="flex items-center gap-2 font-bold text-zinc-200">
-                  <Users className="h-4 w-4 text-emerald-400" />
-                  <span>Frontend Developers Hub (1,480 Members)</span>
-                </div>
-                <button onClick={handleMichaelReset} className="text-zinc-500 hover:text-zinc-300 flex items-center gap-1 text-[11px]">
-                  <RotateCcw className="h-3 w-3" /> Reset Test
-                </button>
-              </div>
-
-              <div className="h-52 overflow-y-auto space-y-2.5 pr-2 font-sans text-xs">
-                {michaelLog.map((item) => (
-                  <div
-                    key={item.id}
-                    className={`p-2.5 rounded-lg border text-left ${
-                      item.type === "normal"
-                        ? "bg-zinc-800/80 border-zinc-700 text-zinc-200"
-                        : item.type === "warning"
-                        ? "bg-amber-950/60 border-amber-600/50 text-amber-200 font-medium"
-                        : "bg-rose-950/70 border-rose-600/50 text-rose-200 font-bold"
-                    }`}
-                  >
-                    {item.text}
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-2 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <div className="text-[11px] text-zinc-400">
-                  Spammer Strikes: <span className="font-bold text-rose-400 font-mono">{michaelSpamCount} / 2</span>
-                </div>
-                <Button
-                  onClick={handleMichaelSimulateSpam}
-                  disabled={michaelSpamCount >= 2}
-                  size="sm"
-                  className="w-full sm:w-auto text-xs bg-rose-600 hover:bg-rose-500 text-white font-semibold gap-1.5"
-                >
-                  <Flame className="h-3.5 w-3.5" />
-                  <span>{michaelSpamCount === 0 ? "Test: Spammer Posts Scam Link" : michaelSpamCount === 1 ? "Test: Spammer Repeats Infraction" : "Spammer Exited by Bot"}</span>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── USE CASE 4: 24/7 AUTO-RESPONDER & SMART LEAD CAPTURE ── */}
-      <div id="use-case-auto-responder" className="scroll-mt-24 rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm">
-        <div className="grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7 order-2 lg:order-1 bg-zinc-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-zinc-800 space-y-6">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
-                <span className="text-xs font-mono text-zinc-300">24/7 smart auto-responder · zero latency</span>
-              </div>
-              <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded">auto-replied in 0.8s</span>
-            </div>
-
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-3">
-              <div className="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-2">
-                <div className="flex items-center gap-2 font-bold text-zinc-200">
-                  <Bot className="h-4 w-4 text-blue-400" />
-                  <span>Business WhatsApp Bot (Live Simulation)</span>
-                </div>
-                <span className="text-emerald-400 font-mono text-[10px]">Online 24/7</span>
-              </div>
-
-              <div className="h-56 overflow-y-auto space-y-3 pr-2 text-xs">
-                {autoChatLog.map((msg, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"}`}
-                  >
-                    <div
-                      className={`max-w-[85%] rounded-2xl p-3 text-left ${
-                        msg.sender === "user"
-                          ? "bg-[#2563eb] text-white rounded-br-none"
-                          : "bg-zinc-800 border border-zinc-700/80 text-zinc-200 rounded-bl-none"
-                      }`}
-                    >
-                      {msg.text}
-                    </div>
-                    <span className="text-[9px] text-zinc-500 mt-1 px-1">{msg.time}</span>
-                  </div>
-                ))}
-              </div>
-
-              <form onSubmit={handleSendAutoChat} className="pt-2 border-t border-zinc-800 flex items-center gap-2">
-                <input
-                  type="text"
-                  placeholder="Type 'pricing', 'book call', or anything..."
-                  value={testUserMsg}
-                  onChange={(e) => setTestUserMsg(e.target.value)}
-                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
-                />
-                <Button type="submit" size="sm" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs h-8 px-4">
-                  Send
-                </Button>
-              </form>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 order-1 lg:order-2 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">
-              <Bot className="h-3.5 w-3.5" />
-              <span>Use Case #4 · 24/7 Auto-Responder &amp; CRM</span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-              Never leave a client on "read". <span className="text-[#2563eb]">Auto-respond in seconds</span> at 2:00 AM.
-            </h3>
-
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              When prospects reach out after business hours or while you're focused, delay means lost revenue. JidoSapp answers inquiries instantly with intelligent menus, pricing, catalog links, and captures leads directly into your CRM.
-            </p>
-
-            <div className="space-y-3 text-xs text-zinc-700">
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Zero-Latency Replies:</strong> Instant replies 24/7 without keeping prospects waiting.</span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Automatic CRM Capture:</strong> Extracts client intent, budget, and tags qualified leads into Kanban pipelines.</span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Smart Human Escalation:</strong> Escalates to your team when human intervention or closure is required.</span>
-              </div>
-            </div>
-
-            <div className="pt-2">
-              <Link href="/request-integration?use_case=custom">
-                <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white gap-2 text-xs h-10 px-5">
-                  <span>Setup 24/7 Auto-Responder</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </Link>

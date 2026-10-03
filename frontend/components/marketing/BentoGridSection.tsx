@@ -137,7 +137,7 @@ export function BentoGridSection() {
               Seamless Newsletter Publishing
             </h3>
             <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
-              Precious publishes on <span className="font-semibold text-zinc-900">penna.dev</span> and with a single tap, JidoSapp bridges the formatted update and tracked link to WhatsApp Status.
+              Precious publishes his newsletter and with a single tap, JidoSapp bridges the formatted update and tracked link to WhatsApp Status.
             </p>
           </div>
         </div>

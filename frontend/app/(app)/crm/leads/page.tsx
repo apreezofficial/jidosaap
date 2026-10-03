@@ -63,7 +63,7 @@ const INITIAL_TASKS: TaskItem[] = [
     createdDate: "Sep 28, 2026 09:30 AM",
     dueDate: "Oct 04, 2026",
     assignees: [
-      { name: "Precious O.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
+      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
       { name: "David Chen", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80" },
     ],
     attachments: [
@@ -88,7 +88,7 @@ const INITIAL_TASKS: TaskItem[] = [
     createdDate: "Sep 29, 2026 02:15 PM",
     dueDate: "Oct 05, 2026",
     assignees: [
-      { name: "Precious O.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
+      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
       { name: "Alex Johnson", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80" },
     ],
     attachments: [
@@ -134,7 +134,7 @@ const INITIAL_TASKS: TaskItem[] = [
     createdDate: "Sep 30, 2026 12:45 PM",
     dueDate: "Oct 03, 2026",
     assignees: [
-      { name: "Precious O.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
+      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
     ],
     attachments: [
       { name: "Case Study Assets.zip", size: "8.45 MB", type: "ZIP" },
@@ -146,7 +146,7 @@ const INITIAL_TASKS: TaskItem[] = [
         title: "Format visual preview cards for WhatsApp",
         completed: true,
         note: "Ensure image dimensions fit 1:1 mobile feed and load instantly over 3G/4G connections.",
-        assignee: "Precious O.",
+        assignee: "Onos E.",
         date: "Oct 01, 2026",
       },
       { id: "st-9", title: "Schedule cron trigger for 07:00 AM sharp", completed: true },
@@ -168,7 +168,7 @@ const INITIAL_TASKS: TaskItem[] = [
     dueDate: "Oct 04, 2026",
     assignees: [
       { name: "Alex Johnson", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80" },
-      { name: "Precious O.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
+      { name: "Onos E.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" },
     ],
     attachments: [
       { name: "Chat Transcripts Oct 01.json", size: "1.12 MB", type: "JSON" },

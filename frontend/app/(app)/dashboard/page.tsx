@@ -36,8 +36,8 @@ export default function ChronoTaskDashboardHome() {
   const { user } = useAuth();
 
   // User Greeting
-  const userName = user?.name ? user.name.split(" ")[0] : "Precious";
-  const userFullName = user?.name || "Precious O.";
+  const userName = user?.name ? user.name.split(" ")[0] : "Onos";
+  const userFullName = user?.name || "Onos E.";
   const userInitials = userFullName
     .split(" ")
     .map((n) => n[0])
@@ -302,46 +302,69 @@ export default function ChronoTaskDashboardHome() {
           {/* Top Bar */}
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-              <span className="text-xs font-bold tracking-wide uppercase font-sans">Autonomous uptime</span>
+              <span className={cn("w-2 h-2 rounded-full", isEngineRunning ? "bg-white animate-pulse" : "bg-white/40")} />
+              <span className="text-xs font-bold tracking-wide uppercase font-sans">
+                {isEngineRunning ? "Autonomous uptime" : "Engine Paused"}
+              </span>
             </div>
-            <button className="text-white/80 hover:text-white transition-colors">
-              <MoreVertical className="h-4 w-4" />
-            </button>
+            <span className={cn(
+              "text-[10px] font-mono px-2 py-0.5 rounded-full font-bold uppercase transition-colors",
+              isEngineRunning ? "bg-black/25 text-white" : "bg-white/20 text-white"
+            )}>
+              {isEngineRunning ? "Live" : "Standby"}
+            </span>
           </div>
 
           {/* Big Digital Display: 04:21:58 */}
           <div className="relative z-10 my-auto text-center">
-            <span className="text-4xl sm:text-5xl font-mono font-bold tracking-tight drop-shadow-xs">
+            <span className={cn(
+              "text-4xl sm:text-5xl font-mono font-bold tracking-tight drop-shadow-xs transition-opacity duration-300",
+              !isEngineRunning && "opacity-80"
+            )}>
               {formatTimer(seconds)}
             </span>
             <p className="text-[11px] font-semibold text-white/90 mt-1">
-              Autonomous Engine Active • Meta Cloud API
+              {isEngineRunning ? "Autonomous Engine Active • Meta Cloud API" : "Autonomous Engine Paused • Click Resume"}
             </p>
           </div>
 
           {/* Control Buttons */}
-          <div className="relative z-10 flex items-center justify-center gap-3">
+          <div className="relative z-10 flex items-center justify-center gap-2.5">
             <button
               onClick={() => setIsEngineRunning(!isEngineRunning)}
-              className="h-10 w-10 rounded-full bg-white text-zinc-900 shadow-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
+              className={cn(
+                "h-9 px-3.5 rounded-full font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 cursor-pointer",
+                isEngineRunning
+                  ? "bg-white text-zinc-950 hover:bg-zinc-100"
+                  : "bg-emerald-600 text-white hover:bg-emerald-500 ring-2 ring-white/40"
+              )}
               title={isEngineRunning ? "Pause Autonomous Engine" : "Resume Autonomous Engine"}
             >
               {isEngineRunning ? (
-                <Pause className="h-4 w-4 fill-zinc-900" />
+                <>
+                  <Pause className="h-3.5 w-3.5 fill-current" />
+                  <span>Pause</span>
+                </>
               ) : (
-                <Play className="h-4 w-4 fill-zinc-900 ml-0.5" />
+                <>
+                  <Play className="h-3.5 w-3.5 fill-current ml-0.5" />
+                  <span>Resume</span>
+                </>
               )}
             </button>
             <button
               onClick={() => {
-                setIsEngineRunning(false);
-                setSeconds(0);
+                if (seconds === 0) {
+                  setSeconds(15718);
+                } else {
+                  setSeconds(0);
+                }
               }}
-              className="h-10 w-10 rounded-full bg-zinc-900 text-white shadow-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
-              title="Reset Engine Session"
+              className="h-9 px-3 rounded-full bg-black/30 hover:bg-black/40 text-white border border-white/25 shadow-sm flex items-center justify-center gap-1.5 text-xs font-semibold transition-all active:scale-95 cursor-pointer"
+              title={seconds === 0 ? "Restore Initial Uptime (04:21:58)" : "Reset Session Timer to 00:00:00"}
             >
-              <Square className="h-4 w-4 fill-white" />
+              <Square className="h-3.5 w-3.5 fill-current" />
+              <span>{seconds === 0 ? "Restore" : "Reset"}</span>
             </button>
           </div>
         </div>
