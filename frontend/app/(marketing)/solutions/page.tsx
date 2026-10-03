@@ -76,8 +76,16 @@ export default function SolutionsHubPage() {
           <Sparkles className="h-3.5 w-3.5 text-[#2563eb]" />
           <span>Tailored WhatsApp Automations</span>
         </div>
-        <h1 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
-          Solutions engineered for how you actually work.
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Solutions engineered for
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            how you actually work.
+          </span>
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
           Explore individual solutions built specifically to solve real bottlenecks for creators, freelance designers, community directors, and growing businesses.

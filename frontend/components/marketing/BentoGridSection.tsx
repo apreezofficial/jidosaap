@@ -57,8 +57,16 @@ export function BentoGridSection() {
           <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
           <span>Core Superpowers</span>
         </div>
-        <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
-          Keep everything in one place
+        <h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Keep everything in one place.
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            Autonomous growth on autopilot.
+          </span>
         </h2>
         <p className="text-sm sm:text-base text-zinc-500 leading-relaxed font-normal max-w-xl mx-auto">
           Four dedicated engines working in lockstep to keep your WhatsApp channel active, converting, and organized 24 hours a day.

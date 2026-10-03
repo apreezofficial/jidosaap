@@ -25,8 +25,16 @@ export default function NewsletterBridgePage() {
           <Newspaper className="h-3.5 w-3.5" />
           <span>Publishing &amp; Distribution Bridge</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-          Publish from Penna.dev directly to WhatsApp Status.
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Publish your newsletter directly
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            to WhatsApp Status.
+          </span>
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
           No copy-pasting links. No uploading manual screenshots. Click "Publish" on your blog or newsletter, and JidoSapp automatically formats and drops the card straight onto your official WhatsApp Status.

@@ -27,8 +27,16 @@ export default function FeaturesPage() {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200/90 text-xs font-semibold text-zinc-700 shadow-2xs">
           <span>Enterprise Platform Capabilities</span>
         </div>
-        <h1 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
-          Your WhatsApp can do more than you think.
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Autonomous features engineered
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            to scale your audience.
+          </span>
         </h1>
         <p className="text-base sm:text-lg text-zinc-500 leading-relaxed max-w-2xl mx-auto">
           From 24/7 group spam moderation and zero-latency auto-responders to 7:00 AM portfolio broadcasts—explore the full spectrum of tools provisioned on your dedicated <code className="font-mono font-bold text-zinc-900 bg-zinc-100 px-1.5 py-0.5 rounded">*.jidosaap.xyz</code> subdomain.

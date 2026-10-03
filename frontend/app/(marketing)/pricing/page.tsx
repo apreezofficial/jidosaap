@@ -14,8 +14,16 @@ export default function PricingPage() {
         <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-zinc-200/80 shadow-2xs text-xs font-semibold text-zinc-700">
           Pricing
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-          Simple pricing plans
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Simple, transparent pricing
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            for every growth stage.
+          </span>
         </h1>
         <p className="text-sm sm:text-base text-zinc-500 leading-relaxed">
           Every plan includes your dedicated <code className="font-mono font-bold text-zinc-900 bg-zinc-100 px-1.5 py-0.5 rounded">*.jidosaap.xyz</code> subdomain, verified Meta WhatsApp Cloud API instance, and isolated database.

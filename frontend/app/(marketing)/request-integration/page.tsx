@@ -346,8 +346,16 @@ function RequestIntegrationWizard() {
             <ChevronRight className="h-3 w-3 text-zinc-300" />
             <span className="text-zinc-700 font-semibold">Request Setup &amp; Automation</span>
           </nav>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-zinc-950 font-outfit">
-            Set Up Your WhatsApp Superpower
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-normal leading-[1.05] tracking-[-2px] text-zinc-950 font-outfit"
+            style={{ fontWeight: 400 }}
+          >
+            <span className="block text-zinc-950 font-normal">
+              Set up your WhatsApp
+            </span>
+            <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+              autonomous superpower.
+            </span>
           </h1>
           <p className="text-xs sm:text-sm text-zinc-500 mt-1 font-outfit">
             Whether you want Group Buddy, 24/7 Auto-Responder, Newsletter Status Bridge, or a SaaS integration.

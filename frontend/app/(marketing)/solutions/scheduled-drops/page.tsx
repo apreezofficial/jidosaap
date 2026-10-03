@@ -25,8 +25,16 @@ export default function ScheduledDropsPage() {
           <Calendar className="h-3.5 w-3.5" />
           <span>Consistency Engine for Creators &amp; Designers</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-          7:00 AM Daily Scheduled Portfolio Drops.
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            7:00 AM Daily Scheduled
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            portfolio &amp; status drops.
+          </span>
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
           Consistency is what convinces high-ticket clients to hire you. Queue your graphics, case studies, or design tips once a week—and let JidoSapp broadcast them at 7:00 AM sharp every morning while you sleep.

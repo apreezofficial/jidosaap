@@ -104,8 +104,16 @@ export function UseCasesSection() {
     <section id="use-cases" className="max-w-7xl mx-auto px-6 lg:px-12 space-y-24">
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="text-xs font-bold uppercase tracking-wider text-[#2563eb]">Proven In The Real World</div>
-        <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
-          Four Stories. Four WhatsApp Superpowers.
+        <h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Four Stories.
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            Four WhatsApp Superpowers.
+          </span>
         </h2>
         <p className="text-sm text-zinc-600 font-outfit">
           Interact with live simulators of real creators, designers, group admins, and 24/7 auto-responders.

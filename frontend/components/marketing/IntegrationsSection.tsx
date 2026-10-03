@@ -113,10 +113,15 @@ export function IntegrationsSection() {
           <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
           <span>Ecosystem &amp; Integrations</span>
         </div>
-        <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-normal tracking-[-0.03em] text-zinc-950 leading-[1.15]">
-          Connect the tools you rely on <br className="hidden sm:inline" />
-          <span className="bg-gradient-to-r from-[#2563eb] via-[#1d4ed8] to-[#00b4d8] bg-clip-text text-transparent">
-            every single day
+        <h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Connect the tools you rely on
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            every single day.
           </span>
         </h2>
         <p className="text-sm sm:text-base text-zinc-600 max-w-2xl mx-auto font-normal leading-relaxed">

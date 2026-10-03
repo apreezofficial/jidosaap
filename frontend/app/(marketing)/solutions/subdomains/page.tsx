@@ -54,8 +54,16 @@ export default function SubdomainsArchitecturePage() {
           <Globe className="h-3.5 w-3.5" />
           <span>Multi-Tenant Cloud Architecture</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-          Your own dedicated subdomain on jidosaap.xyz.
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Your own dedicated subdomain
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            on jidosaap.xyz.
+          </span>
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
           No shared bot queues. No shared rate limits. Every creator, freelancer, and organization receives an isolated subdomain (e.g. <code>yourbrand.jidosaap.xyz</code>) with private Webhook endpoints and dedicated Meta Cloud API authentication.

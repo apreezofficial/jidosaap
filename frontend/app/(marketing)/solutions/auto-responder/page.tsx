@@ -60,8 +60,16 @@ export default function AutoResponderPage() {
           <Bot className="h-3.5 w-3.5" />
           <span>24/7 AI Customer Conversations</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-          Never let a high-intent lead wait until morning.
+        <h1
+          className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-[1.05] max-w-4xl mx-auto font-outfit"
+          style={{ letterSpacing: "-2px", fontWeight: 400 }}
+        >
+          <span className="block text-zinc-950 font-normal">
+            Never let a high-intent lead
+          </span>
+          <span className="block text-[#9ca3af] mt-1 sm:mt-1.5 font-normal">
+            wait until morning.
+          </span>
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
           Over 64% of potential clients contact businesses outside standard office hours. JidoSapp's intelligent auto-responder answers instantly, qualifies the prospect, shares your pricing deck, and books calendar calls on autopilot.
