@@ -26,10 +26,6 @@ export function PennaLogo({ className = "w-6 h-6" }: LogoProps) {
         src="/penna.png"
         alt="Penna - AI & Docs Newsletter Tool"
         className="w-full h-full object-contain"
-        onError={(e) => {
-          (e.currentTarget as HTMLImageElement).src =
-            "https://www.penna.dev/_next/static/immutable/media/logo.1q43tv72odsz_.png";
-        }}
       />
     </div>
   );
