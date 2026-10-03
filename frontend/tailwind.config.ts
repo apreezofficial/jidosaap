@@ -54,7 +54,7 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-plus-jakarta)", "Plus Jakarta Sans", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        sans: ["var(--font-outfit)", "Outfit", "var(--font-plus-jakarta)", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
         outfit: ["var(--font-outfit)", "Outfit", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
         heading: ["var(--font-outfit)", "Outfit", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },

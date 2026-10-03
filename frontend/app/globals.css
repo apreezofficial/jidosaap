@@ -52,7 +52,12 @@
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
+  font-family: var(--font-outfit), "Outfit", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label {
+  font-family: var(--font-outfit), "Outfit", sans-serif;
 }
 
 /* Custom Scrollbar */

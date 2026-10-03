@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { JidoSappLogo } from "@/components/ui/logo";
 
 export default function AuthLayout({
   children,
@@ -10,19 +11,7 @@ export default function AuthLayout({
     <div className="min-h-screen bg-[#f4f5f7] flex flex-col justify-between p-4 sm:p-6 lg:p-10 font-sans selection:bg-[#2563eb] selection:text-white">
       {/* Top Bar Header */}
       <div className="w-full max-w-5xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-zinc-950 text-white">
-            <span className="w-1.5 h-1.5 rounded-full bg-white" />
-            <span className="w-1.5 h-1.5 rounded-full bg-white" />
-            <span className="w-1.5 h-1.5 rounded-full bg-white" />
-            <span className="w-1.5 h-1.5 rounded-full bg-white" />
-            <span className="w-1.5 h-1.5 rounded-full bg-white" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb]" />
-          </div>
-          <span className="font-bold text-base tracking-tight text-zinc-950">
-            JidoSapp
-          </span>
-        </Link>
+        <JidoSappLogo href="/" size="md" />
 
         <Link
           href="/request-integration"
