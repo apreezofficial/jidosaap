@@ -228,7 +228,7 @@ export default function TemplatesPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {templates.map((tmpl) => (
+          {templates.map((tmpl: any) => (
             <Card key={tmpl.id} className="p-5 group hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-2">
                 <div>
@@ -260,7 +260,7 @@ export default function TemplatesPage() {
 
               {tmpl.variables?.length > 0 && (
                 <div className="flex flex-wrap gap-1 mb-3">
-                  {tmpl.variables.map((v) => (
+                  {tmpl.variables.map((v: string) => (
                     <span key={v} className="text-[10px] bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded-full font-mono">
                       {`{{${v}}}`}
                     </span>

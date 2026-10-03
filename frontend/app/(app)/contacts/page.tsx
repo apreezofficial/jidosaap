@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useContacts, useTags } from "@/hooks/useContacts";
+import { useContacts, useTags, Contact } from "@/hooks/useContacts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,9 +22,10 @@ const SOURCE_LABELS: Record<string, string> = {
   crm: "CRM",
 };
 
-const DEFAULT_CONTACTS: any[] = [
+const DEFAULT_CONTACTS: Contact[] = [
   {
     id: "c-1",
+    workspace_id: "default",
     name: "Alex Rivera",
     phone: "+1 (415) 890-2311",
     email: "alex@scalestudio.io",
@@ -33,9 +34,11 @@ const DEFAULT_CONTACTS: any[] = [
     status: "active",
     tags: [{ id: "t-1", name: "VIP Retainer ($1,800/mo)", color: "#10b981" }],
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
   {
     id: "c-2",
+    workspace_id: "default",
     name: "Precious O.",
     phone: "+234 810 992 0184",
     email: "precious@penna.dev",
@@ -44,9 +47,11 @@ const DEFAULT_CONTACTS: any[] = [
     status: "active",
     tags: [{ id: "t-2", name: "Newsletter Reader", color: "#2563eb" }],
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
   {
     id: "c-3",
+    workspace_id: "default",
     name: "Elena Rostova",
     phone: "+44 7911 123456",
     email: "elena@cryptobuilders.xyz",
@@ -55,9 +60,11 @@ const DEFAULT_CONTACTS: any[] = [
     status: "active",
     tags: [{ id: "t-3", name: "Group Shield Admin", color: "#f59e0b" }],
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
   {
     id: "c-4",
+    workspace_id: "default",
     name: "Shola Visuals",
     phone: "+234 802 334 9102",
     email: "shola@visuals.design",
@@ -66,6 +73,7 @@ const DEFAULT_CONTACTS: any[] = [
     status: "active",
     tags: [{ id: "t-4", name: "7 AM Drops Subscriber", color: "#8b5cf6" }],
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
 ];
 
@@ -257,7 +265,7 @@ export default function ContactsPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
-                        {c.tags?.slice(0, 2).map((t) => (
+                        {c.tags?.slice(0, 2).map((t: { id: string; name: string; color: string }) => (
                           <span
                             key={t.id}
                             className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium"
