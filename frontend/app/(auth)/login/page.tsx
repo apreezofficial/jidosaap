@@ -55,52 +55,81 @@ export default function BlueMoxfitaskLoginPage() {
         <X className="h-5 w-5 stroke-[2.2]" />
       </Link>
 
-      {/* ── LEFT COLUMN: FOCUSED SENTINEL MONITORING THE FORM ── */}
+      {/* ── LEFT COLUMN: JUST THE TALKING & EYE-ROLLING SENTINEL GUY ── */}
       <div className="w-full md:w-1/2 rounded-[28px] bg-gradient-to-br from-blue-50/80 via-[#f0f5ff] to-[#e4edff] border border-blue-100/90 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[460px] sm:min-h-[520px] select-none shadow-xs">
         {/* Real Official JidoSapp Logo at top */}
-        <div className="relative z-10 flex items-center justify-between">
+        <div className="relative z-10 flex items-center justify-start">
           <JidoSappLogo size="lg" />
-          <span className="px-2.5 py-1 rounded-full bg-white/90 border border-blue-200/80 text-[10px] font-bold text-[#2563eb] shadow-2xs font-outfit">
-            v2.0 Active
-          </span>
         </div>
 
-        {/* Sentinel Character actively monitoring the login form */}
-        <div className="relative z-10 my-auto pt-4 flex flex-col items-center">
-          {/* Reassuring speech bubble pointing from sentinel to the form */}
-          <div className="relative bg-white/95 backdrop-blur-xs border border-blue-200/90 rounded-2xl p-3.5 shadow-sm max-w-[270px] text-left mb-4">
-            <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#2563eb] uppercase tracking-wider font-outfit mb-0.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Session Guard Active
-            </div>
-            <p className="text-xs text-zinc-700 font-medium leading-relaxed font-outfit">
-              &ldquo;I&apos;m monitoring this login. Enter your details to access your WhatsApp workspace.&rdquo;
-            </p>
-            {/* Speech bubble pointer */}
-            <div className="absolute -bottom-2 left-12 w-4 h-4 bg-white border-b border-r border-blue-200/90 transform rotate-45" />
-          </div>
+        {/* Centerpiece: Just the Guy with rolling eyes and talking mouth */}
+        <div className="relative z-10 my-auto w-full flex items-center justify-center py-4">
+          <svg
+            viewBox="0 0 320 280"
+            className="w-full max-w-[300px] sm:max-w-[340px] drop-shadow-md overflow-visible"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <style>{`
+              @keyframes eyeRoll {
+                0%, 100% { transform: translate(0px, 0px); }
+                18% { transform: translate(4px, 0.5px); }
+                35% { transform: translate(4.5px, -2.5px); }
+                50% { transform: translate(0px, -3px); }
+                68% { transform: translate(-3.5px, -1px); }
+                82% { transform: translate(3.5px, 1px); }
+              }
+              @keyframes mouthTalk {
+                0%, 100% { transform: scaleY(0.35) scaleX(1); }
+                15% { transform: scaleY(1.35) scaleX(0.9); }
+                30% { transform: scaleY(0.5) scaleX(1.05); }
+                48% { transform: scaleY(1.45) scaleX(0.88); }
+                65% { transform: scaleY(0.4) scaleX(1); }
+                78% { transform: scaleY(1.2) scaleX(0.92); }
+                90% { transform: scaleY(0.6) scaleX(1.02); }
+              }
+              @keyframes eyebrowMove {
+                0%, 100% { transform: translateY(0px); }
+                25% { transform: translateY(-2px); }
+                55% { transform: translateY(1px); }
+                75% { transform: translateY(-1.5px); }
+              }
+              @keyframes headBob {
+                0%, 100% { transform: translateY(0px) rotate(0deg); }
+                25% { transform: translateY(-2.5px) rotate(0.6deg); }
+                50% { transform: translateY(0px) rotate(-0.5deg); }
+                75% { transform: translateY(-1.5px) rotate(0.4deg); }
+              }
+              .anim-eye-roll {
+                animation: eyeRoll 3.2s ease-in-out infinite;
+              }
+              .anim-mouth-talk {
+                transform-origin: 171px 145px;
+                animation: mouthTalk 1.1s ease-in-out infinite;
+              }
+              .anim-eyebrow {
+                animation: eyebrowMove 2.4s ease-in-out infinite;
+              }
+              .anim-head-bob {
+                transform-origin: 160px 240px;
+                animation: headBob 3s ease-in-out infinite;
+              }
+            `}</style>
 
-          {/* Clean Person / Sentinel SVG facing right directly at the login form */}
-          <div className="w-full flex justify-center">
-            <svg
-              viewBox="0 0 320 270"
-              className="w-full max-w-[280px] sm:max-w-[310px] drop-shadow-sm overflow-visible"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Soft Ambient Ground Shadow */}
-              <ellipse cx="160" cy="255" rx="90" ry="12" fill="#2563eb" fillOpacity="0.12" />
+            {/* Soft Ambient Ground Shadow */}
+            <ellipse cx="160" cy="265" rx="95" ry="12" fill="#2563eb" fillOpacity="0.12" />
 
+            <g className="anim-head-bob">
               {/* Shoulders & Royal Blue Jacket */}
               <path
-                d="M75 250 C75 205, 115 190, 160 190 C205 190, 245 205, 245 250"
+                d="M75 255 C75 205, 115 190, 160 190 C205 190, 245 205, 245 255"
                 fill="#2563eb"
                 stroke="#1d4ed8"
                 strokeWidth="4"
               />
               {/* White undershirt & jacket collar */}
-              <path d="M142 190 L160 218 L178 190" fill="#eff6ff" />
-              <line x1="160" y1="218" x2="160" y2="250" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+              <path d="M142 190 L160 220 L178 190" fill="#eff6ff" />
+              <line x1="160" y1="220" x2="160" y2="255" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
 
               {/* Neck */}
               <rect x="146" y="160" width="28" height="34" rx="8" fill="#e0e7ff" />
@@ -132,7 +161,7 @@ export default function BlueMoxfitaskLoginPage() {
               <rect x="208" y="100" width="16" height="34" rx="8" fill="#0f172a" stroke="#2563eb" strokeWidth="2" />
               <circle cx="216" cy="117" r="4" fill="#00b4d8" />
 
-              {/* Headset boom mic pointing forward towards mouth & form */}
+              {/* Headset boom mic pointing towards mouth */}
               <path
                 d="M214 122 C214 144, 192 154, 178 150"
                 stroke="#0f172a"
@@ -141,39 +170,51 @@ export default function BlueMoxfitaskLoginPage() {
               />
               <rect x="170" y="146" width="10" height="7" rx="3" fill="#00b4d8" />
 
-              {/* Eyebrows angled in alert, friendly focus */}
-              <path d="M136 104 Q148 100 156 104" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
-              <path d="M172 103 Q184 99 194 104" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+              {/* Eyebrows with active expressive movement */}
+              <g className="anim-eyebrow">
+                <path d="M136 104 Q148 100 156 104" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+                <path d="M172 103 Q184 99 194 104" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+              </g>
 
-              {/* Watchful Eyes Looking Directly Right at the Form */}
+              {/* Eye Sockets */}
               <ellipse cx="148" cy="115" rx="8.5" ry="7.5" fill="white" stroke="#0f172a" strokeWidth="2.5" />
-              <circle cx="152" cy="115" r="3.8" fill="#0f172a" />
-              <circle cx="154" cy="113" r="1.3" fill="white" />
-
               <ellipse cx="182" cy="115" rx="8.5" ry="7.5" fill="white" stroke="#0f172a" strokeWidth="2.5" />
-              <circle cx="186" cy="115" r="3.8" fill="#0f172a" />
-              <circle cx="188" cy="113" r="1.3" fill="white" />
 
-              {/* Confident, Reassuring Smile */}
-              <path d="M158 138 Q170 147 184 138" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+              {/* Animated Rolling Pupils (looking over at form, rolling around, glancing back) */}
+              <g className="anim-eye-roll">
+                {/* Left Pupil */}
+                <circle cx="150" cy="115" r="4" fill="#0f172a" />
+                <circle cx="152" cy="113" r="1.3" fill="white" />
+                {/* Right Pupil */}
+                <circle cx="184" cy="115" r="4" fill="#0f172a" />
+                <circle cx="186" cy="113" r="1.3" fill="white" />
+              </g>
+
+              {/* Animated Talking Mouth (opening, closing, speaking naturally) */}
+              <g className="anim-mouth-talk">
+                {/* Open Mouth Cavity */}
+                <path
+                  d="M157 141 Q171 144 185 141 C185 152, 157 152, 157 141 Z"
+                  fill="#0f172a"
+                  stroke="#0f172a"
+                  strokeWidth="1.5"
+                />
+                {/* White Upper Teeth */}
+                <path d="M161 142 Q171 144 181 142 C181 145, 161 145, 161 142 Z" fill="white" />
+                {/* Tongue Accent in Cyan */}
+                <path d="M165 148 Q171 146 177 148 Q171 151 165 148 Z" fill="#00b4d8" />
+              </g>
 
               {/* Welcoming Hand gesture directing right towards the inputs */}
               <path
-                d="M226 205 C242 190, 262 195, 272 204 C276 208, 278 215, 270 222 L236 235 Z"
+                d="M226 210 C242 195, 262 200, 272 209 C276 213, 278 220, 270 227 L236 240 Z"
                 fill="#f8fafc"
                 stroke="#2563eb"
                 strokeWidth="3"
               />
-              <circle cx="266" cy="210" r="3" fill="#00b4d8" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Clean, calm bottom note */}
-        <div className="relative z-10 text-center">
-          <span className="text-[11px] text-zinc-400 font-medium font-outfit">
-            End-to-end encrypted session &bull; JidoSapp Meta Engine
-          </span>
+              <circle cx="266" cy="215" r="3" fill="#00b4d8" />
+            </g>
+          </svg>
         </div>
       </div>
 
