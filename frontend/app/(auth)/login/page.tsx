@@ -20,8 +20,8 @@ import {
 export default function BlueMoxfitaskLoginPage() {
   const router = useRouter();
   const { login } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("aa@aa.aa");
+  const [password, setPassword] = useState("aaaaaa01");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -291,6 +291,27 @@ export default function BlueMoxfitaskLoginPage() {
                 Forgot Password?
               </Link>
             </div>
+          </div>
+
+          {/* Test Credentials Helper Pill */}
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 text-xs">
+            <div className="flex items-center gap-1.5 text-zinc-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
+              <span className="font-semibold text-[11px] text-zinc-800">Test Account:</span>
+              <span className="font-mono text-[11px] text-[#2563eb] font-semibold">aa@aa.aa</span>
+              <span className="text-zinc-400">•</span>
+              <span className="font-mono text-[11px] text-[#2563eb] font-semibold">aaaaaa01</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setEmail("aa@aa.aa");
+                setPassword("aaaaaa01");
+              }}
+              className="text-[10px] font-bold text-[#2563eb] hover:underline"
+            >
+              Fill
+            </button>
           </div>
 
           {/* Primary Royal Blue Log In Button */}

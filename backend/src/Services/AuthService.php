@@ -114,9 +114,36 @@ final class AuthService
         $email = strtolower(trim($email));
         $pdo = Connection::get();
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Auto-seed and authenticate test user aa@aa.aa / aaaaaa01 if missing
+        if ($email === 'aa@aa.aa' && $password === 'aaaaaa01') {
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user) {
+                $userId = uuid_v4();
+                $passHash = PasswordHasher::hash('aaaaaa01');
+                $now = current_timestamp();
+                $pdo->prepare("
+                    INSERT INTO users (id, name, email, password_hash, status, created_at, updated_at)
+                    VALUES (?, 'Onos E.', 'aa@aa.aa', ?, 'active', ?, ?)
+                ")->execute([$userId, $passHash, $now, $now]);
+
+                $wsId = uuid_v4();
+                $pdo->prepare("
+                    INSERT INTO workspaces (id, name, slug, timezone, currency, business_type, created_by, created_at, updated_at)
+                    VALUES (?, 'JidoSapp HQ', 'jidosapp-hq', 'UTC', 'USD', 'services', ?, ?, ?)
+                ")->execute([$wsId, $userId, $now, $now]);
+
+                $pdo->prepare("
+                    INSERT INTO workspace_members (id, workspace_id, user_id, role, created_at, updated_at)
+                    VALUES (?, ?, ?, 'owner', ?, ?)
+                ")->execute([uuid_v4(), $wsId, $userId, $now, $now]);
+
+                $stmt->execute([$email]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+        }
 
         if (!$user || !PasswordHasher::verify($password, $user['password_hash'])) {
             throw new RuntimeException("Invalid email or password", 401);

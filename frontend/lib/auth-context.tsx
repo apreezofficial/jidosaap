@@ -52,6 +52,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    // Support instant test session persistence
+    if (token === "mock_jwt_token_aa_aaaaaa01") {
+      const testUser: User = {
+        id: "usr_test_onos",
+        name: "Onos E.",
+        email: "aa@aa.aa",
+        avatar_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+      };
+      const testWs: Workspace = {
+        id: "ws_test_main",
+        name: "JidoSapp HQ",
+        slug: "jidosapp-hq",
+        role: "owner",
+      };
+      setUser(testUser);
+      setWorkspaces([testWs]);
+      setCurrentWorkspace(testWs);
+      api.setWorkspaceId(testWs.id);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const res = await api.get<{ user: User; workspaces: Workspace[] }>("/auth/me");
       if (res.success && res.data) {
@@ -86,6 +108,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, pass: string) => {
+    // Instant test account bypass for aa@aa.aa / aaaaaa01
+    if (email.trim().toLowerCase() === "aa@aa.aa" && pass === "aaaaaa01") {
+      const testUser: User = {
+        id: "usr_test_onos",
+        name: "Onos E.",
+        email: "aa@aa.aa",
+        avatar_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+      };
+      const testWs: Workspace = {
+        id: "ws_test_main",
+        name: "JidoSapp HQ",
+        slug: "jidosapp-hq",
+        role: "owner",
+      };
+      const mockToken = "mock_jwt_token_aa_aaaaaa01";
+
+      api.setToken(mockToken);
+      setUser(testUser);
+      setWorkspaces([testWs]);
+      setCurrentWorkspace(testWs);
+      api.setWorkspaceId(testWs.id);
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("jidosapp_token", mockToken);
+        localStorage.setItem("jidosapp_workspace_id", testWs.id);
+      }
+
+      return {
+        success: true,
+        data: {
+          user: testUser,
+          token: mockToken,
+          workspaces: [testWs],
+          workspace: testWs,
+        },
+      };
+    }
+
     const res = await api.post<{
       user: User;
       token: string;
