@@ -18,22 +18,20 @@ export function ProformsLogo({ className = "w-6 h-6" }: LogoProps) {
   );
 }
 
-// 2. Penna Logo (Minimalist Modern Pen Nib Mark in Indigo)
+// 2. Penna Logo (Official Mark: AI & Docs Newsletter Tool)
 export function PennaLogo({ className = "w-6 h-6" }: LogoProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn("shrink-0", className)}
-    >
-      <path
-        d="M12 2L19 9L13 22L12 18L11 22L5 9L12 2Z"
-        fill="#6366F1"
+    <div className={cn("relative flex items-center justify-center shrink-0", className)}>
+      <img
+        src="/penna.png"
+        alt="Penna - AI & Docs Newsletter Tool"
+        className="w-full h-full object-contain"
+        onError={(e) => {
+          (e.currentTarget as HTMLImageElement).src =
+            "https://www.penna.dev/_next/static/immutable/media/logo.1q43tv72odsz_.png";
+        }}
       />
-      <circle cx="12" cy="11" r="1.5" fill="white" />
-      <path d="M12 12.5V17.5" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
+    </div>
   );
 }
 

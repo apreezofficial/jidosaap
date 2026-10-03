@@ -25,21 +25,6 @@ export default function AuthLayout({
       <div className="w-full max-w-4xl mx-auto my-auto py-6">
         {children}
       </div>
-
-      {/* Bottom Footer Note */}
-      <div className="w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-zinc-400">
-        <span>&copy; {new Date().getFullYear()} JidoSapp. Put WhatsApp on Autopilot.</span>
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            Meta Cloud API Verified
-          </span>
-          <span>&bull;</span>
-          <span>Multi-tenant Isolation</span>
-          <span>&bull;</span>
-          <span>Argon2id Encrypted</span>
-        </div>
-      </div>
     </div>
   );
 }

@@ -55,138 +55,125 @@ export default function BlueMoxfitaskLoginPage() {
         <X className="h-5 w-5 stroke-[2.2]" />
       </Link>
 
-      {/* ── LEFT COLUMN: COOL-HEADED MASCOT & ILLUSTRATION CARD ── */}
-      <div className="w-full md:w-1/2 rounded-[28px] bg-gradient-to-br from-blue-50/90 via-[#eef4ff] to-[#e0edff] border border-blue-100/90 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[460px] sm:min-h-[540px] select-none shadow-xs">
-        
-        {/* Real Official JidoSapp Logo at top (Prominent & Clean) */}
+      {/* ── LEFT COLUMN: FOCUSED SENTINEL MONITORING THE FORM ── */}
+      <div className="w-full md:w-1/2 rounded-[28px] bg-gradient-to-br from-blue-50/80 via-[#f0f5ff] to-[#e4edff] border border-blue-100/90 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[460px] sm:min-h-[520px] select-none shadow-xs">
+        {/* Real Official JidoSapp Logo at top */}
         <div className="relative z-10 flex items-center justify-between">
           <JidoSappLogo size="lg" />
-          <span className="px-2.5 py-1 rounded-full bg-white/90 border border-blue-200/80 text-[10px] font-bold text-[#2563eb] shadow-2xs">
+          <span className="px-2.5 py-1 rounded-full bg-white/90 border border-blue-200/80 text-[10px] font-bold text-[#2563eb] shadow-2xs font-outfit">
             v2.0 Active
           </span>
         </div>
 
-        {/* ── FLOATING WIDGET 1: Top-Right Analytics & Task Card ── */}
-        <div className="absolute top-16 right-5 sm:right-7 w-36 bg-white/95 backdrop-blur-xs rounded-2xl shadow-[0_12px_28px_rgba(37,99,235,0.08)] border border-blue-100/80 p-3 z-0 space-y-2 transform rotate-6 hover:rotate-3 transition-transform duration-300 animate-edge-tr">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#2563eb] animate-pulse" />
-              <span className="text-[9px] font-bold text-zinc-700">7:00 AM Drop</span>
+        {/* Sentinel Character actively monitoring the login form */}
+        <div className="relative z-10 my-auto pt-4 flex flex-col items-center">
+          {/* Reassuring speech bubble pointing from sentinel to the form */}
+          <div className="relative bg-white/95 backdrop-blur-xs border border-blue-200/90 rounded-2xl p-3.5 shadow-sm max-w-[270px] text-left mb-4">
+            <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#2563eb] uppercase tracking-wider font-outfit mb-0.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Session Guard Active
             </div>
-            <span className="text-[8px] font-mono text-emerald-600 bg-emerald-50 px-1 py-0.2 rounded font-bold">100%</span>
+            <p className="text-xs text-zinc-700 font-medium leading-relaxed font-outfit">
+              &ldquo;I&apos;m monitoring this login. Enter your details to access your WhatsApp workspace.&rdquo;
+            </p>
+            {/* Speech bubble pointer */}
+            <div className="absolute -bottom-2 left-12 w-4 h-4 bg-white border-b border-r border-blue-200/90 transform rotate-45" />
           </div>
-          {/* Mini Bar Chart */}
-          <div className="flex items-end gap-1.5 h-10 pt-1 border-b border-zinc-100">
-            <div className="w-4 bg-blue-100 rounded-t h-5" />
-            <div className="w-4 bg-[#2563eb] rounded-t h-10" />
-            <div className="w-4 bg-[#00b4d8] rounded-t h-7" />
-            <div className="w-4 bg-sky-200 rounded-t h-6" />
-          </div>
-          <div className="flex items-center justify-between text-[8px] text-zinc-400 font-mono">
-            <span>Dispatched</span>
-            <span>1,240 sent</span>
-          </div>
-        </div>
 
-        {/* ── FLOATING WIDGET 2: Left Side Auto-Responder Chip ── */}
-        <div className="absolute left-4 top-40 bg-white/90 backdrop-blur-xs rounded-xl shadow-sm border border-blue-100 px-3 py-1.5 z-0 flex items-center gap-2 transform -rotate-3 animate-edge-tl">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[10px] font-bold text-zinc-800">24/7 Auto-Responder</span>
-        </div>
+          {/* Clean Person / Sentinel SVG facing right directly at the login form */}
+          <div className="w-full flex justify-center">
+            <svg
+              viewBox="0 0 320 270"
+              className="w-full max-w-[280px] sm:max-w-[310px] drop-shadow-sm overflow-visible"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Soft Ambient Ground Shadow */}
+              <ellipse cx="160" cy="255" rx="90" ry="12" fill="#2563eb" fillOpacity="0.12" />
 
-        {/* ── FLOATING TWINKLE STARS ── */}
-        <div className="absolute top-32 left-1/2 -translate-x-1/2 pointer-events-none text-[#2563eb]/40 animate-pulse">
-          <Sparkles className="w-4 h-4" />
-        </div>
-        <div className="absolute top-52 right-12 pointer-events-none text-cyan-400/60 animate-pulse [animation-delay:1s]">
-          <Sparkles className="w-3.5 h-3.5" />
-        </div>
-
-        {/* ── COOL-HEADED CHARACTER MASCOT SVG (BIGGER, WITH HEADPHONES & ANIMATION) ── */}
-        <div className="relative z-10 mt-auto pt-6 flex items-end justify-center animate-edge-bl">
-          <svg
-            viewBox="0 0 340 300"
-            className="w-full max-w-[320px] sm:max-w-[350px] drop-shadow-md overflow-visible transition-transform duration-300 hover:scale-102"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Ambient Shadow under Mascot */}
-            <ellipse cx="170" cy="285" rx="100" ry="12" fill="#2563eb" fillOpacity="0.12" />
-
-            {/* ── COOL HEADPHONES: Over-ear Studio Headband ── */}
-            <path
-              d="M75 140 C75 60, 265 60, 265 140"
-              stroke="#0f172a"
-              strokeWidth="9"
-              strokeLinecap="round"
-            />
-            {/* Headphone Top Cushion in Royal Blue */}
-            <path
-              d="M110 80 C130 70, 210 70, 230 80"
-              stroke="#2563eb"
-              strokeWidth="11"
-              strokeLinecap="round"
-            />
-
-            {/* ── Left Ear Speaker Ear-cup (Cool Headed) ── */}
-            <rect x="58" y="115" width="28" height="52" rx="14" fill="#0f172a" stroke="#2563eb" strokeWidth="3" />
-            <circle cx="72" cy="141" r="7" fill="#38bdf8" />
-            {/* ── Right Ear Speaker Ear-cup (Cool Headed) ── */}
-            <rect x="254" y="115" width="28" height="52" rx="14" fill="#0f172a" stroke="#2563eb" strokeWidth="3" />
-            <circle cx="268" cy="141" r="7" fill="#38bdf8" />
-
-            {/* ── Mascot Face & Body Structure ── */}
-            <ellipse cx="170" cy="195" rx="88" ry="76" fill="#eff6ff" stroke="#2563eb" strokeWidth="4" />
-
-            {/* Cyan Hair Locks on Forehead */}
-            <path
-              d="M125 130 C140 115, 155 125, 170 112 C185 128, 205 118, 215 132 C185 128, 150 128, 125 130 Z"
-              fill="#00b4d8"
-            />
-
-            {/* ── Cool Sunglasses / Visor in Obsidian Glass with Cyan Highlights ── */}
-            <rect x="105" y="148" width="130" height="42" rx="14" fill="#090d16" stroke="#1e293b" strokeWidth="3.5" />
-            <rect x="112" y="154" width="52" height="30" rx="8" fill="#1e293b" />
-            <rect x="176" y="154" width="52" height="30" rx="8" fill="#1e293b" />
-            {/* Futuristic Cyan/Blue Light Flares across Visor */}
-            <line x1="120" y1="160" x2="148" y2="178" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
-            <line x1="184" y1="160" x2="212" y2="178" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
-            <circle cx="158" cy="169" r="2.5" fill="#00b4d8" />
-            <circle cx="222" cy="169" r="2.5" fill="#00b4d8" />
-
-            {/* Cute Nose */}
-            <ellipse cx="170" cy="202" rx="6" ry="4" fill="#2563eb" />
-
-            {/* Confident Smile */}
-            <path d="M152 216 Q170 234 188 216" stroke="#0f172a" strokeWidth="3.5" strokeLinecap="round" />
-            <path d="M161 223 Q170 238 179 223" fill="#2563eb" />
-
-            {/* ── Body Hoodie / Shirt in Royal Blue with Jido Badge ── */}
-            <path
-              d="M95 248 C115 235, 225 235, 245 248 C235 290, 105 290, 95 248 Z"
-              fill="#2563eb"
-              stroke="#1d4ed8"
-              strokeWidth="4"
-            />
-            {/* White Hoodie strings */}
-            <line x1="155" y1="248" x2="155" y2="272" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-            <line x1="185" y1="248" x2="185" y2="272" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-
-            {/* ── Dynamic Waving Paw / Hand with Tablet on Right ── */}
-            <g className="animate-squircle-bob">
+              {/* Shoulders & Royal Blue Jacket */}
               <path
-                d="M245 195 C240 160, 275 150, 285 175 C295 155, 320 165, 315 190 C325 178, 342 192, 335 212 C338 230, 320 255, 292 258 C265 262, 242 235, 245 195 Z"
-                fill="#eff6ff"
-                stroke="#2563eb"
-                strokeWidth="3.5"
+                d="M75 250 C75 205, 115 190, 160 190 C205 190, 245 205, 245 250"
+                fill="#2563eb"
+                stroke="#1d4ed8"
+                strokeWidth="4"
               />
-              {/* Paw pads in cyan */}
-              <ellipse cx="292" cy="222" rx="18" ry="14" fill="#bae6fd" />
-              <circle cx="274" cy="188" r="6" fill="#bae6fd" />
-              <circle cx="294" cy="180" r="6" fill="#bae6fd" />
-              <circle cx="314" cy="190" r="6" fill="#bae6fd" />
-            </g>
-          </svg>
+              {/* White undershirt & jacket collar */}
+              <path d="M142 190 L160 218 L178 190" fill="#eff6ff" />
+              <line x1="160" y1="218" x2="160" y2="250" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+
+              {/* Neck */}
+              <rect x="146" y="160" width="28" height="34" rx="8" fill="#e0e7ff" />
+
+              {/* Head */}
+              <ellipse cx="160" cy="120" rx="54" ry="56" fill="#f8fafc" stroke="#2563eb" strokeWidth="4" />
+
+              {/* Modern Dark Hair with Subtle Cyan Highlights */}
+              <path
+                d="M110 110 C106 70, 150 56, 205 66 C216 70, 218 82, 212 94 C202 82, 180 76, 160 78 C135 81, 118 94, 110 110 Z"
+                fill="#0f172a"
+              />
+              <path
+                d="M124 80 C146 66, 184 66, 210 80"
+                stroke="#00b4d8"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+              />
+
+              {/* Over-ear Headset with Mic (Monitoring Communications) */}
+              <path
+                d="M104 116 C102 76, 218 76, 216 116"
+                stroke="#0f172a"
+                strokeWidth="7"
+                strokeLinecap="round"
+              />
+              {/* Left & Right Ear Cushions */}
+              <rect x="96" y="100" width="16" height="34" rx="8" fill="#0f172a" stroke="#2563eb" strokeWidth="2" />
+              <rect x="208" y="100" width="16" height="34" rx="8" fill="#0f172a" stroke="#2563eb" strokeWidth="2" />
+              <circle cx="216" cy="117" r="4" fill="#00b4d8" />
+
+              {/* Headset boom mic pointing forward towards mouth & form */}
+              <path
+                d="M214 122 C214 144, 192 154, 178 150"
+                stroke="#0f172a"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <rect x="170" y="146" width="10" height="7" rx="3" fill="#00b4d8" />
+
+              {/* Eyebrows angled in alert, friendly focus */}
+              <path d="M136 104 Q148 100 156 104" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+              <path d="M172 103 Q184 99 194 104" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+
+              {/* Watchful Eyes Looking Directly Right at the Form */}
+              <ellipse cx="148" cy="115" rx="8.5" ry="7.5" fill="white" stroke="#0f172a" strokeWidth="2.5" />
+              <circle cx="152" cy="115" r="3.8" fill="#0f172a" />
+              <circle cx="154" cy="113" r="1.3" fill="white" />
+
+              <ellipse cx="182" cy="115" rx="8.5" ry="7.5" fill="white" stroke="#0f172a" strokeWidth="2.5" />
+              <circle cx="186" cy="115" r="3.8" fill="#0f172a" />
+              <circle cx="188" cy="113" r="1.3" fill="white" />
+
+              {/* Confident, Reassuring Smile */}
+              <path d="M158 138 Q170 147 184 138" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+
+              {/* Welcoming Hand gesture directing right towards the inputs */}
+              <path
+                d="M226 205 C242 190, 262 195, 272 204 C276 208, 278 215, 270 222 L236 235 Z"
+                fill="#f8fafc"
+                stroke="#2563eb"
+                strokeWidth="3"
+              />
+              <circle cx="266" cy="210" r="3" fill="#00b4d8" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Clean, calm bottom note */}
+        <div className="relative z-10 text-center">
+          <span className="text-[11px] text-zinc-400 font-medium font-outfit">
+            End-to-end encrypted session &bull; JidoSapp Meta Engine
+          </span>
         </div>
       </div>
 
