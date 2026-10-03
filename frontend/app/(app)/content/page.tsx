@@ -167,7 +167,7 @@ export default function StatusDropsStudioPage() {
         {/* Left 7 Columns: Broadcast Queue */}
         <div className="lg:col-span-7 space-y-4">
           {/* Filter Pills */}
-          <div className="flex items-center gap-2 bg-zinc-100 p-1 rounded-xl text-xs font-semibold text-zinc-600">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-zinc-100 p-1 rounded-xl text-xs font-semibold text-zinc-600 overflow-x-auto whitespace-nowrap">
             {[
               { id: "all", label: "All Drops" },
               { id: "7am_drop", label: "7:00 AM Consistency Engine" },
@@ -177,7 +177,7 @@ export default function StatusDropsStudioPage() {
                 key={f.id}
                 onClick={() => setCategoryFilter(f.id)}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg transition-all",
+                  "px-3 py-1.5 rounded-lg transition-all shrink-0",
                   categoryFilter === f.id
                     ? "bg-white text-zinc-950 shadow-2xs"
                     : "hover:text-zinc-950"

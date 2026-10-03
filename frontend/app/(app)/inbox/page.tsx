@@ -29,6 +29,7 @@ import {
   ExternalLink,
   ChevronRight,
   Radio,
+  ArrowLeft,
 } from "lucide-react";
 
 interface Message {
@@ -202,6 +203,7 @@ const INITIAL_CHATS: ChatContact[] = [
 export default function WhatsAppInboxPage() {
   const [chats, setChats] = useState<ChatContact[]>(INITIAL_CHATS);
   const [selectedId, setSelectedId] = useState<string>("chat-1");
+  const [mobileView, setMobileView] = useState<"list" | "chat">("list");
   const [search, setSearch] = useState("");
   const [messageInput, setMessageInput] = useState("");
 
@@ -254,11 +256,16 @@ export default function WhatsAppInboxPage() {
   );
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] -m-4 sm:-m-6 lg:-m-8 overflow-hidden bg-white select-none font-sans">
+    <div className="flex h-[calc(100vh-5.5rem)] -m-3.5 sm:-m-5 lg:-m-8 overflow-hidden bg-white select-none font-sans">
       {/* ─── LEFT: WhatsApp Contacts List ─── */}
-      <div className="w-80 sm:w-96 border-r border-zinc-200/90 flex flex-col bg-white shrink-0">
+      <div
+        className={cn(
+          "w-full md:w-80 lg:w-96 border-r border-zinc-200/90 flex flex-col bg-white shrink-0",
+          mobileView === "chat" ? "hidden md:flex" : "flex"
+        )}
+      >
         {/* Header */}
-        <div className="p-4 border-b border-zinc-100 space-y-3">
+        <div className="p-3.5 sm:p-4 border-b border-zinc-100 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <h2 className="text-base font-extrabold text-zinc-950 flex items-center gap-2">
@@ -287,7 +294,10 @@ export default function WhatsAppInboxPage() {
           {filteredChats.map((chat) => (
             <div
               key={chat.id}
-              onClick={() => setSelectedId(chat.id)}
+              onClick={() => {
+                setSelectedId(chat.id);
+                setMobileView("chat");
+              }}
               className={cn(
                 "p-3.5 cursor-pointer transition-all flex items-start gap-3 hover:bg-zinc-50/80",
                 selectedChat.id === chat.id ? "bg-blue-50/40 border-l-4 border-l-[#2563eb]" : ""
@@ -333,31 +343,45 @@ export default function WhatsAppInboxPage() {
       </div>
 
       {/* ─── RIGHT: WhatsApp Conversation Area ─── */}
-      <div className="flex-1 flex flex-col bg-[#f0f2f5]/40 min-w-0">
+      <div
+        className={cn(
+          "flex-1 flex flex-col bg-[#f0f2f5]/40 min-w-0",
+          mobileView === "list" ? "hidden md:flex" : "flex"
+        )}
+      >
         {/* Chat Header */}
-        <div className="h-16 border-b border-zinc-200/90 bg-white px-6 flex items-center justify-between shrink-0 shadow-2xs">
-          <div className="flex items-center gap-3">
+        <div className="h-16 border-b border-zinc-200/90 bg-white px-3.5 sm:px-6 flex items-center justify-between shrink-0 shadow-2xs">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            {/* Back button on mobile */}
+            <button
+              onClick={() => setMobileView("list")}
+              className="p-1.5 -ml-1 text-zinc-500 hover:text-zinc-950 rounded-lg md:hidden shrink-0"
+              title="Back to conversation list"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+
             <img
               src={selectedChat.avatar}
               alt={selectedChat.name}
-              className="h-10 w-10 rounded-full object-cover ring-2 ring-emerald-500/20"
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover ring-2 ring-emerald-500/20 shrink-0"
             />
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-sm font-bold text-zinc-950">{selectedChat.name}</h3>
-                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-semibold">
-                  Meta Verified
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 truncate">
+                <h3 className="text-xs sm:text-sm font-bold text-zinc-950 truncate">{selectedChat.name}</h3>
+                <span className="text-[9px] sm:text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200 font-semibold shrink-0">
+                  Verified
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-400 font-mono">{selectedChat.phone}</p>
+              <p className="text-[10px] sm:text-[11px] text-zinc-400 font-mono truncate">{selectedChat.phone}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => toggleMode(selectedChat.id)}
               className={cn(
-                "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all",
+                "flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold border transition-all shrink-0",
                 selectedChat.mode === "autonomous"
                   ? "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100"
                   : "bg-blue-50 text-[#2563eb] border-blue-200 hover:bg-blue-100"
@@ -366,12 +390,14 @@ export default function WhatsAppInboxPage() {
               {selectedChat.mode === "autonomous" ? (
                 <>
                   <Bot className="h-3.5 w-3.5" />
-                  <span>Autonomous Bot Mode (1.2s reply)</span>
+                  <span className="hidden sm:inline">Autonomous Bot (1.2s)</span>
+                  <span className="sm:hidden">Bot Mode</span>
                 </>
               ) : (
                 <>
                   <UserCheck className="h-3.5 w-3.5" />
-                  <span>Human Operator Takeover</span>
+                  <span className="hidden sm:inline">Human Takeover</span>
+                  <span className="sm:hidden">Human</span>
                 </>
               )}
             </button>
@@ -379,10 +405,10 @@ export default function WhatsAppInboxPage() {
         </div>
 
         {/* Messages Stream */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto p-3.5 sm:p-6 space-y-4">
           <div className="text-center my-2">
             <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-zinc-200/80 text-zinc-600">
-              End-to-End Encrypted via WhatsApp Cloud API • Isolated Subdomain
+              End-to-End Encrypted via Meta Cloud API • onos.jidosaap.xyz
             </span>
           </div>
 
@@ -393,7 +419,7 @@ export default function WhatsAppInboxPage() {
             >
               <div
                 className={cn(
-                  "p-3.5 rounded-2xl max-w-[80%] sm:max-w-[70%] shadow-2xs space-y-1.5 relative",
+                  "p-3 sm:p-3.5 rounded-2xl max-w-[88%] sm:max-w-[70%] shadow-2xs space-y-1.5 relative",
                   msg.isOutbound
                     ? "bg-[#2563eb] text-white rounded-tr-xs"
                     : "bg-white text-zinc-900 border border-zinc-200/80 rounded-tl-xs"
@@ -413,13 +439,13 @@ export default function WhatsAppInboxPage() {
                     href={msg.attachment.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="block p-2.5 rounded-xl bg-black/15 hover:bg-black/25 text-white transition-colors border border-white/20 mt-2"
+                    className="block p-2 sm:p-2.5 rounded-xl bg-black/15 hover:bg-black/25 text-white transition-colors border border-white/20 mt-2"
                   >
                     <div className="flex items-center justify-between text-xs font-semibold">
-                      <span>{msg.attachment.title}</span>
-                      <ExternalLink className="h-3.5 w-3.5" />
+                      <span className="truncate mr-2">{msg.attachment.title}</span>
+                      <ExternalLink className="h-3.5 w-3.5 shrink-0" />
                     </div>
-                    <span className="text-[10px] opacity-80 font-mono">{msg.attachment.link}</span>
+                    <span className="text-[10px] opacity-80 font-mono truncate block">{msg.attachment.link}</span>
                   </a>
                 )}
 
@@ -438,9 +464,9 @@ export default function WhatsAppInboxPage() {
         </div>
 
         {/* Quick Canned Responses Bar */}
-        <div className="px-6 py-2 bg-zinc-50 border-t border-zinc-200/80 flex items-center gap-2 overflow-x-auto">
-          <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider shrink-0">
-            Quick 1-Tap:
+        <div className="px-3 sm:px-6 py-2 bg-zinc-50 border-t border-zinc-200/80 flex items-center gap-1.5 sm:gap-2 overflow-x-auto">
+          <span className="text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider shrink-0">
+            1-Tap:
           </span>
           <button
             onClick={() =>
@@ -448,9 +474,9 @@ export default function WhatsAppInboxPage() {
                 "Our retainers start at $1,800/mo. Here is our booking link to claim a slot: cal.com/onos/15min"
               )
             }
-            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
+            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[10px] sm:text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
           >
-            💵 Send Retainer Rates ($1,800/mo)
+            💵 Retainer Rates ($1,800/mo)
           </button>
           <button
             onClick={() =>
@@ -458,9 +484,9 @@ export default function WhatsAppInboxPage() {
                 "Here is our direct booking link for a 15-min discovery call: https://cal.com/onos/15min"
               )
             }
-            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
+            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[10px] sm:text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
           >
-            📅 Send Cal.com Link
+            📅 Cal.com Link
           </button>
           <button
             onClick={() =>
@@ -468,17 +494,17 @@ export default function WhatsAppInboxPage() {
                 "Read our latest essay bridged from penna.dev: https://onos.jidosaap.xyz/read/48"
               )
             }
-            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
+            className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 hover:border-[#2563eb] text-[10px] sm:text-[11px] font-semibold text-zinc-700 transition-colors shrink-0"
           >
-            📰 Send Status Bridge Link
+            📰 Status Bridge Link
           </button>
         </div>
 
         {/* Input Bar */}
-        <div className="p-4 bg-white border-t border-zinc-200/80 flex items-center gap-3">
+        <div className="p-2.5 sm:p-4 bg-white border-t border-zinc-200/80 flex items-center gap-2 sm:gap-3">
           <button
             title="Attach Media / Rate Card PDF"
-            className="p-2 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 rounded-xl transition-colors"
+            className="p-2 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 rounded-xl transition-colors shrink-0"
           >
             <Paperclip className="h-4 w-4" />
           </button>
@@ -493,15 +519,15 @@ export default function WhatsAppInboxPage() {
                 handleSendMessage();
               }
             }}
-            placeholder="Type a WhatsApp reply or trigger automation..."
-            className="flex-1 text-xs sm:text-sm bg-zinc-50 border border-zinc-200/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-[#2563eb] transition-all"
+            placeholder="Type a WhatsApp reply..."
+            className="flex-1 min-w-0 text-xs sm:text-sm bg-zinc-50 border border-zinc-200/90 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 focus:outline-none focus:border-[#2563eb] transition-all"
           />
 
           <button
             onClick={() => handleSendMessage()}
-            className="h-10 px-4 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white flex items-center justify-center gap-1.5 text-xs font-semibold shadow-xs transition-all active:scale-95"
+            className="h-9 sm:h-10 px-3 sm:px-4 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white flex items-center justify-center gap-1.5 text-xs font-semibold shadow-xs transition-all active:scale-95 shrink-0"
           >
-            <span>Send</span>
+            <span className="hidden sm:inline">Send</span>
             <Send className="h-3.5 w-3.5" />
           </button>
         </div>

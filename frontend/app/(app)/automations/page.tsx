@@ -192,7 +192,7 @@ export default function AutomationsPage() {
 
       {/* ── FILTER & SEARCH BAR ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5 bg-zinc-100 p-1 rounded-xl text-xs font-semibold text-zinc-600 overflow-x-auto">
+        <div className="flex items-center gap-1.5 bg-zinc-100 p-1 rounded-xl text-xs font-semibold text-zinc-600 overflow-x-auto whitespace-nowrap max-w-full">
           {[
             { id: "all", label: "All Automations" },
             { id: "auto_responder", label: "Auto-Responder" },

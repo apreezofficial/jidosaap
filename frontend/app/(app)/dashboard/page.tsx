@@ -218,9 +218,9 @@ export default function JidoSappCommandCenter() {
       </div>
 
       {/* ── TOP METRICS ROW: Autonomous Uptime | Telemetry Rings | Subdomain HUD ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6 items-stretch">
         {/* 1. Autonomous Uptime Widget */}
-        <div className="lg:col-span-4 rounded-[28px] bg-gradient-to-b from-amber-400 via-amber-500 to-amber-500 text-white p-6 shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[260px]">
+        <div className="md:col-span-1 lg:col-span-4 rounded-2xl sm:rounded-[28px] bg-gradient-to-b from-amber-400 via-amber-500 to-amber-500 text-white p-5 sm:p-6 shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[250px]">
           {/* Subtle Concentric Rings Graphic */}
           <div className="absolute inset-0 pointer-events-none opacity-20">
             <svg viewBox="0 0 300 300" className="w-full h-full">
@@ -246,12 +246,12 @@ export default function JidoSappCommandCenter() {
 
           <div className="relative z-10 my-auto text-center py-2">
             <span className={cn(
-              "text-4xl sm:text-5xl font-mono font-bold tracking-tight drop-shadow-xs transition-opacity duration-300",
+              "text-3xl sm:text-4xl lg:text-5xl font-mono font-bold tracking-tight drop-shadow-xs transition-opacity duration-300",
               !isEngineRunning && "opacity-80"
             )}>
               {formatTimer(seconds)}
             </span>
-            <p className="text-[11px] font-semibold text-white/95 mt-1">
+            <p className="text-[10px] sm:text-[11px] font-semibold text-white/95 mt-1">
               {isEngineRunning ? "Sub-2s Zero-Latency Engine • Meta Cloud API" : "Autonomous Engine Paused • Click Resume"}
             </p>
           </div>
@@ -292,7 +292,7 @@ export default function JidoSappCommandCenter() {
         </div>
 
         {/* 2. Concentric Telemetry Activity Card */}
-        <div className="lg:col-span-5 rounded-[28px] bg-zinc-950 text-white p-6 shadow-sm flex flex-col justify-between min-h-[260px]">
+        <div className="md:col-span-1 lg:col-span-5 rounded-2xl sm:rounded-[28px] bg-zinc-950 text-white p-5 sm:p-6 shadow-sm flex flex-col justify-between min-h-[250px]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Zap className="h-4 w-4 text-[#00b4d8]" />
@@ -303,35 +303,35 @@ export default function JidoSappCommandCenter() {
             </span>
           </div>
 
-          <div className="flex items-center justify-between my-auto gap-4 py-2">
-            <div className="space-y-3.5 text-xs font-medium">
+          <div className="flex items-center justify-between my-auto gap-2 sm:gap-4 py-2">
+            <div className="space-y-3 text-xs font-medium min-w-0">
               <div>
                 <div className="flex items-center gap-1.5 text-zinc-400 text-[10px]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <span>Messages Dispatched</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                  <span className="truncate">Messages Dispatched</span>
                 </div>
-                <p className="text-lg font-bold text-white pl-3 mt-0.5">2,840 / 3,000</p>
+                <p className="text-base sm:text-lg font-bold text-white pl-3 mt-0.5 font-mono">2,840 / 3,000</p>
               </div>
 
               <div>
                 <div className="flex items-center gap-1.5 text-zinc-400 text-[10px]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <span>Inquiries Auto-Resolved</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                  <span className="truncate">Inquiries Auto-Resolved</span>
                 </div>
-                <p className="text-lg font-bold text-white pl-3 mt-0.5">842 / 910</p>
+                <p className="text-base sm:text-lg font-bold text-white pl-3 mt-0.5 font-mono">842 / 910</p>
               </div>
 
               <div>
                 <div className="flex items-center gap-1.5 text-zinc-400 text-[10px]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb]" />
-                  <span>Active Engines</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] shrink-0" />
+                  <span className="truncate">Active Engines</span>
                 </div>
-                <p className="text-lg font-bold text-white pl-3 mt-0.5">4 / 4 Online</p>
+                <p className="text-base sm:text-lg font-bold text-white pl-3 mt-0.5 font-mono">4 / 4 Online</p>
               </div>
             </div>
 
             {/* Apple-style Concentric Rings */}
-            <div className="relative h-32 w-32 shrink-0 flex items-center justify-center">
+            <div className="relative h-24 w-24 sm:h-32 sm:w-32 shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
                 <circle cx="60" cy="60" r="48" fill="none" stroke="#27272a" strokeWidth="8" />
                 <circle cx="60" cy="60" r="36" fill="none" stroke="#27272a" strokeWidth="8" />
@@ -374,14 +374,14 @@ export default function JidoSappCommandCenter() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-zinc-400 border-t border-zinc-900 pt-2 font-mono">
-            <span>Meta Cloud API: 42ms ping</span>
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-zinc-400 border-t border-zinc-900 pt-2 font-mono">
+            <span>Meta API: 42ms</span>
             <span className="text-emerald-400 font-semibold">99.98% uptime</span>
           </div>
         </div>
 
         {/* 3. Subdomain & Isolated Instance Card */}
-        <div className="lg:col-span-3 rounded-[28px] border border-zinc-200/80 bg-white p-6 shadow-2xs flex flex-col justify-between min-h-[260px]">
+        <div className="md:col-span-2 lg:col-span-3 rounded-2xl sm:rounded-[28px] border border-zinc-200/80 bg-white p-5 sm:p-6 shadow-2xs flex flex-col justify-between min-h-[250px]">
           <div>
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Isolated Instance</span>
@@ -389,7 +389,7 @@ export default function JidoSappCommandCenter() {
             </div>
 
             <div className="space-y-1">
-              <p className="text-sm font-bold text-zinc-950 font-mono">onos.jidosaap.xyz</p>
+              <p className="text-sm font-bold text-zinc-950 font-mono truncate">onos.jidosaap.xyz</p>
               <p className="text-xs text-zinc-500">Multi-tenant webhook container isolated at edge.</p>
             </div>
 
@@ -415,7 +415,7 @@ export default function JidoSappCommandCenter() {
 
           <Link
             href="/integrations/whatsapp"
-            className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-zinc-50 hover:bg-zinc-100 text-xs font-semibold text-zinc-700 border border-zinc-200/80 transition-colors"
+            className="w-full flex items-center justify-center gap-1.5 py-2 mt-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 text-xs font-semibold text-zinc-700 border border-zinc-200/80 transition-colors"
           >
             <span>Manage Subdomain</span>
             <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />

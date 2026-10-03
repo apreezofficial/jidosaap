@@ -7,6 +7,8 @@ import { Sidebar } from "@/components/sidebar";
 import { Topbar } from "@/components/topbar";
 import { CommandMenu } from "@/components/ui/command-menu";
 
+import { SidebarProvider } from "@/lib/sidebar-context";
+
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
   const router = useRouter();
@@ -34,13 +36,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f4f5f7]">
-      <Sidebar />
-      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-        <Topbar />
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">{children}</main>
+    <SidebarProvider>
+      <div className="flex h-screen overflow-hidden bg-[#f4f5f7]">
+        <Sidebar />
+        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+          <Topbar />
+          <main className="flex-1 overflow-y-auto p-3.5 sm:p-5 lg:p-8 min-w-0">{children}</main>
+        </div>
+        <CommandMenu />
       </div>
-      <CommandMenu />
-    </div>
+    </SidebarProvider>
   );
 }

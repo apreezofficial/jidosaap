@@ -189,6 +189,8 @@ export default function WhatsAppLeadsPipeline() {
   const [activeTab, setActiveTab] = useState<"transcript" | "checks">("transcript");
   const [newCheckText, setNewCheckText] = useState("");
 
+  const [activeStage, setActiveStage] = useState<string>("all");
+
   const totalPipelineValue = leads.reduce((acc, l) => acc + l.value, 0);
 
   const moveLead = (leadId: string, targetCol: LeadItem["columnId"]) => {
@@ -261,14 +263,39 @@ export default function WhatsAppLeadsPipeline() {
         </div>
       </div>
 
+      {/* Mobile Stage Filter Tabs */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:hidden">
+        <button
+          onClick={() => setActiveStage("all")}
+          className={cn(
+            "px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors",
+            activeStage === "all" ? "bg-zinc-950 text-white" : "bg-zinc-100 text-zinc-600"
+          )}
+        >
+          All ({leads.length})
+        </button>
+        {COLUMNS.map((c) => (
+          <button
+            key={c.id}
+            onClick={() => setActiveStage(c.id)}
+            className={cn(
+              "px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors",
+              activeStage === c.id ? "bg-[#2563eb] text-white" : "bg-zinc-100 text-zinc-600"
+            )}
+          >
+            {c.title.split(" ")[0]} ({leads.filter((l) => l.columnId === c.id).length})
+          </button>
+        ))}
+      </div>
+
       {/* ── 4-COLUMN KANBAN PIPELINE ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
-        {COLUMNS.map((col) => {
+      <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start overflow-x-auto pb-4 snap-x">
+        {COLUMNS.filter((col) => activeStage === "all" || activeStage === col.id).map((col) => {
           const colLeads = leads.filter((l) => l.columnId === col.id);
           const colTotal = colLeads.reduce((acc, l) => acc + l.value, 0);
 
           return (
-            <div key={col.id} className="rounded-2xl bg-zinc-100/70 border border-zinc-200/80 p-4 space-y-4">
+            <div key={col.id} className="w-[85vw] sm:w-[320px] md:w-auto shrink-0 snap-center rounded-2xl bg-zinc-100/70 border border-zinc-200/80 p-4 space-y-4">
               {/* Column Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
